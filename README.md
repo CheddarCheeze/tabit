@@ -1,4 +1,4 @@
-tabit
+Tabit
 =====
 
 Capstone project files
