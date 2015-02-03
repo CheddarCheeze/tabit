@@ -26,7 +26,7 @@ public class DesktopFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.setBounds(140, 120, 79, 19);
+        jPasswordField1.setBounds(190, 110, 79, 19);
         jDesktopPane1.add(jPasswordField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
