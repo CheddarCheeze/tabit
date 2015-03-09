@@ -10,6 +10,7 @@ public class DesktopFrame extends javax.swing.JFrame {
     /** Creates new form DesktopFrame */
     public DesktopFrame() {
         initComponents();
+        
     }
 
     /** This method is called from within the constructor to
@@ -28,11 +29,11 @@ public class DesktopFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.setBounds(10, 0, 94, 19);
+        jPasswordField1.setBounds(110, 100, 94, 19);
         jDesktopPane1.add(jPasswordField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton1.setText("jButton1");
-        jButton1.setBounds(150, 130, 79, 21);
+        jButton1.setBounds(60, 200, 79, 21);
         jDesktopPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton2.setText("jButton2");
