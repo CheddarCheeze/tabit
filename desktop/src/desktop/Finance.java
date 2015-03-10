@@ -2,13 +2,23 @@
 package desktop;
 
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import oracle.jdbc.pool.OracleDataSource;
 
 /**
  *
  * @author  Nicolas Nunez
  */
 public class Finance extends javax.swing.JFrame {
-
+    
+    Statement stmt;
+    ResultSet rset;
+    String query;
+    String sqlString;
+    
     /** Creates new form Finance */
     public Finance() {
         super("Tabit version 1.00.1");
