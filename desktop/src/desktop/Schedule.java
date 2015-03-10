@@ -62,6 +62,14 @@ public class Schedule extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getColumn(0).setHeaderValue("Employee");
+        jTable1.getColumnModel().getColumn(1).setHeaderValue("Monday");
+        jTable1.getColumnModel().getColumn(2).setHeaderValue("Tuesday");
+        jTable1.getColumnModel().getColumn(3).setHeaderValue("Wednesday");
+        jTable1.getColumnModel().getColumn(4).setHeaderValue("Thursday");
+        jTable1.getColumnModel().getColumn(5).setHeaderValue("Friday");
+        jTable1.getColumnModel().getColumn(6).setHeaderValue("Saturday");
+        jTable1.getColumnModel().getColumn(7).setHeaderValue("Sunday");
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
