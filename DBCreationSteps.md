@@ -97,5 +97,32 @@ after completion
 	SQL> @?\rdbms\admin\catproc.sql;
 	
 And now besides the XE database we have a TABIT database.
+
+
+how to create a user and grant access (this is all done from the command line)
+
+	sqlplus / as sysdba
+	
+	create user nanunezr identified by password tabit0427;
+	grant connect to nanunezr;
+	grant connect, resource, dba to nanunezr;
+	grant create session to nanunezr;
+	grant unlimited tablespace to nanunezr;
+	grant select, update, insert, delete on TABLENAMES*** to nanunezr;
+	
+	exit
+	
+	
+	now to log in as a regular user and with all privileges instead of dba admin
+	
+	sqlplus
+	
+	Enter username: nanunezr;
+	Enter password: tabit0427;
+	
+	and you are now logged in
+
+	
+
 	
 	
