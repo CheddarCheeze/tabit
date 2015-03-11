@@ -34,16 +34,29 @@ public class DataHandler {
     
     public void addNewEmployee(int id, String lastname, String firstname, String dob,String position, 
                                int salary, String phoneno) throws SQLException {
-        //Statement stmt = conn.createStatement();
+        Statement stmt = conn.createStatement();
+        query = "INSERT INTO Employee VALUES("+id+", "+lastname+", "+firstname+", "+dob+", "+position+", "+salary+", "+phoneno+")";
+        System.out.println("\nExecuting query: " + query);
+        stmt.execute(query);
     }
+    
+    //public void addNewProduct()
     
     public ResultSet getAllEmployees() throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
-        query = "SELECT * FROM Employees ORDER BY employee_id";
+        query = "SELECT * FROM Employees ORDER BY id";
         System.out.println("\nExecuting query: " + query);
         rset = stmt.executeQuery(query); 
         return rset;
     }
     
+    public ResultSet getAllProducts() throws SQLException{
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "SELECT * FROM Inventory ORDER BY id";
+        System.out.println("\nExecuting query: " + query);
+        rset = stmt.executeQuery(query);        
+        return rset;
+    }
 }
