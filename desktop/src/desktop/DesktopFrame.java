@@ -1,12 +1,22 @@
 
 package desktop;
+import java.awt.Image;
+
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
+import javax.swing.ImageIcon;
 
 /**
  *
- * @author Owner
+ * @author Owner, Nicolas Nunez
  */
 public class DesktopFrame extends javax.swing.JFrame {
+    @SuppressWarnings("compatibility:-4952383735578523799")
+    private static final long serialVersionUID = 1L;
 
+    @SuppressWarnings("oracle.jdeveloper.java.field-not-serializable")
     /** Creates new form DesktopFrame */
     public DesktopFrame() {
         initComponents();
@@ -24,21 +34,41 @@ public class DesktopFrame extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        canvas1 = new java.awt.Canvas();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.setBounds(110, 100, 94, 19);
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
+        jPasswordField1.setBounds(180, 190, 100, 19);
         jDesktopPane1.add(jPasswordField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton1.setText("jButton1");
-        jButton1.setBounds(60, 200, 79, 21);
+        jButton1.setText("Sign in");
+        jButton1.setBounds(200, 220, 65, 20);
         jDesktopPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton2.setText("jButton2");
-        jButton2.setBounds(150, 200, 79, 21);
-        jDesktopPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jTextField1.setText("Username");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.setBounds(180, 160, 100, 20);
+        jDesktopPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        canvas1.setBounds(230, 80, 0, 0);
+        jDesktopPane1.add(canvas1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel1.setText(null);
+        Image img = new ImageIcon("logo.png").getImage();
+        jLabel1.setIcon(new ImageIcon(img));
+        jLabel1.setBounds(190, 30, 140, 90);
+        jDesktopPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,19 +76,27 @@ public class DesktopFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }//GEN-END:initComponents
+
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -100,10 +138,12 @@ public class DesktopFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Canvas canvas1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
 }
