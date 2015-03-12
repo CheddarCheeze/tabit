@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.DriverManager;
 import oracle.jdbc.pool.OracleDataSource;
 
 /**
@@ -45,7 +46,7 @@ public class DataHandler {
     public ResultSet getAllEmployees() throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
-        query = "SELECT * FROM Employees ORDER BY id";
+        query = "SELECT * FROM Employee ORDER BY id";
         System.out.println("\nExecuting query: " + query);
         rset = stmt.executeQuery(query); 
         return rset;
@@ -58,5 +59,19 @@ public class DataHandler {
         System.out.println("\nExecuting query: " + query);
         rset = stmt.executeQuery(query);        
         return rset;
+    }
+    
+    public void printEmployees() throws SQLException {
+        ResultSet temp = getAllEmployees();
+        while(temp.next()){
+            System.out.println(temp.getInt(1)+ " " + temp.getString(2) + " " +
+                temp.getString(3) + " " + temp.getString(4).substring(0, 9)+ " " + temp.getString(5) + " " + 
+                temp.getInt(6) + " " + temp.getString(7));
+        }
+    }
+    
+    public static void main(String[] args) throws SQLException {
+        DataHandler datahandler = new DataHandler();
+        datahandler.printEmployees();
     }
 }

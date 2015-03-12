@@ -109,7 +109,7 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_newTableButtonActionPerformed
 
     private void viewScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewScheduleButtonActionPerformed
-        Schedule.main(new String []);
+       // Schedule.main(new String []);
     }//GEN-LAST:event_viewScheduleButtonActionPerformed
 
     /**
