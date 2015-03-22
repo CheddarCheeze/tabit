@@ -43,6 +43,14 @@ public class DataHandler {
         stmt.execute(query);
     }
     
+    public void addSchedule(String name, String mond, String tues, String wed, String thurs, String fri, String sat, String sun) throws SQLException {
+        Statement stmt = conn.createStatement();
+        System.out.println(name + " " + mond + " " + tues + " " + wed + " " + thurs + " " + fri + " " + sat + " " + sun);
+        query = "INSERT INTO Schedule VALUES('"+name+"', '"+mond+"', '"+tues+"', '"+wed+"', '"+thurs+"', '"+fri+"', '"+sat+"', '"+sun+"')";
+        System.out.println("\nExecuting query: " + query);
+        stmt.execute(query);
+    }
+    
     //public void addNewProduct()
     
     public ResultSet getAllEmployees() throws SQLException{
@@ -67,7 +75,7 @@ public class DataHandler {
         ResultSet temp = getAllEmployees();
         while(temp.next()){
             System.out.println(temp.getInt(1)+ " " + temp.getString(2) + " " +
-                temp.getString(3) + " " + temp.getString(4).substring(0, 9)+ " " + temp.getString(5) + " " + 
+                temp.getString(3) + " " + temp.getString(4) + " " + temp.getString(5) + " " + 
                 temp.getInt(6) + " " + temp.getString(7));
         }
     }
@@ -81,13 +89,29 @@ public class DataHandler {
         }
     }
 
+    public int getRows(String tablename) throws SQLException{
+        int rows = 0;
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "SELECT COUNT(*) FROM "+tablename+"";
+        System.out.println("\nExecuting query: " + query);
+        rset = stmt.executeQuery(query);
+        while(rset.next()){
+            rows = rset.getInt(1);
+        }
+        System.out.println(rows);
+        return rows;
+    }
     
     public static void main(String[] args) throws SQLException {
         DataHandler datahandler = new DataHandler();
         datahandler.printEmployees();
-        datahandler.addNewEmployee(6, "McAlly", "James", "05/MAR/1991","Cashier", 
-                               30000, "479-990-7869");
+//        datahandler.addSchedule("Niggolah", "asfdasfd", "asdfasfsad", "asdfsafsdaf", "asdfasfsad", "asdfsadf", "asdfsafsda", "asdfsdafsd");
+      //  datahandler.addNewEmployee(7, "McAlly", "James", "05/MAR/1991","Cashier", 
+                               //30000, "479-990-7869");
         datahandler.printEmployees();
+        int temp = datahandler.getRows("Employee");
+        System.out.println(temp);
         //datahandler.printInventory();
     }
 }

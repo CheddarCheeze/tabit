@@ -1,22 +1,27 @@
 
 package desktop;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
+
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author martinbruckner
  */
-public class Schedule extends javax.swing.JFrame {
+public class Schedule extends javax.swing.JFrame{    
     @SuppressWarnings("compatibility:8515289491683898573")
     private static final long serialVersionUID = -160035917128169035L;
-
+    
+    DataHandler databit;
     /** Creates new form Schedule */
-    public Schedule() {
+    public Schedule() throws SQLException{
+        databit = new DataHandler();
         initComponents();
     }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -45,14 +50,6 @@ public class Schedule extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null}
@@ -136,14 +133,37 @@ public class Schedule extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        System.out.println("Save Records");
+        //Add records to database
+        String name, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
+        for (int i=0; i<jTable1.getRowCount(); i++){
+           name = (String)jTable1.getModel().getValueAt(i, 0);
+           Monday = (String)jTable1.getModel().getValueAt(i, 1);
+            Tuesday = (String)jTable1.getModel().getValueAt(i, 2);
+            Wednesday = (String)jTable1.getModel().getValueAt(i, 3);
+            Thursday = (String)jTable1.getModel().getValueAt(i, 4);
+            Friday = (String)jTable1.getModel().getValueAt(i, 5);
+            Saturday = (String)jTable1.getModel().getValueAt(i, 6);
+            Sunday = (String)jTable1.getModel().getValueAt(i, 7);
+            System.out.println(name + " " +  Monday + " " + Tuesday + " " + Wednesday + " " + Thursday + " " + Friday + " " + Saturday + " " + Sunday);
+            try {
+                databit.addSchedule(name, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel1ComponentResized
         // TODO add your handling code here:
+        //QUIT
     }//GEN-LAST:event_jLabel1ComponentResized
 
     /**
@@ -176,9 +196,12 @@ public class Schedule extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable(){
             public void run() {
-                new Schedule().setVisible(true);
+                try {
+                    new Schedule().setVisible(true);
+                } catch (SQLException e) {
+                }
             }
         });
     }
