@@ -3,7 +3,7 @@ package desktop;
 
 /**
  *
- * @author martinbruckner
+ * @author Nicolas Nunez
  */
 public class Finance extends javax.swing.JFrame {
 

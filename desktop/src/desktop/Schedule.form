@@ -89,42 +89,42 @@
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel(); &#xa;int rows = 0;&#xa;try {&#xa;    rows = databit.getRows(&quot;Schedule&quot;);&#xa;     &#xa; }catch (SQLException e) {}&#xa;//System.out.println(&quot;# of rows &quot; + rows);&#xa;int rowsInTable = jTable1.getRowCount();&#xa;while(rowsInTable &lt; rows){&#xa;dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});&#xa;rowsInTable++;&#xa;}&#xa;try{&#xa;    loadSchedule(jTable1, rows);&#xa;}catch(SQLException e) { }">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="true">
-                  <Title/>
+                  <Title value="Employee"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="Monday"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="Tuesday"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="Wednesday"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="Thursday"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="Friday"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="Saturday"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="Sunday"/>
                   <Editor/>
                   <Renderer/>
                 </Column>

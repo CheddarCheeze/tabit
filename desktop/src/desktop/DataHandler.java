@@ -51,6 +51,14 @@ public class DataHandler {
         stmt.execute(query);
     }
     
+    public void addInventory(int id ,String ProdName, int Quant, String DateIn,float CostUnit, float TotalCost,float SalePrice,  int EmplID,String Vendor,int VendorNo ) throws SQLException {
+        Statement stmt = conn.createStatement();
+        
+        query = "INSERT INTO Inventory VALUES(" + id + ", '"+ ProdName +"', "+Quant+", '"+DateIn+"', "+CostUnit+", "+ TotalCost +", "+ SalePrice +", "+ EmplID+",'" + Vendor + "', "+ VendorNo +" )";
+        System.out.println("\nExecuting query: " + query);
+        stmt.execute(query);
+    }
+    
     //public void addNewProduct()
     
     public ResultSet getAllEmployees() throws SQLException{
@@ -80,6 +88,14 @@ public class DataHandler {
         return rset;
     }
     
+    public ResultSet getInventory() throws SQLException{
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "SELECT * FROM Inventory ORDER BY ID";
+        System.out.println("\nExecuting query: " + query);
+        rset = stmt.executeQuery(query);        
+        return rset;
+    }
     public void printEmployees() throws SQLException {
         ResultSet temp = getAllEmployees();
         while(temp.next()){

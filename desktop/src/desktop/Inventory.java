@@ -1,6 +1,14 @@
 
 package desktop;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.util.Date;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author martinbruckner
@@ -8,7 +16,9 @@ package desktop;
 public class Inventory extends javax.swing.JFrame {
 
     /** Creates new form Inventory */
-    public Inventory() {
+    DataHandler databit;
+    public Inventory() throws SQLException {
+        databit = new DataHandler();
         initComponents();
     }
 
@@ -20,22 +30,173 @@ public class Inventory extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     private void initComponents() {//GEN-BEGIN:initComponents
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Product Name", "Quantity", "Date In", "Cost Unit", "Total Cost", "Sale Price", "Empl ID", "Vendor", "Vendor No"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getColumn(0).setHeaderValue("ID");
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(1).setHeaderValue("Product Name");
+        jTable1.getColumnModel().getColumn(2).setHeaderValue("Quantity");
+        jTable1.getColumnModel().getColumn(3).setHeaderValue("Date In");
+        jTable1.getColumnModel().getColumn(4).setHeaderValue("Cost Unit");
+        jTable1.getColumnModel().getColumn(5).setHeaderValue("Total Cost");
+        jTable1.getColumnModel().getColumn(6).setHeaderValue("Sale Price");
+        jTable1.getColumnModel().getColumn(7).setHeaderValue("Empl ID");
+        jTable1.getColumnModel().getColumn(8).setHeaderValue("Vendor");
+        jTable1.getColumnModel().getColumn(9).setPreferredWidth(70);
+        jTable1.getColumnModel().getColumn(9).setHeaderValue("Vendor No");
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        int rows = 0;
+        try {
+            rows = databit.getRows("Schedule");
+
+        }catch (SQLException e) {}
+        //System.out.println("# of rows " + rows);
+        int rowsInTable = jTable1.getRowCount();
+        while(rowsInTable < rows){
+            dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});
+            rowsInTable++;
+        }
+        try{
+            loadInventory(jTable1, rows);
+        }catch(SQLException e) { }
+
+        jButton1.setText("Add Item");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Back");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(439, 439, 439)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3)
+                            .addComponent(jButton2)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addGap(40, 40, 40))
         );
 
         pack();
     }//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            // TODO add your handling code here:
+            DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+            dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Save Records");
+        //Add records to database
+        try{
+            databit.deleteInfoDatabase("Inventory");
+        }catch(SQLException e){}
+        int id, Quant, EmplID,VendorNo;
+        float  CostUnit, TotalCost, SalePrice;
+        String Vendor, ProdName,DateIn;
+ 
+        for (int i=0; i<jTable1.getRowCount(); i++){
+            System.out.println("IM there");
+           id = Integer.parseInt((String)jTable1.getModel().getValueAt(i, 0));
+            System.out.println(id);
+           ProdName = (String)jTable1.getModel().getValueAt(i, 1);
+            System.out.println(ProdName);
+            Quant = Integer.parseInt((String)jTable1.getModel().getValueAt(i, 2));
+            System.out.println(Quant);
+            DateIn = (String)jTable1.getModel().getValueAt(i, 3);
+            System.out.println(DateIn);
+            CostUnit = Float.parseFloat((String)jTable1.getModel().getValueAt(i, 4));
+            System.out.println(CostUnit);
+            TotalCost= Float.parseFloat((String)jTable1.getModel().getValueAt(i, 5));
+            System.out.println(ProdName);
+            SalePrice =  Float.parseFloat((String)jTable1.getModel().getValueAt(i, 6));
+            System.out.println(ProdName);
+            EmplID = Integer.parseInt((String)jTable1.getModel().getValueAt(i, 7));
+            System.out.println(ProdName);
+            Vendor = (String)jTable1.getModel().getValueAt(i, 8);
+            System.out.println(ProdName);
+            VendorNo = Integer.parseInt((String)jTable1.getModel().getValueAt(i, 9));
+            System.out.println(ProdName);
+                  System.out.println("IM HERE");
+            if(id != 0){
+            try {
+                    databit.addInventory(id ,ProdName, Quant, DateIn, CostUnit, TotalCost, SalePrice,  EmplID,Vendor,VendorNo  );
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+    void loadInventory(JTable jt, int rows) throws SQLException{
+        ResultSet inventory = databit.getInventory();
+        int i = 0;
+        while(inventory.next()){
+            jt.getModel().setValueAt(inventory.getInt(1),i ,0);
+            jt.getModel().setValueAt(inventory.getString(2),i ,1);
+            jt.getModel().setValueAt(inventory.getInt(3),i ,2);
+            jt.getModel().setValueAt(inventory.getString(4),i ,3);
+            jt.getModel().setValueAt(inventory.getFloat(5),i ,4);
+            jt.getModel().setValueAt(inventory.getFloat(6),i ,5);
+            jt.getModel().setValueAt(inventory.getFloat(7),i ,6);
+            jt.getModel().setValueAt(inventory.getInt(8),i ,7);
+            jt.getModel().setValueAt(inventory.getString(9),i ,8);
+            jt.getModel().setValueAt(inventory.getInt(10),i ,9);
+            i++;
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -66,12 +227,20 @@ public class Inventory extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inventory().setVisible(true);
+                try {
+                    new Inventory().setVisible(true);
+                } catch (SQLException e) {
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
 }
