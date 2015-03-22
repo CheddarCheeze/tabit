@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
  * @author Brandon Foster
  */
 public class ManagerProfile extends javax.swing.JFrame {
-    Schedule s = new Schedule();
+    //Schedule s = new Schedule();
     Finance f = new Finance();
     Profile p = new Profile();
     String[] args = {};
@@ -138,7 +138,7 @@ public class ManagerProfile extends javax.swing.JFrame {
 
     private void modifyScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyScheduleButtonActionPerformed
         String[] args = {};
-        s.main(args);
+        //s.main(args);
     }//GEN-LAST:event_modifyScheduleButtonActionPerformed
 
     private void viewFinancesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFinancesButtonActionPerformed

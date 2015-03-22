@@ -185,7 +185,7 @@ public class Schedule extends javax.swing.JFrame{
         // TODO add your handling code here:
         //QUIT
     }//GEN-LAST:event_jLabel1ComponentResized
-<<<<<<< HEAD
+
     
     void loadSchedule(JTable jt, int rows) throws SQLException{
         ResultSet schedule = databit.getSchedule();
@@ -202,13 +202,13 @@ public class Schedule extends javax.swing.JFrame{
             i++;
         }
     }
-=======
+
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         super.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
->>>>>>> afb7347005de875e77e32030a49af7a87d65b6a8
+
     /**
      * @param args the command line arguments
      */
