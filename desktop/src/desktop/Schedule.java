@@ -93,6 +93,11 @@ public class Schedule extends javax.swing.JFrame{
         });
 
         jButton3.setText("Back");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Schedule from: " + dateString + " to : " + dateTempString);
         jLabel1.setFont(new Font("", Font.BOLD, 18));
@@ -180,6 +185,7 @@ public class Schedule extends javax.swing.JFrame{
         // TODO add your handling code here:
         //QUIT
     }//GEN-LAST:event_jLabel1ComponentResized
+<<<<<<< HEAD
     
     void loadSchedule(JTable jt, int rows) throws SQLException{
         ResultSet schedule = databit.getSchedule();
@@ -196,6 +202,13 @@ public class Schedule extends javax.swing.JFrame{
             i++;
         }
     }
+=======
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        super.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+>>>>>>> afb7347005de875e77e32030a49af7a87d65b6a8
     /**
      * @param args the command line arguments
      */
