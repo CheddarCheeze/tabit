@@ -14,6 +14,7 @@ public class Table {
     }
     
     public Table(int tNum, int tEmp){
+        super();
         tableNumber = tNum;
         tableEmployee = tEmp;
     }
@@ -33,5 +34,4 @@ public class Table {
     public void removeTableItem(int item){
         tableItemsOrdered.remove(item);
     }
-
 }

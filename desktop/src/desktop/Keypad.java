@@ -1,6 +1,8 @@
 
 package desktop;
 
+import java.awt.event.KeyEvent;
+
 import java.util.ArrayList;
 
 /**
@@ -9,11 +11,16 @@ import java.util.ArrayList;
  */
 public class Keypad extends javax.swing.JFrame {
     
-    private ArrayList<Integer> number = new ArrayList();
+    private ArrayList<String> number = new ArrayList();
+    public static int finalNumber = -1;
     
     /** Creates new form Keypad */
     public Keypad() {
         initComponents();
+    }
+    
+    public int getNumber(){
+        return finalNumber;
     }
 
     /** This method is called from within the constructor to
@@ -36,6 +43,7 @@ public class Keypad extends javax.swing.JFrame {
         zeroButton = new javax.swing.JButton();
         fourButton = new javax.swing.JButton();
         twoButton = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,6 +116,11 @@ public class Keypad extends javax.swing.JFrame {
                 zeroButtonActionPerformed(evt);
             }
         });
+        zeroButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                zeroButtonKeyTyped(evt);
+            }
+        });
 
         fourButton.setText("4");
         fourButton.addActionListener(new java.awt.event.ActionListener() {
@@ -117,10 +130,16 @@ public class Keypad extends javax.swing.JFrame {
         });
 
         twoButton.setText("2");
-        twoButton.setActionCommand("2");
         twoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 twoButtonActionPerformed(evt);
+            }
+        });
+
+        clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
             }
         });
 
@@ -130,7 +149,8 @@ public class Keypad extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(clearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(sevenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -182,50 +202,52 @@ public class Keypad extends javax.swing.JFrame {
                     .addComponent(zeroButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(enterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(clearButton, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }//GEN-END:initComponents
 
     private void zeroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroButtonActionPerformed
-        number.add(0);
+        number.add("0");
     }//GEN-LAST:event_zeroButtonActionPerformed
 
     private void oneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oneButtonActionPerformed
-        number.add(1);
+        number.add("1");
     }//GEN-LAST:event_oneButtonActionPerformed
 
     private void twoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoButtonActionPerformed
-        number.add(2);
+        number.add("2");
     }//GEN-LAST:event_twoButtonActionPerformed
 
     private void threeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeButtonActionPerformed
-        number.add(3);
+        number.add("3");
     }//GEN-LAST:event_threeButtonActionPerformed
 
     private void fourButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourButtonActionPerformed
-        number.add(4);
+        number.add("4");
     }//GEN-LAST:event_fourButtonActionPerformed
 
     private void fiveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fiveButtonActionPerformed
-        number.add(5);
+        number.add("5");
     }//GEN-LAST:event_fiveButtonActionPerformed
 
     private void sixButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixButtonActionPerformed
-        number.add(6);
+        number.add("6");
     }//GEN-LAST:event_sixButtonActionPerformed
 
     private void sevenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sevenButtonActionPerformed
-        number.add(7);
+        number.add("7");
     }//GEN-LAST:event_sevenButtonActionPerformed
 
     private void eightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eightButtonActionPerformed
-        number.add(8);
+        number.add("8");
     }//GEN-LAST:event_eightButtonActionPerformed
 
     private void nineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nineButtonActionPerformed
-        number.add(9);
+        number.add("9");
     }//GEN-LAST:event_nineButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -233,8 +255,23 @@ public class Keypad extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void enterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterButtonActionPerformed
-        System.out.print("Final Number" + number);
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < number.size(); i++){
+            sb.append(number.get(i));
+        }
+        finalNumber = Integer.parseInt(sb.toString()); 
+        System.out.print("Final Number: " + finalNumber);
     }//GEN-LAST:event_enterButtonActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        number.clear();
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void zeroButtonKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_zeroButtonKeyTyped
+        if(evt.getKeyChar() == '0'){
+            number.add("0");
+        }
+    }//GEN-LAST:event_zeroButtonKeyTyped
 
     /**
      * @param args the command line arguments
@@ -272,6 +309,7 @@ public class Keypad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clearButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton eightButton;
     private javax.swing.JButton enterButton;

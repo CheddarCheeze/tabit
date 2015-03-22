@@ -86,6 +86,11 @@ public class Schedule extends javax.swing.JFrame {
         });
 
         jButton3.setText("Back");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Schedule from: " + dateString + " to : " + dateTempString);
         jLabel1.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -145,6 +150,10 @@ public class Schedule extends javax.swing.JFrame {
     private void jLabel1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel1ComponentResized
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel1ComponentResized
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        super.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
