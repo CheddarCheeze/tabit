@@ -71,6 +71,15 @@ public class DataHandler {
         return rset;
     }
     
+    public ResultSet getSchedule() throws SQLException{
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "SELECT * FROM Schedule ORDER BY Name";
+        System.out.println("\nExecuting query: " + query);
+        rset = stmt.executeQuery(query);        
+        return rset;
+    }
+    
     public void printEmployees() throws SQLException {
         ResultSet temp = getAllEmployees();
         while(temp.next()){
@@ -101,6 +110,14 @@ public class DataHandler {
         }
         System.out.println(rows);
         return rows;
+    }
+    
+    public void deleteInfoDatabase(String tablename) throws SQLException{
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "DELETE FROM "+ tablename +"";
+        System.out.println("\nExecuting query: " + query);
+        stmt.execute(query);
     }
     
     public static void main(String[] args) throws SQLException {

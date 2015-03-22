@@ -7,6 +7,5 @@ Wednesday varchar(20),
 Thursday varchar(20),
 Friday varchar(20),
 Saturday varchar(20),
-Sunday varchar(20),
-PRIMARY KEY(Name)
+Sunday varchar(20)
 )

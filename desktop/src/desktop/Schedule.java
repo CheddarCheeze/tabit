@@ -1,11 +1,15 @@
 
 package desktop;
 
+import java.awt.Font;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -50,23 +54,29 @@ public class Schedule extends javax.swing.JFrame{
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Employee", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setHeaderValue("Employee");
-        jTable1.getColumnModel().getColumn(1).setHeaderValue("Monday");
-        jTable1.getColumnModel().getColumn(2).setHeaderValue("Tuesday");
-        jTable1.getColumnModel().getColumn(3).setHeaderValue("Wednesday");
-        jTable1.getColumnModel().getColumn(4).setHeaderValue("Thursday");
-        jTable1.getColumnModel().getColumn(5).setHeaderValue("Friday");
-        jTable1.getColumnModel().getColumn(6).setHeaderValue("Saturday");
-        jTable1.getColumnModel().getColumn(7).setHeaderValue("Sunday");
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        int rows = 0;
+        try {
+            rows = databit.getRows("Schedule");
+
+        }catch (SQLException e) {}
+        //System.out.println("# of rows " + rows);
+        int rowsInTable = jTable1.getRowCount();
+        while(rowsInTable < rows){
+            dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});
+            rowsInTable++;
+        }
+        try{
+            loadSchedule(jTable1, rows);
+        }catch(SQLException e) { }
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +95,7 @@ public class Schedule extends javax.swing.JFrame{
         jButton3.setText("Back");
 
         jLabel1.setText("Schedule from: " + dateString + " to : " + dateTempString);
+        jLabel1.setFont(new Font("", Font.BOLD, 18));
         jLabel1.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 jLabel1ComponentResized(evt);
@@ -97,7 +108,7 @@ public class Schedule extends javax.swing.JFrame{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(42, 42, 42)
@@ -108,17 +119,17 @@ public class Schedule extends javax.swing.JFrame{
                     .addComponent(jButton1))
                 .addGap(96, 96, 96))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                .addGap(223, 223, 223))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -135,6 +146,9 @@ public class Schedule extends javax.swing.JFrame{
         // TODO add your handling code here:
         System.out.println("Save Records");
         //Add records to database
+        try{
+            databit.deleteInfoDatabase("Schedule");
+        }catch(SQLException e){}
         String name, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
         for (int i=0; i<jTable1.getRowCount(); i++){
            name = (String)jTable1.getModel().getValueAt(i, 0);
@@ -145,11 +159,12 @@ public class Schedule extends javax.swing.JFrame{
             Friday = (String)jTable1.getModel().getValueAt(i, 5);
             Saturday = (String)jTable1.getModel().getValueAt(i, 6);
             Sunday = (String)jTable1.getModel().getValueAt(i, 7);
-            System.out.println(name + " " +  Monday + " " + Tuesday + " " + Wednesday + " " + Thursday + " " + Friday + " " + Saturday + " " + Sunday);
+//            System.out.println(name + " " +  Monday + " " + Tuesday + " " + Wednesday + " " + Thursday + " " + Friday + " " + Saturday + " " + Sunday);
+            if(name != null){
             try {
-                databit.addSchedule(name, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
-            } catch (SQLException e) {
-                System.out.println(e);
+                    databit.addSchedule(name, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
+                } catch (SQLException e) {
+                }
             }
         }
         
@@ -165,7 +180,22 @@ public class Schedule extends javax.swing.JFrame{
         // TODO add your handling code here:
         //QUIT
     }//GEN-LAST:event_jLabel1ComponentResized
-
+    
+    void loadSchedule(JTable jt, int rows) throws SQLException{
+        ResultSet schedule = databit.getSchedule();
+        int i = 0;
+        while(schedule.next()){
+            jt.getModel().setValueAt(schedule.getString(1),i ,0);
+            jt.getModel().setValueAt(schedule.getString(2),i ,1);
+            jt.getModel().setValueAt(schedule.getString(3),i ,2);
+            jt.getModel().setValueAt(schedule.getString(4),i ,3);
+            jt.getModel().setValueAt(schedule.getString(5),i ,4);
+            jt.getModel().setValueAt(schedule.getString(6),i ,5);
+            jt.getModel().setValueAt(schedule.getString(7),i ,6);
+            jt.getModel().setValueAt(schedule.getString(8),i ,7);
+            i++;
+        }
+    }
     /**
      * @param args the command line arguments
      */

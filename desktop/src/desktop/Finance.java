@@ -143,6 +143,10 @@ public class Finance extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getColumn(0).setHeaderValue("Order No");
+        jTable1.getColumnModel().getColumn(1).setHeaderValue("Cashier");
+        jTable1.getColumnModel().getColumn(2).setHeaderValue("Description");
+        jTable1.getColumnModel().getColumn(3).setHeaderValue("Sale Price");
 
         jSplitPane1.setRightComponent(jScrollPane1);
 
