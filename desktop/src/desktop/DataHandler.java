@@ -141,10 +141,12 @@ public class DataHandler {
         datahandler.printEmployees();
 //        datahandler.addSchedule("Niggolah", "asfdasfd", "asdfasfsad", "asdfsafsdaf", "asdfasfsad", "asdfsadf", "asdfsafsda", "asdfsdafsd");
       //  datahandler.addNewEmployee(7, "McAlly", "James", "05/MAR/1991","Cashier", 
-                               //30000, "479-990-7869");
+        //                       30000, "479-990-7869");
         datahandler.printEmployees();
         int temp = datahandler.getRows("Employee");
+        System.out.println(datahandler.getRows("Inventory"));
         System.out.println(temp);
-        //datahandler.printInventory();
+        //datahandler.printInventory();\
+        datahandler.addInventory(11, "CACACACA", 3 ,"10-MAR-15", 4, 5, 10, 1, "WALMART", 1);
     }
 }

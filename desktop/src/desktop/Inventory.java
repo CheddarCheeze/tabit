@@ -4,19 +4,24 @@ package desktop;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author martinbruckner
- */
 public class Inventory extends javax.swing.JFrame {
 
+    @SuppressWarnings("oracle.jdeveloper.java.unconventional-field-modifier-order")
+    final static String FORMAT = "yyyy-MM-dd";
     /** Creates new form Inventory */
     DataHandler databit;
+    
+
     public Inventory() throws SQLException {
         databit = new DataHandler();
         initComponents();
@@ -40,7 +45,7 @@ public class Inventory extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, "YYYY/MM/DD", null, null, null, null, null, null}
             },
             new String [] {
                 "ID", "Product Name", "Quantity", "Date In", "Cost Unit", "Total Cost", "Sale Price", "Empl ID", "Vendor", "Vendor No"
@@ -70,7 +75,7 @@ public class Inventory extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         int rows = 0;
         try {
-            rows = databit.getRows("Schedule");
+            rows = databit.getRows("Inventory");
 
         }catch (SQLException e) {}
         //System.out.println("# of rows " + rows);
@@ -133,70 +138,184 @@ public class Inventory extends javax.swing.JFrame {
     }//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            // TODO add your handling code here:
-            DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-            dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});
+        // TODO add your handling code here:
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.addRow(new Object[] { null, null, null, null, null, null, null, null });
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        System.out.println("Save Records");
+        System.out.println("Saving Records");
         //Add records to database
-        try{
-            databit.deleteInfoDatabase("Inventory");
-        }catch(SQLException e){}
-        int id, Quant, EmplID,VendorNo;
-        float  CostUnit, TotalCost, SalePrice;
-        String Vendor, ProdName,DateIn;
- 
-        for (int i=0; i<jTable1.getRowCount(); i++){
+
+        int id, Quant, EmplID, VendorNo;
+        float CostUnit, TotalCost, SalePrice;
+        String Vendor, ProdName, DateIn;
+        //        try {
+        //            databit.deleteInfoDatabase("Inventory");
+        //        } catch (SQLException e) {
+        //        }
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            Object o;
+            boolean correct = true;
             System.out.println("IM there");
-           id = Integer.parseInt((String)jTable1.getModel().getValueAt(i, 0));
-            System.out.println(id);
-           ProdName = (String)jTable1.getModel().getValueAt(i, 1);
-            System.out.println(ProdName);
-            Quant = Integer.parseInt((String)jTable1.getModel().getValueAt(i, 2));
-            System.out.println(Quant);
-            DateIn = (String)jTable1.getModel().getValueAt(i, 3);
-            System.out.println(DateIn);
-            CostUnit = Float.parseFloat((String)jTable1.getModel().getValueAt(i, 4));
-            System.out.println(CostUnit);
-            TotalCost= Float.parseFloat((String)jTable1.getModel().getValueAt(i, 5));
-            System.out.println(ProdName);
-            SalePrice =  Float.parseFloat((String)jTable1.getModel().getValueAt(i, 6));
-            System.out.println(ProdName);
-            EmplID = Integer.parseInt((String)jTable1.getModel().getValueAt(i, 7));
-            System.out.println(ProdName);
-            Vendor = (String)jTable1.getModel().getValueAt(i, 8);
-            System.out.println(ProdName);
-            VendorNo = Integer.parseInt((String)jTable1.getModel().getValueAt(i, 9));
-            System.out.println(ProdName);
-                  System.out.println("IM HERE");
-            if(id != 0){
-            try {
-                    databit.addInventory(id ,ProdName, Quant, DateIn, CostUnit, TotalCost, SalePrice,  EmplID,Vendor,VendorNo  );
+            o = jTable1.getModel().getValueAt(i, 0);
+            if (o == null) {
+                //                JOptionPane.showInputDialog(null, "WRONG");
+                JOptionPane.showMessageDialog(null, "Fill all fields");
+                id = -1;
+                correct = false;
+                continue;
+            } else
+                id = Integer.parseInt(o.toString());
+            // id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
+
+            o = jTable1.getModel().getValueAt(i, 1);
+            if (o == null) {
+                //                JOptionPane.showInputDialog(null, "WRONG");
+                JOptionPane.showMessageDialog(null, "Fill all fields");
+                ProdName = "";
+                correct = false;
+                continue;
+            } else {
+                ProdName = o.toString();
+                ProdName = ProdName.toUpperCase();
+            }
+            o = jTable1.getModel().getValueAt(i, 2);
+            if (o == null) {
+                //                JOptionPane.showInputDialog(null, "WRONG");
+                JOptionPane.showMessageDialog(null, "Fill all fields");
+                Quant = -1;
+                correct = false;
+                continue;
+            } else
+                Quant = Integer.parseInt(o.toString());
+
+            o = jTable1.getModel().getValueAt(i, 3);
+            if (o == null) {
+                //                JOptionPane.showInputDialog(null, "WRONG");
+                JOptionPane.showMessageDialog(null, "Fill all fields");
+                DateIn = "";
+                correct = false;
+                continue;
+            } else if (!isDateValid( o.toString())){
+                JOptionPane.showMessageDialog(null, "Date Format is: YYYY-MM-DD");
+                DateIn = "";
+                correct = false;
+                continue;
+            }
+                else{
+                DateIn = o.toString();
+            }
+
+
+            o = jTable1.getModel().getValueAt(i, 4);
+            if (o == null) {
+                //                JOptionPane.showInputDialog(null, "WRONG");
+                JOptionPane.showMessageDialog(null, "Fill all fields");
+                CostUnit = -1;
+                correct = false;
+                continue;
+            } else
+                CostUnit = Float.parseFloat(o.toString());
+
+            o = jTable1.getModel().getValueAt(i, 5);
+            if (o == null) {
+                //                JOptionPane.showInputDialog(null, "WRONG");
+                JOptionPane.showMessageDialog(null, "Fill all fields");
+                TotalCost = -1;
+                correct = false;
+                continue;
+            } else
+                TotalCost = Float.parseFloat(o.toString());
+
+
+            o = jTable1.getModel().getValueAt(i, 6);
+            if (o == null) {
+                //                JOptionPane.showInputDialog(null, "WRONG");
+                JOptionPane.showMessageDialog(null, "Fill all fields");
+                SalePrice = -1;
+                correct = false;
+                continue;
+            } else
+                SalePrice = Float.parseFloat(o.toString());
+
+            o = jTable1.getModel().getValueAt(i, 7);
+            if (o == null) {
+                //                JOptionPane.showInputDialog(null, "WRONG");
+                JOptionPane.showMessageDialog(null, "Fill all fields");
+                EmplID = -1;
+                correct = false;
+                continue;
+            } else
+                EmplID = Integer.parseInt(o.toString());
+
+            o = jTable1.getModel().getValueAt(i, 8);
+            if (o == null) {
+                //                JOptionPane.showInputDialog(null, "WRONG");
+                JOptionPane.showMessageDialog(null, "Fill all fields");
+                Vendor = "";
+                correct = false;
+                continue;
+            } else {
+                Vendor = o.toString();
+                Vendor = Vendor.toUpperCase();
+            }
+
+            o = jTable1.getModel().getValueAt(i, 9);
+            if (o == null) {
+                //                JOptionPane.showInputDialog(null, "WRONG");
+                JOptionPane.showMessageDialog(null, "Fill all fields");
+                VendorNo = -1;
+                correct = false;
+                continue;
+            } else
+                VendorNo = Integer.parseInt(o.toString());
+
+
+            if (correct == true) {
+                try {
+                    databit.addInventory(id, ProdName, Quant, DateIn, CostUnit, TotalCost, SalePrice, EmplID, Vendor,
+                                         VendorNo);
                 } catch (SQLException e) {
                 }
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-    void loadInventory(JTable jt, int rows) throws SQLException{
+    void loadInventory(JTable jt, int rows) throws SQLException {
         ResultSet inventory = databit.getInventory();
         int i = 0;
-        while(inventory.next()){
-            jt.getModel().setValueAt(inventory.getInt(1),i ,0);
-            jt.getModel().setValueAt(inventory.getString(2),i ,1);
-            jt.getModel().setValueAt(inventory.getInt(3),i ,2);
-            jt.getModel().setValueAt(inventory.getString(4),i ,3);
-            jt.getModel().setValueAt(inventory.getFloat(5),i ,4);
-            jt.getModel().setValueAt(inventory.getFloat(6),i ,5);
-            jt.getModel().setValueAt(inventory.getFloat(7),i ,6);
-            jt.getModel().setValueAt(inventory.getInt(8),i ,7);
-            jt.getModel().setValueAt(inventory.getString(9),i ,8);
-            jt.getModel().setValueAt(inventory.getInt(10),i ,9);
+
+        while (inventory.next()) {
+
+
+            jt.getModel().setValueAt(inventory.getInt(1), i, 0);
+            jt.getModel().setValueAt(inventory.getString(2), i, 1);
+            jt.getModel().setValueAt(inventory.getInt(3), i, 2);
+            jt.getModel().setValueAt(inventory.getDate(4).toString(), i, 3);
+            jt.getModel().setValueAt(inventory.getFloat(5), i, 4);
+            jt.getModel().setValueAt(inventory.getFloat(6), i, 5);
+            jt.getModel().setValueAt(inventory.getFloat(7), i, 6);
+            jt.getModel().setValueAt(inventory.getInt(8), i, 7);
+            jt.getModel().setValueAt(inventory.getString(9), i, 8);
+            jt.getModel().setValueAt(inventory.getInt(10), i, 9);
             i++;
         }
     }
+    public static boolean isDateValid(String date) 
+    {
+            try {
+                DateFormat df = new SimpleDateFormat(FORMAT);
+                df.setLenient(false);
+               Date d= df.parse(date);
+                System.out.println(d);
+                return true;
+            } catch (ParseException e) {
+                return false;
+            }
+    }
+    
+
     /**
      * @param args the command line arguments
      */

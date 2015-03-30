@@ -9,7 +9,8 @@ Total_Cost decimal(6,2),
 Sale_Price decimal(5,2),
 Empl_Id int,
 Vendor varchar(30),
-VendorNo varchar(20),
+VendorNo int,
 PRIMARY KEY (Id),
-FOREIGN KEY (Empl_Id) REFERENCES Employee(Id)
+FOREIGN KEY (Empl_Id) REFERENCES Employee(Id),
+FOREIGN KEY (VendorNo) REFERENCES Vendor
 )
