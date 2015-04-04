@@ -12,6 +12,8 @@ import java.util.Date;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author martinbruckner
@@ -19,7 +21,8 @@ import javax.swing.table.DefaultTableModel;
 public class Schedule extends javax.swing.JFrame{    
     @SuppressWarnings("compatibility:8515289491683898573")
     private static final long serialVersionUID = -160035917128169035L;
-    
+//    Image im = Toolkit.getDefaultToolkit().getImage("logo.gif");
+    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\tabitIcon.png");
     DataHandler databit;
     /** Creates new form Schedule */
     public Schedule() throws SQLException{
@@ -41,16 +44,18 @@ public class Schedule extends javax.swing.JFrame{
         jButton3 = new javax.swing.JButton();
         Date date = new Date();
         Date datetemp = new Date();
-        int days = date.getDate();
-        datetemp.setDate(days+ 7);
         int currentday = date.getDay();
-
+        int days = date.getDate() - currentday ;
+        date.setDate(days + 1 );
         datetemp.setDate(days+ 7);
-        String dateString = new SimpleDateFormat("dd/MM/yyyy").format(date);
-        String dateTempString = new SimpleDateFormat("dd/MM/yyyy").format(datetemp);
+
+        String dateString = new SimpleDateFormat("MMM/dd/yyyy").format(date);
+        String dateTempString = new SimpleDateFormat("MMM/dd/yyyy").format(datetemp);
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tabit - Schedule");
+        setIconImage(img.getImage());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

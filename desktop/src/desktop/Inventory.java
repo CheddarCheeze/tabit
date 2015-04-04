@@ -8,11 +8,16 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import java.util.List;
+
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Image;
 
 /**
  *
@@ -24,11 +29,16 @@ public class Inventory extends javax.swing.JFrame {
     @SuppressWarnings("oracle.jdeveloper.java.unconventional-field-modifier-order")
     final static String FORMAT = "yyyy-MM-dd";
     /** Creates new form Inventory */
+    List<Image> listex = new ArrayList<>();
+    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\tabitIcon.png");
+    ImageIcon img2 = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");                   
     DataHandler databit;
     
 
     public Inventory() throws SQLException {
         databit = new DataHandler();
+      
+        listex.add(img2.getImage());
         initComponents();
     }
 
@@ -47,6 +57,7 @@ public class Inventory extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImages(listex);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
