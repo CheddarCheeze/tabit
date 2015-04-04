@@ -59,14 +59,25 @@ public class DataHandler {
         stmt.execute(query);
     }
     
-    //public void addNewProduct()
+    public String getEmployeeName(int id) throws SQLException{
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "SELECT Firstname, Lastname FROM Employee where id = "+ id;
+        System.out.println("\nExecuting query:  " + query);
+        rset = stmt.executeQuery(query); 
+        String Name = "";
+        while(rset.next()){
+        Name = rset.getString(1) + " " + rset.getString(2);
+        }
+        return Name;
+    }
     
     public ResultSet getAllEmployees() throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
         query = "SELECT * FROM Employee ORDER BY id";
         System.out.println("\nExecuting query: " + query);
-        rset = stmt.executeQuery(query); 
+        rset = stmt.executeQuery(query);
         return rset;
     }
     
@@ -145,10 +156,11 @@ public class DataHandler {
       //  datahandler.addNewEmployee(7, "McAlly", "James", "05/MAR/1991","Cashier", 
         //                       30000, "479-990-7869");
         datahandler.printEmployees();
-        int temp = datahandler.getRows("Employee");
+        System.out.println(datahandler.getRows("Employee"));
         System.out.println(datahandler.getRows("Inventory"));
-        System.out.println(temp);
-        //datahandler.printInventory();\
-        datahandler.addInventory(11, "CACACACA", 3 ,"10-MAR-15", 4, 5, 10, 1, "WALMART", 1);
+        
+        //datahandler.printInventory();
+        //datahandler.addInventory(11, "Plastic Cups", 3 ,"10-MAR-15", 4, 5, 10, 1, "WALMART", 1);
+        System.out.println(datahandler.getEmployeeName(1));
     }
 }

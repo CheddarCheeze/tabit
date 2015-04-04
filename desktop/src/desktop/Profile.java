@@ -3,6 +3,8 @@ package desktop;
 
 import java.awt.Toolkit;
 
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -96,7 +98,11 @@ public class Profile extends javax.swing.JFrame {
         String tableNumber = JOptionPane.showInputDialog("Enter the new table number: ");
         int newTableNumber = Integer.parseInt(tableNumber);
 
-        Table t1 = new Table();
+        Table t1 = null;
+        try {
+            t1 = new Table();
+        } catch (SQLException e) {
+        }
         t1.setTableNumber(newTableNumber);
         TableList.addTable(t1);
     }//GEN-LAST:event_newTableButtonActionPerformed
