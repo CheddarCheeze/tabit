@@ -3,10 +3,10 @@ package desktop;
 import java.util.ArrayList;
 
 public class TableList {
-    private static ArrayList<Table> allTables = new ArrayList<>();
+    private static ArrayList<Table> allTables;
     
     public TableList() {
-        super();
+        allTables = new ArrayList<>();
     }
     
     public static void addTable(Table t){

@@ -14,6 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @authors Martin Bruckner and Nicolas Nunez
+ */
+
 public class Inventory extends javax.swing.JFrame {
 
     @SuppressWarnings("oracle.jdeveloper.java.unconventional-field-modifier-order")

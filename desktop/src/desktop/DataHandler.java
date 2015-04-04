@@ -135,7 +135,9 @@ public class DataHandler {
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
     }
-    
+/*
+ * Main method is for testing purposes only
+ */
     public static void main(String[] args) throws SQLException {
         DataHandler datahandler = new DataHandler();
         datahandler.printEmployees();
