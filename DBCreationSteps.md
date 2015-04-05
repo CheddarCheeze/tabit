@@ -142,8 +142,12 @@ Type in the following with the same username and password[THIS IS BECAUSE THE JA
 	SQL>grant connect to nanunezr;
 	SQL>grant connect, resource, dba to nanunezr;
 	SQL>grant create session to nanunezr;
+	SQL>grant alter session to nanunezr;
 	SQL>grant unlimited tablespace to nanunezr;
-	SQL>grant select, update, insert, delete on TABLENAMES*** to nanunezr;
+	SQL>grant create session, grant any privilege to nanunez;
+	
+	
+// not sure about this one SQL>grant select, update, insert, delete on TABLENAMES*** to nanunezr;
 	
 	SQL>exit
 	
