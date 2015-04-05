@@ -127,6 +127,8 @@ after completion execute the following command and wait:
 
 And now besides the XE database we have a TABIT database.
 
+	SQL> SET SERVEROUTPUT ON
+
 	SQL>exit
 
 THIS IS ALSO VERY IMPORTANT:
