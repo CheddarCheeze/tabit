@@ -13,7 +13,7 @@ Installation:
 This is all done in cmd as administrator
 all parameter files for a database must exist in the Oracle HOME (see above)
 	cd C:\oraclexe\app\oracle\product\11.2.0\server\database
-	vim initabit.ora
+	vim inittabit.ora
 	db_name=tabit
 	control_files="C:\database\oradata\tabit\control01.ctl"
 	
