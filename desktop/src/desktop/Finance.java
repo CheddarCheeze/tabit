@@ -1,12 +1,14 @@
 
 package desktop;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Nicolas Nunez
  */
 public class Finance extends javax.swing.JFrame {
-
+    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
     /** Creates new form Finance */
     public Finance() {
         initComponents();
@@ -36,6 +38,7 @@ public class Finance extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(img.getImage());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

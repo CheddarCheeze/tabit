@@ -30,15 +30,12 @@ public class Inventory extends javax.swing.JFrame {
     final static String FORMAT = "yyyy-MM-dd";
     /** Creates new form Inventory */
     List<Image> listex = new ArrayList<>();
-    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\tabitIcon.png");
-    ImageIcon img2 = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");                   
+    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
     DataHandler databit;
     
 
     public Inventory() throws SQLException {
         databit = new DataHandler();
-      
-        listex.add(img2.getImage());
         initComponents();
     }
 
@@ -57,7 +54,7 @@ public class Inventory extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImages(listex);
+        setIconImage(img.getImage());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
