@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amx:view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amx="http://xmlns.oracle.com/adf/mf/amx"
+          xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
+  <amx:panelPage id="pp1">
+    <amx:facet name="header">
+      <amx:outputText value="Login" id="ot1"/>
+    </amx:facet>
+    <amx:facet name="primary">
+      <amx:commandButton id="cb1"/>
+    </amx:facet>
+    <amx:facet name="secondary">
+      <amx:commandButton id="cb2"/>
+    </amx:facet>
+    <amx:facet name="footer">
+      <amx:outputText value="Los Altos" id="ot2"/>
+    </amx:facet>
+    
+    <amx:outputText value="Lock" id="ot3"
+                    inlineStyle="text-align:center; font-weight:bolder; font-style:normal; padding:5%;"/>
+    
+    <amx:commandButton text="." icon="/resources/one.png" iconPosition="trailing" id="cb3"
+                       inlineStyle="text-align:right;"/>
+    <amx:commandButton text="" icon="/resources/two.png" iconPosition="trailing" id="cb4"
+                       inlineStyle="text-align:center;"/>
+    <amx:commandButton text="." icon="/resources/three.png" iconPosition="trailing" id="cb5"
+                       inlineStyle="text-align:justify;"/>
+        
+    <amx:panelFormLayout id="pfl1" labelPosition="center"/>
+    <amx:commandButton text="" icon="/resources/four.png" iconPosition="trailing" id="cb6"/>
+    <amx:commandButton text="" icon="/resources/five.png" iconPosition="trailing" id="cb7"/>
+    <amx:commandButton text="" icon="/resources/six.png" iconPosition="trailing" id="cb8"/>
+    <amx:panelFormLayout id="pfl2"/>
+    <amx:commandButton text="" icon="/resources/seven.png" iconPosition="trailing" id="cb9"/>
+    <amx:commandButton text="" icon="/resources/eight.png" iconPosition="trailing" id="cb10"/>
+    <amx:commandButton text="" icon="/resources/nine.png" iconPosition="trailing" id="cb11"/>  
+    <amx:panelFormLayout id="pfl3"/>
+    <amx:commandButton text="" icon="/resources/clear.png" iconPosition="trailing" id="cb12"/>
+    <amx:commandButton text="" icon="/resources/zero.png" iconPosition="trailing" id="cb13"/>
+    <amx:commandButton text="" icon="/resources/enter.png" iconPosition="trailing" id="cb14"/>  
+  </amx:panelPage>
+</amx:view>
