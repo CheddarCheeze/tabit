@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="11.1.2.64.36" id="DataBindings"
+             SeparateXMLFiles="false" Package="mycomp.mobile" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adfm/dvt"
+             className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/empList.amx" usageId="mycomp_mobile_empListPageDef"/>
+    <page path="/graph.amx" usageId="mycomp_mobile_graphPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="mycomp_mobile_empListPageDef" path="mycomp.mobile.pageDefs.empListPageDef"/>
+    <page id="mycomp_mobile_graphPageDef" path="mycomp.mobile.pageDefs.graphPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="Emps" path="mycomp.mobile.Emps"/>
+  </dataControlUsages>
+</Application>

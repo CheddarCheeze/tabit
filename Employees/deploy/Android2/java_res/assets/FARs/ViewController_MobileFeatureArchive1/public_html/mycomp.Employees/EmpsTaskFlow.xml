@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-mobile-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.0">
+  <task-flow-definition id="EmpsTaskFlow">
+    <default-activity>login</default-activity>
+    <view id="empList">
+      <page>/empList.amx</page>
+    </view>
+    <view id="graph">
+      <page>/graph.amx</page>
+    </view>
+    <view id="login">
+      <page>/login.amx</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>empList</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>showGraph</from-outcome>
+        <to-activity-id>graph</to-activity-id>
+        <transition>flipRight</transition>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>login</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>showEmp</from-outcome>
+        <to-activity-id>empList</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-mobile-config>

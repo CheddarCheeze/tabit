@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">empList</property>
+      <property
+         name="page">/empList.amx</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>empList&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">236.94824</property>
+      <property
+         name="x">256.0</property>
+   </View>
+   <View
+      id="View3">
+      <property
+         name="activityId">graph</property>
+      <property
+         name="page">/graph.amx</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>graph&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">237.59766</property>
+      <property
+         name="x">527.0</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="View2"
+      to="View3">
+      <property
+         name="fromOutcome">showGraph</property>
+      <property
+         name="sdm:polyPoints">R50,297.0,236.59766,486.0,237.24707,L50</property>
+   </ControlFlowCase>
+   <View
+      id="View5">
+      <property
+         name="activityId">login</property>
+      <property
+         name="page">/login.amx</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>login&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">235.59766</property>
+      <property
+         name="x">39.0</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="View5"
+      to="View2">
+      <property
+         name="fromOutcome">showEmp</property>
+      <property
+         name="sdm:polyPoints">R50,80.0,235.24707,215.0,236.59766,L50</property>
+   </ControlFlowCase>
+</SDM>
