@@ -4,12 +4,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
+
+import java.text.SimpleDateFormat;
+
 import oracle.jdbc.pool.OracleDataSource;
 
 /**
  *
  * @author  Nicolas Nunez
- * Some notes: in order to add date this is the format 'dd/mmm/yyyy'
+ * Some notes: in order to add date this is the format 'MON/DD/YYYY'
  * where mmm is MAR for example
  */
 
@@ -23,9 +26,12 @@ public class DataHandler {
     ResultSet rset;
     String query;
     String sqlString;
+    SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
     
     public DataHandler() throws SQLException {
         getDBConnection();
+        alterDateFormat("MON/DD/YYYY");
+        printDateFormat();
     }
     
     public void getDBConnection() throws SQLException{
@@ -34,6 +40,38 @@ public class DataHandler {
         ds.setURL(jdbcUrl);
         conn = ds.getConnection(userid, password);
     }
+    
+//==============================================================
+// Name: alterDateFormat
+// Purpose: to set the date of the database being used in a 
+//          desired format
+// Parameters: String dateformat "MMM/DD/YYYY"
+//==============================================================
+        public void alterDateFormat(String df) throws SQLException{
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "ALTER SESSION SET NLS_DATE_FORMAT='" + df + "'";
+//        System.out.println("\nExecuting query: " + query);
+        stmt.execute(query);
+        }
+        
+// ===================================================================
+// Method: printDateFormat
+// Purpose: print the nls_date_format of the database being used
+// Paramaters: none
+// ===================================================================
+        public void printDateFormat() throws SQLException{
+            String temp = "";
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                   ResultSet.CONCUR_READ_ONLY);
+            query = "SELECT SYSDATE FROM DUAL";
+  //          System.out.println("\nExecuting query: " + query);
+            rset = stmt.executeQuery(query);
+            while(rset.next()){
+                 temp = rset.getString(1);
+            }
+            System.out.println(temp);
+        }
     
     public void addNewEmployee(int id, String lastname, String firstname, String dob,String position, 
                                int salary, String phoneno) throws SQLException {
@@ -98,7 +136,13 @@ public class DataHandler {
         rset = stmt.executeQuery(query);        
         return rset;
     }
-    
+
+//=================================================================================
+// Name: getInventory
+// Purpose: to get all items in the inventory
+// Parameters: none
+// Returns: ResultSet
+//=================================================================================    
     public ResultSet getInventory() throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
@@ -107,24 +151,42 @@ public class DataHandler {
         rset = stmt.executeQuery(query);        
         return rset;
     }
+    
+//=================================================================================
+// Name: printEmployees
+// Purpose: to print all the information of all employess
+// Parameters: none
+//=================================================================================
+    
     public void printEmployees() throws SQLException {
         ResultSet temp = getAllEmployees();
         while(temp.next()){
             System.out.println(temp.getInt(1)+ " " + temp.getString(2) + " " +
-                temp.getString(3) + " " + temp.getString(4) + " " + temp.getString(5) + " " + 
+                temp.getString(3) + " " + fmt.format(temp.getDate(4)) + " " + temp.getString(5) + " " + 
                 temp.getInt(6) + " " + temp.getString(7));
         }
     }
+
+//=================================================================================
+// Name: printInventory
+// Purpose: to print all items in the inventory table
+// Parameters: none
+//=================================================================================
     public void printInventory() throws SQLException{
         ResultSet temp = getAllProducts();
         while(temp.next()){
             System.out.println(temp.getInt(1)+ " " + temp.getString(2) + " " +
-                temp.getInt(3) + " " + temp.getString(4).substring(0, 9)+ " " + temp.getFloat(5) + " " + 
+                temp.getInt(3) + " " + fmt.format(temp.getDate(4))+ " " + temp.getFloat(5) + " " + 
                 temp.getFloat(6) + " " + temp.getFloat(7) + " " + temp.getInt(8) + " " + 
                 temp.getString(9) + " " + temp.getString(10));
         }
     }
 
+//=================================================================================
+// Name: getRows
+// Purpose: get the number of rows in a specific table of the database
+// Parameters: String tableName
+//=================================================================================
     public int getRows(String tablename) throws SQLException{
         int rows = 0;
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
@@ -139,28 +201,36 @@ public class DataHandler {
         return rows;
     }
     
-    public void deleteInfoDatabase(String tablename) throws SQLException{
+// ===================================================================
+// Method: deleteInfoTable
+// Purpose: To delete all content in a specific table
+// Paramaters: String tablename
+// ===================================================================
+    public void deleteInfoTable(String tablename) throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
         query = "DELETE FROM "+ tablename +"";
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
     }
-/*
- * Main method is for testing purposes only
- */
+// ============================================================================
+// Name: main 
+// Purpose: method is for testing class purposes only
+// Paramaters: String[] args
+// ============================================================================
     public static void main(String[] args) throws SQLException {
         DataHandler datahandler = new DataHandler();
         datahandler.printEmployees();
 //        datahandler.addSchedule("Niggolah", "asfdasfd", "asdfasfsad", "asdfsafsdaf", "asdfasfsad", "asdfsadf", "asdfsafsda", "asdfsdafsd");
-      //  datahandler.addNewEmployee(7, "McAlly", "James", "05/MAR/1991","Cashier", 
-        //                       30000, "479-990-7869");
-        datahandler.printEmployees();
-        System.out.println(datahandler.getRows("Employee"));
-        System.out.println(datahandler.getRows("Inventory"));
+        //datahandler.addNewEmployee(6, "McAlleyOop", "James", "APR/05/1991","Cashier", 30000, "479-990-7869");
+        //datahandler.addNewEmployee(7, "Chumacero", "Chumita", "MAY/07/1994","Cashier", 20000, "479-990-7753");
+//        datahandler.printEmployees();
+//        System.out.println(datahandler.getRows("Employee"));
+//        System.out.println(datahandler.getRows("Inventory"));
         
         //datahandler.printInventory();
         //datahandler.addInventory(11, "Plastic Cups", 3 ,"10-MAR-15", 4, 5, 10, 1, "WALMART", 1);
+        datahandler.printEmployees();
         System.out.println(datahandler.getEmployeeName(1));
     }
 }

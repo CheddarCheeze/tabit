@@ -165,7 +165,7 @@ public class Schedule extends javax.swing.JFrame{
         System.out.println("Save Records");
         //Add records to database
         try{
-            databit.deleteInfoDatabase("Schedule");
+            databit.deleteInfoTable("Schedule");
         }catch(SQLException e){}
         String name, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
         for (int i=0; i<jTable1.getRowCount(); i++){
