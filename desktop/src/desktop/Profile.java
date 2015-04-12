@@ -13,8 +13,7 @@ import javax.swing.JOptionPane;
  * @author Brandon Foster
  */
 public class Profile extends javax.swing.JFrame {
-    
-    
+    String[] args = {};
     /** Creates new form Profile */
     public Profile() {
         initComponents();
@@ -95,17 +94,19 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-END:initComponents
 
     private void newTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTableButtonActionPerformed
+        boolean isTableFree = false;
+        int newTableNumber = -1;
         
         String tableNumber = JOptionPane.showInputDialog("Enter the new table number: ");
-        int newTableNumber = Integer.parseInt(tableNumber);
-
-        Table t1 = null;
+        newTableNumber = Integer.parseInt(tableNumber);        
+        
         try {
-            t1 = new Table();
+            Table t1 = new Table();
+            t1.setTableNumber(newTableNumber);
+            TableList.allTables.add(t1);
         } catch (SQLException e) {
         }
-        t1.setTableNumber(newTableNumber);
-        TableList.addTable(t1);
+
     }//GEN-LAST:event_newTableButtonActionPerformed
 
     private void viewScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewScheduleButtonActionPerformed
@@ -115,10 +116,9 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_viewScheduleButtonActionPerformed
 
     private void manageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageButtonActionPerformed
-       // DesktopFrame d = new DesktopFrame();
-        //String[] args = {};
-        //d.main(args);
-        //super.dispose();
+        DesktopFrame d = new DesktopFrame();
+        d.main(args);
+        super.dispose();
     }//GEN-LAST:event_manageButtonActionPerformed
 
     /**

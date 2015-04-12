@@ -14,6 +14,8 @@ import javax.swing.ImageIcon;
  */
 public class DesktopFrame extends javax.swing.JFrame {
     ManagerProfile m = new ManagerProfile();
+    String args[] = {};
+    public static boolean needTableList = true;
     @SuppressWarnings("compatibility:-4952383735578523799")
     private static final long serialVersionUID = 1L;
 
@@ -105,8 +107,6 @@ public class DesktopFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
-
-        String[] args = {};
         m.main(args);
         super.dispose();
     }//GEN-LAST:event_signInButtonActionPerformed
@@ -115,6 +115,10 @@ public class DesktopFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        if(needTableList == true){
+//            TableList t = new TableList();
+            needTableList = false;
+        }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
