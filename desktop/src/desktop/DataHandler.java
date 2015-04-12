@@ -28,6 +28,11 @@ public class DataHandler {
     String sqlString;
     SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
     
+//==============================================================
+// Constructor
+// calls method to get a connection with the database, alters the date format
+// and prints it
+//==============================================================
     public DataHandler() throws SQLException {
         getDBConnection();
         alterDateFormat("MON/DD/YYYY");
@@ -65,7 +70,7 @@ public class DataHandler {
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                    ResultSet.CONCUR_READ_ONLY);
             query = "SELECT SYSDATE FROM DUAL";
-  //          System.out.println("\nExecuting query: " + query);
+            System.out.println("\nExecuting query: " + query);
             rset = stmt.executeQuery(query);
             while(rset.next()){
                  temp = rset.getString(1);
@@ -111,6 +116,12 @@ public class DataHandler {
         stmt.execute(query);
     }
     
+// ==========================================================================
+// Name: getEmployeeName
+// Purpose: to get the name of the employee associated with a particular id
+// Parameters: int id of employee
+// Returns: String Name
+// ==========================================================================
     public String getEmployeeName(int id) throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
@@ -177,6 +188,14 @@ public class DataHandler {
         stmt.execute(query);
     }
 
+//=======================================================================
+// Name: getSchedule
+// Purpose: to get all the information in the Schedule database and
+//          put it in a ResultSet to allow other developers to handle data
+//          as they may need it
+// Parameters: none
+// Returns: ResultSet
+//========================================================================
     public ResultSet getSchedule() throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
@@ -206,7 +225,6 @@ public class DataHandler {
 // Purpose: to print all the information of all employess
 // Parameters: none
 //=================================================================================
-    
     public void printEmployees() throws SQLException {
         ResultSet temp = getAllEmployees();
         while(temp.next()){
@@ -262,6 +280,7 @@ public class DataHandler {
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
     }
+    
 // ============================================================================
 // Name: main 
 // Purpose: method is for testing class purposes only
@@ -270,18 +289,7 @@ public class DataHandler {
     public static void main(String[] args) throws SQLException {
         DataHandler datahandler = new DataHandler();
         datahandler.printEmployees();
-//        datahandler.addSchedule("Niggolah", "asfdasfd", "asdfasfsad", "asdfsafsdaf", "asdfasfsad", "asdfsadf", "asdfsafsda", "asdfsdafsd");
-        //datahandler.addNewEmployee(6, "McAlleyOop", "James", "APR/05/1991","Cashier", 30000, "479-990-7869");
-        //datahandler.addNewEmployee(7, "Chumacero", "Chumita", "MAY/07/1994","Cashier", 20000, "479-990-7753");
-//        datahandler.printEmployees();
-//        System.out.println(datahandler.getRows("Employee"));
-//        System.out.println(datahandler.getRows("Inventory"));
-        
-        //datahandler.printInventory();
-        //datahandler.addInventory(11, "Plastic Cups", 3 ,"10-MAR-15", 4, 5, 10, 1, "WALMART", 1);
         datahandler.printEmployees();
         System.out.println(datahandler.getEmployeeName(1));
-        System.out.println(datahandler.getVendorInfo(1));
-        //datahandler.deleteById("inventory", 7);
     }
 }
