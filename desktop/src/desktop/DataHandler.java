@@ -73,6 +73,14 @@ public class DataHandler {
             System.out.println(temp);
         }
     
+//==================================================================================================
+// Name: addNewEmployee
+// Purpose: to add a new employee to the database
+// Paramaters: all the necessary information
+//             id, last name, first name, date of brith, position, salary, phone no
+// returns nothing
+//==================================================================================================
+
     public void addNewEmployee(int id, String lastname, String firstname, String dob,String position, 
                                int salary, String phoneno) throws SQLException {
         Statement stmt = conn.createStatement();
@@ -80,7 +88,14 @@ public class DataHandler {
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
     }
-    
+
+//==================================================================================================
+// Name: addSchedule
+// Purpose: to schedule a worker.
+// Paramaters: all the necessary information
+//             id, last name, first name, date of brith, position, salary, phone no
+// returns nothing
+//==================================================================================================    
     public void addSchedule(String name, String mond, String tues, String wed, String thurs, String fri, String sat, String sun) throws SQLException {
         Statement stmt = conn.createStatement();
         System.out.println(name + " " + mond + " " + tues + " " + wed + " " + thurs + " " + fri + " " + sat + " " + sun);
@@ -91,7 +106,6 @@ public class DataHandler {
     
     public void addInventory(int id ,String ProdName, int Quant, String DateIn,float CostUnit, float TotalCost,float SalePrice,  int EmplID,String Vendor,int VendorNo ) throws SQLException {
         Statement stmt = conn.createStatement();
-        
         query = "INSERT INTO Inventory VALUES(" + id + ", '"+ ProdName +"', "+Quant+", '"+DateIn+"', "+CostUnit+", "+ TotalCost +", "+ SalePrice +", "+ EmplID+",'" + Vendor + "', "+ VendorNo +" )";
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
@@ -127,7 +141,42 @@ public class DataHandler {
         rset = stmt.executeQuery(query);        
         return rset;
     }
-    
+//=========================================================================
+// Name: getVendorInfo
+// Purpose: get a string with the information of the vendor
+//          to be displayed in the jPanel.
+// Parameters: the respective id of the vendor whose information is wanted
+// Returns: A string concatenated with all the information of the vendor.
+//=========================================================================
+    public String getVendorInfo(int id) throws SQLException {
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "SELECT * FROM  Vendor where id=" + id;
+        System.out.println("\nExecuting query: " + query);
+        rset = stmt.executeQuery(query);        
+        String allInfo="";
+        while(rset.next()){
+            allInfo = "Id: " + rset.getInt(1) + 
+                      "\nVendor: " + rset.getString(2) + 
+                      "\nPhone Number: " + rset.getString(3) + 
+                      "\nAddress: " + rset.getString(4) +
+                      "\nAdditional Information:\n" + rset.getString(5)+ "\n";
+        }
+        return allInfo;
+    }
+//======================================================================
+// Name: deleteByID
+// Purpose: to delete information from a given table by the unique id
+// Parameters: String name of table, int id
+// Returns: nothing
+//======================================================================
+    public void deleteById(String tableName, int id) throws SQLException{
+        Statement stmt = conn.createStatement();
+        query = "DELETE FROM " + tableName + " WHERE ID = " +id;
+        System.out.println("\nExecuting query: " + query);
+        stmt.execute(query);
+    }
+
     public ResultSet getSchedule() throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
@@ -232,5 +281,7 @@ public class DataHandler {
         //datahandler.addInventory(11, "Plastic Cups", 3 ,"10-MAR-15", 4, 5, 10, 1, "WALMART", 1);
         datahandler.printEmployees();
         System.out.println(datahandler.getEmployeeName(1));
+        System.out.println(datahandler.getVendorInfo(1));
+        //datahandler.deleteById("inventory", 7);
     }
 }

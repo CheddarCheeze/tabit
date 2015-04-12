@@ -1,2 +1,10 @@
-insert into Vendor values (1, 'Walmart', '479-745-9089', 'Ask John McKenzie for discounts on dairy products');
-
+INSERT INTO VENDOR VALUES(1, 'WALMART', '479-890-4747', '22 W Cleveland St', 'Ask for John for Dairy Products');
+INSERT INTO VENDOR VALUES(2, 'TIENDA AMIGA', '479-678-4563', '123 Melmar Dr', 'Discounts on meats');
+INSERT INTO VENDOR VALUES(3, 'EL GIRASOL', '479-999-2563', '831 W Center', 'Mexican Soda Provider, ask for Juan');
+INSERT INTO VENDOR VALUES(4, 'LA VECINITA', '479-777-9871', '1032 W Cleveland St', 'Tortilla special chips');
+INSERT INTO VENDOR VALUES(5, 'JUAN DEL SUR', '479-991-1147', '777 Haven Ave', 'Discounts on Paleta Payaso and Mexican candies');
+INSERT INTO VENDOR VALUES(6, 'BELLAGGIO', '501-576-1818', '1435 Gregg St', 'Chimichurri and spicy powder');
+INSERT INTO VENDOR VALUES(7, 'ARLEQUIN', '305-897-1267', '125 Poplar St', 'Provider for plastic cups and other diposables');
+INSERT INTO VENDOR VALUES(8, 'PAYACO', '479-858-1822', '12 Penn Ave', 'Good prices on fruit and vegetables');
+INSERT INTO VENDOR VALUES(9, 'PALETIN', '501-890-4111', '146 Barclay Ave', 'Do not make any deals with this vendor');
+INSERT INTO VENDOR VALUES(10, 'MARIA', '479-812-8923', '95 W One Dr', 'Meats: Bad experience with vendor');
