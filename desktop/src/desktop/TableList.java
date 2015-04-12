@@ -19,31 +19,43 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.*;
+import javax.swing.event.*;
 
-
-public class TableList extends JFrame {
+public class TableList extends JFrame implements ListSelectionListener {
     public static ArrayList<Table> allTables;
     public static String[] tableNumbers = new String[1000];
-    private final JList tableJList;
+    public static JList tableJList;
     public String args[] = {};
+    public static DefaultListModel listModel;
+    
+    public static void populateList(){
+        for(int i = 0; i < allTables.size(); i++){
+            String num = valueOf(allTables.get(i).getTableNumber());
+            System.out.print(num + "\n");
+            tableNumbers[i] = "Table " + num;
+            listModel.addElement("Table " + num);
+            ManagerProfile.strings = tableNumbers;
+        }
+    }
     
     public TableList() {
         allTables = new ArrayList<>();
-
-        tableJList = new JList(tableNumbers);
+        listModel = new DefaultListModel();
+        tableJList = new JList(listModel);
         tableJList.setVisibleRowCount(10);
         tableJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         add(new JScrollPane(tableJList));
-        tableJList.addListSelectionListener(
-           new ListSelectionListener(){
-               
-               public void valueChanged(ListSelectionEvent event){
-                   System.out.print("Value Changed\n");
-                   
-               }
-           }
-        );
+//        tableJList.addListSelectionListener(
+//           new ListSelectionListener(){
+//               
+//               public void valueChanged(ListSelectionEvent event){
+//                   int i = tableJList.getSelectedIndex();
+//                   System.out.print("Value Changed: " + i + "\n");
+//               }
+//           }
+//        );
     }
     
         public void addTable(Table t){
@@ -78,24 +90,12 @@ public class TableList extends JFrame {
         }
     
     public static void main(String[] args){
-        //Make some Tables
-        try {
-            Table t1 = new Table(1, 1);
-            Table t2 = new Table(2,2);
-            Table t3 = new Table(3,3);
-            Table t4 = new Table(4,3);
-            allTables.add(t1);
-            allTables.add(t2);
-            allTables.add(t3);
-            allTables.add(t4);
-        } catch (SQLException e) {
-        }
         
-        for(int i = 0; i < allTables.size(); i++){
-            Table t = allTables.get(i);
-            String num = valueOf(t.getTableNumber());
-            System.out.print(num + "\n");
-            tableNumbers[i] = "Table " + num;
-        }
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent listSelectionEvent) {
+        int i = tableJList.getSelectedIndex();
+        System.out.print("Value Changed: " + i + "\n");
     }
 }
