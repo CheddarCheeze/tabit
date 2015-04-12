@@ -24,6 +24,7 @@ public class Schedule extends javax.swing.JFrame{
 //    Image im = Toolkit.getDefaultToolkit().getImage("logo.gif");
     ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\tabitIcon.png");
     DataHandler databit;
+    String args[] = {};
     /** Creates new form Schedule */
     public Schedule() throws SQLException{
         databit = new DataHandler();
@@ -218,6 +219,8 @@ public class Schedule extends javax.swing.JFrame{
 
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ManagerProfile m = new ManagerProfile();
+        m.main(args);
         super.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
