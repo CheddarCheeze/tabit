@@ -19,7 +19,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class ManagerProfile extends javax.swing.JFrame {
     String[] args = {};
-    public static String[] strings = new String[1000];
+    public static String[] strings = new String[1000]; //strings stores the table name in the List
     public static TableList tableList = new TableList();
     /** Creates new form ManagerProfile */
     public ManagerProfile() { 
@@ -27,6 +27,17 @@ public class ManagerProfile extends javax.swing.JFrame {
         this.setLocationRelativeTo(getRootPane());
     }
 
+    // Opens ViewTable with the information about the table
+    public void openTable(int index){
+        if(index >= 0){
+            System.out.print("\n" + index + "\n");
+            String num = valueOf(TableList.allTables.get(index).getTableNumber());
+            String[] args = {num};
+            ViewTable.main(args);
+            super.dispose();
+        }
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -42,7 +53,6 @@ public class ManagerProfile extends javax.swing.JFrame {
         magagerLogOutButton = new javax.swing.JButton();
         modifyInventoryButton = new javax.swing.JButton();
         viewProfileButton = new javax.swing.JButton();
-        viewTablesButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
 
@@ -97,17 +107,19 @@ public class ManagerProfile extends javax.swing.JFrame {
             }
         });
 
-        viewTablesButton.setText("View Tables");
-        viewTablesButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewTablesButtonActionPerformed(evt);
-            }
-        });
-
         jList1.setModel(new javax.swing.AbstractListModel() {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jList1.addListSelectionListener(
+            new ListSelectionListener(){
+                public void valueChanged(ListSelectionEvent e){
+                    System.out.print("Value Changed");
+                    int i = jList1.getSelectedIndex();
+                    openTable(i);
+                }
+            }
+        );
         jScrollPane1.setViewportView(jList1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -125,8 +137,7 @@ public class ManagerProfile extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(modifyInventoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                    .addComponent(viewProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(viewTablesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(viewProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(148, 148, 148)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(124, Short.MAX_VALUE))
@@ -145,9 +156,7 @@ public class ManagerProfile extends javax.swing.JFrame {
                             .addComponent(viewProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
                             .addComponent(modifyEmployeeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(viewTablesButton, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                            .addComponent(viewFinancesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(viewFinancesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(clearTablesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -187,18 +196,6 @@ public class ManagerProfile extends javax.swing.JFrame {
         super.dispose();
     }//GEN-LAST:event_viewProfileButtonActionPerformed
 
-    private void viewTablesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTablesButtonActionPerformed
-    for(int i = 0; i < TableList.allTables.size(); i++){
-        String num = valueOf(TableList.allTables.get(i).getTableNumber());
-        System.out.print(num + "\n");
-        strings[i] = ("Table" + num);
-    }
-        DesktopFrame.tables.setSize(350,350);
-        DesktopFrame.tables.setLocationRelativeTo(null);
-        DesktopFrame.tables.setVisible(true);
-        TableList.main(args);
-    }//GEN-LAST:event_viewTablesButtonActionPerformed
-
     private void modifyEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyEmployeeButtonActionPerformed
         Employee.main(args);
         super.dispose();
@@ -211,7 +208,7 @@ public class ManagerProfile extends javax.swing.JFrame {
         for(int i = 0; i < TableList.allTables.size(); i++){
             String num = valueOf(TableList.allTables.get(i).getTableNumber());
             System.out.print(num + "\n");
-            strings[i] = ("Table" + num);
+            strings[i] = ("Table " + num);
         }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -258,7 +255,6 @@ public class ManagerProfile extends javax.swing.JFrame {
     private javax.swing.JButton modifyScheduleButton;
     private javax.swing.JButton viewFinancesButton;
     private javax.swing.JButton viewProfileButton;
-    private javax.swing.JButton viewTablesButton;
     // End of variables declaration//GEN-END:variables
 
 }

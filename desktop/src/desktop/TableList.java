@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 /*
  * Purpose is to display all tables in use
- * with a boolean value see if a table is in use or not
+ * @author: Brandon Foster
 */
 
 import static java.lang.String.valueOf;
@@ -22,10 +22,11 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class TableList extends JFrame implements ListSelectionListener {
+public class TableList extends JFrame {
     public static ArrayList<Table> allTables;
     public static String[] tableNumbers = new String[1000];
     public static JList tableJList;
+    private static Table t = null; // used as return for getTableByNumber
     public String args[] = {};
     public static DefaultListModel listModel;
     
@@ -47,15 +48,7 @@ public class TableList extends JFrame implements ListSelectionListener {
         tableJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         add(new JScrollPane(tableJList));
-//        tableJList.addListSelectionListener(
-//           new ListSelectionListener(){
-//               
-//               public void valueChanged(ListSelectionEvent event){
-//                   int i = tableJList.getSelectedIndex();
-//                   System.out.print("Value Changed: " + i + "\n");
-//               }
-//           }
-//        );
+
     }
     
         public void addTable(Table t){
@@ -88,14 +81,29 @@ public class TableList extends JFrame implements ListSelectionListener {
             }
             return true;
         }
+        
+        /*
+         * getTableByNumber takes in a table number and returns the table
+         * object with the matching number. A null pointer will be returned if 
+         * the matching table does not exist
+         */
+        public static Table getTableByNumber(int tableNumber){
+            try {
+                Table t = new Table();
+                for(int i = 0; i < allTables.size(); i++){
+                    t = allTables.get(i);
+                    if(t.getTableNumber() == tableNumber){
+                        return t; 
+                    }
+                }
+
+            } catch (SQLException e) {
+            }
+            return t; // this t is a null pointer
+        }
     
     public static void main(String[] args){
         
     }
 
-    @Override
-    public void valueChanged(ListSelectionEvent listSelectionEvent) {
-        int i = tableJList.getSelectedIndex();
-        System.out.print("Value Changed: " + i + "\n");
-    }
 }

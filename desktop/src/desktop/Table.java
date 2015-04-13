@@ -72,6 +72,10 @@ public class Table {
         return ItemsOrdered.size();
     }
     
+    public ArrayList<Item> getItemsOrdered(){
+        return ItemsOrdered;
+    }
+    
     public void clearTable(){
         ItemsOrdered.clear();
     }

@@ -36,7 +36,6 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="modifyInventoryButton" pref="132" max="32767" attributes="0"/>
                   <Component id="viewProfileButton" max="32767" attributes="0"/>
-                  <Component id="viewTablesButton" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="188" max="-2" attributes="0"/>
@@ -60,10 +59,7 @@
                           <Component id="modifyEmployeeButton" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="viewTablesButton" pref="59" max="32767" attributes="0"/>
-                          <Component id="viewFinancesButton" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="viewFinancesButton" min="-2" pref="59" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="clearTablesButton" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
@@ -133,14 +129,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewProfileButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="viewTablesButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View Tables"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewTablesButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -154,6 +142,9 @@
               <Connection code="new javax.swing.AbstractListModel() {&#xa;    public int getSize() { return strings.length; }&#xa;    public Object getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jList1.addListSelectionListener(&#xa;    new ListSelectionListener(){&#xa;        public void valueChanged(ListSelectionEvent e){&#xa;            System.out.print(&quot;Value Changed&quot;);&#xa;            int i = jList1.getSelectedIndex();&#xa;            openTable(i);&#xa;        }&#xa;    }&#xa;);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

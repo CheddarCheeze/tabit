@@ -5,17 +5,29 @@ import static java.lang.String.valueOf;
 
 import java.sql.SQLException;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author Meanpie
+ * @author Brandon Foster
  */
 public class ViewTable extends javax.swing.JFrame {
-    public static String[] strings = new String[1000];
+    public static String[] strings = new String[10000]; // string to store table items in list
+    public static String[] args = {};
+    public static String tableNum;
+    public static DataHandler databit;
+    public static int serverNum = -1;
+    public static String serverName = "";
+    public static ArrayList<Item> itemsOrdered;
+    public static String totalCost = "";
+    
     /** Creates new form ViewTable */
-    public ViewTable() {
+    public ViewTable() throws SQLException {
+        databit = new DataHandler();
+        this.setLocationRelativeTo(null);
         initComponents();
     }
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -30,6 +42,7 @@ public class ViewTable extends javax.swing.JFrame {
         severLable = new javax.swing.JLabel();
         totalLable = new javax.swing.JLabel();
         removeItemButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,29 +53,42 @@ public class ViewTable extends javax.swing.JFrame {
         jScrollPane1.setViewportView(itemsList);
 
         tableNumberLable.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        tableNumberLable.setText("Table");
+        tableNumberLable.setText("Table " + tableNum);
 
         severLable.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        severLable.setText("Sever: ");
+        severLable.setText("Server: " + serverName);
 
-        totalLable.setText("jLabel1");
+        totalLable.setText(totalCost);
 
         removeItemButton.setText("Remove");
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(removeItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(totalLable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(severLable, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tableNumberLable, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(removeItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(totalLable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(severLable, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tableNumberLable, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,17 +102,72 @@ public class ViewTable extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(totalLable, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(removeItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(removeItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }//GEN-END:initComponents
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        ManagerProfile.main(args);
+        super.dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
+    
     /**
      * @param args the command line arguments
+     * args[0] contains the table number for this table
      */
     public static void main(String args[]) {
+        tableNum = args[0];
+        int tNum =  Integer.parseInt(tableNum);
+
+        try {
+            Table t = new Table();
+            t = TableList.getTableByNumber(tNum);
+            serverNum = t.getEmployeeNumber();
+            itemsOrdered = t.getItemsOrdered();
+            totalCost = (t.totalCostOrder()).toString();
+        } catch (SQLException e) {}
+
+        try{
+            serverName = databit.getEmployeeName(serverNum);
+        }catch(SQLException e){}
+        
+        //Set all the items into the JList
+        for(int i = 0; i < itemsOrdered.size(); i++){
+            strings[i] = (itemsOrdered.get(i)).toString();
+        }
+
+
+        /* TESTING 
+         * Create a table object with items ordered, insert into JList
+        Table table1;
+        serverName = "This Guy";
+        try {
+            table1 = new Table(1, 1);
+            table1.addItem(new Item("Taco", 1, 3, 1.35));
+            table1.addItem(new Item("Quesadilla", 2, 3, 4.35));
+            table1.addItem(new Item("Torta", 3, 3, 5.35));
+            table1.addItem(new Item("Gordita", 4, 3, 2.35));
+            table1.printOrderTable();
+            System.out.println(table1.totalCostOrder());
+            
+            itemsOrdered = table1.getItemsOrdered();
+            //Items Ordered working?
+            for(int i = 0; i < itemsOrdered.size(); i++){
+                System.out.print(itemsOrdered.get(i).toString());
+            }
+            for(int i = 0; i < itemsOrdered.size(); i++){
+                strings[i] = (itemsOrdered.get(i)).toString();
+            }
+            totalCost = (table1.totalCostOrder()).toString();
+        } catch (SQLException e) {
+        }
+        */
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -113,12 +194,16 @@ public class ViewTable extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewTable().setVisible(true);
+                try {
+                    new ViewTable().setVisible(true);
+                } catch (SQLException e) {
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JList itemsList;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton removeItemButton;
