@@ -17,6 +17,7 @@ public class Profile extends javax.swing.JFrame {
     /** Creates new form Profile */
     public Profile() {
         initComponents();
+        this.setLocationRelativeTo(getRootPane());
     }
 
     /** This method is called from within the constructor to

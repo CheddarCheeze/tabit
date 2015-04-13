@@ -1,0 +1,13 @@
+Go to this link:
+http://developer.android.com/sdk/index.html
+Go to the section "Other Download Options" and download "SDK Tools Only" corresponding to your operating system.
+
+After downloading, open the installation and just remember where you install the SDK. I installed mine on the path "C:\AndroidSDK". Just remember where you install this because you will need to point to this path in your IDE.
+
+After installation, open up the folder and run "SDK Manager.exe".
+
+Give it a second to check for updates automatically. Here you can pick and choose what tools you want. The tablet uses Android 4.4.2 so you will need API 19. If you are using another device or tablet, look up what API would be needed for your device. If you don't have a device, you can choose any API emulator. I advice sticking to Android version 4.0 and above.
+
+You will need "Android SDK Build-tools" corresponding to your API, the API's "SDK Platform" and "Sources for Android SDK" (emulator optional), and in extras you need "Google USB Driver," "Google Repository," "Android Support Repository," "Android Support Library," and "Google Cloud Messaging for Android."
+
+All other installations are optional. I have so much more installed but this may be the bare minimum. These downloads do take a long time so be prepared.

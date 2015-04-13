@@ -219,8 +219,7 @@ public class Schedule extends javax.swing.JFrame{
 
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ManagerProfile m = new ManagerProfile();
-        m.main(args);
+        ManagerProfile.main(args);
         super.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
