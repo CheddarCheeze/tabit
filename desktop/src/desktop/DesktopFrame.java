@@ -13,7 +13,6 @@ import javax.swing.ImageIcon;
  * @author Owner, Nicolas Nunez
  */
 public class DesktopFrame extends javax.swing.JFrame {
-    ManagerProfile m = new ManagerProfile();
     String args[] = {};
     public static boolean needTableList = true;
     @SuppressWarnings("compatibility:-4952383735578523799")
@@ -107,7 +106,7 @@ public class DesktopFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
-        m.main(args);
+        desktop.ManagerProfile.main(args);
         super.dispose();
     }//GEN-LAST:event_signInButtonActionPerformed
 

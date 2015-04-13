@@ -116,8 +116,7 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_viewScheduleButtonActionPerformed
 
     private void manageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageButtonActionPerformed
-        DesktopFrame d = new DesktopFrame();
-        d.main(args);
+        desktop.DesktopFrame.main(args);
         super.dispose();
     }//GEN-LAST:event_manageButtonActionPerformed
 

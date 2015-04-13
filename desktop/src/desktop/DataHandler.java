@@ -1,4 +1,7 @@
 package desktop;
+
+import java.io.UnsupportedEncodingException;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -6,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.DriverManager;
 
 import java.text.SimpleDateFormat;
+
+import java.util.Date;
 
 import oracle.jdbc.pool.OracleDataSource;
 
@@ -85,11 +90,10 @@ public class DataHandler {
 //             id, last name, first name, date of brith, position, salary, phone no
 // returns nothing
 //==================================================================================================
-
     public void addNewEmployee(int id, String lastname, String firstname, String dob,String position, 
-                               int salary, String phoneno) throws SQLException {
+                               double salary, String phoneno, String picfile) throws SQLException {
         Statement stmt = conn.createStatement();
-        query = "INSERT INTO Employee VALUES("+id+", '"+lastname+"', '"+firstname+"', '"+dob+"', '"+position+"', "+salary+", '"+phoneno+"')";
+        query = "INSERT INTO Employee VALUES("+id+", '"+lastname+"', '"+firstname+"', '"+dob+"', '"+position+"', "+salary+", '"+phoneno+"', '" + picfile+"')";
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
     }
@@ -175,6 +179,53 @@ public class DataHandler {
         }
         return allInfo;
     }
+    
+    
+//======================================================================
+// Name: getEmployeeInfo
+// Purpose: to get all the information of an employee to displayed 
+//          anywhere needed
+// Parameters: int id of employee
+// Returns: String with all info concatenated.
+//======================================================================
+    public String getEmployeeInfo(int id) throws SQLException {
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "SELECT * FROM  Employee where id=" + id;
+        System.out.println("\nExecuting query: " + query);
+        rset = stmt.executeQuery(query);        
+        String allInfo="";
+        while(rset.next()){
+            allInfo = "Id: " + rset.getInt(1) + 
+                      "\nLast Name: \n" + rset.getString(2) + 
+                      "\nFirst Name: \n" + rset.getString(3) + 
+                      "\nDate of Birth: \n" + rset.getDate(4) +
+                      "\nPosition:\n" + rset.getString(5)+
+                      "\nSalary:\n$" + rset.getDouble(6)+
+                      "\nPosition:\n" + rset.getString(7)+ "\n";
+        }
+        return allInfo;
+    }
+    
+//======================================================================
+// Name: getEmployeePicture
+// Purpose: to get all the information of an employee to displayed 
+//          anywhere needed
+// Parameters: int id of employee
+// Returns: String with all info concatenated.
+//======================================================================
+    public String getEmployeePicture(int id) throws SQLException {
+           stmt = conn.createStatement();
+           query = "SELECT picturefile FROM  Employee where id = " + id;
+           System.out.println("\nExecuting query: " + query);
+           rset = stmt.executeQuery(query);
+           String picture = "";
+                while(rset.next()){
+                    picture = rset.getString(1);
+                }
+           return picture;
+       }
+    
 //======================================================================
 // Name: deleteByID
 // Purpose: to delete information from a given table by the unique id
@@ -289,7 +340,9 @@ public class DataHandler {
     public static void main(String[] args) throws SQLException {
         DataHandler datahandler = new DataHandler();
         datahandler.printEmployees();
-        datahandler.printEmployees();
         System.out.println(datahandler.getEmployeeName(1));
+        System.out.println(datahandler.getRows("Employee"));
+        System.out.println(datahandler.getEmployeePicture(1));
+        
     }
 }

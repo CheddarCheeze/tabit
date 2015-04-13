@@ -175,7 +175,7 @@ public class ManagerProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_viewProfileButtonActionPerformed
 
     private void viewTablesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTablesButtonActionPerformed
-        tableList.main(args);
+        TableList.main(args);
     }//GEN-LAST:event_viewTablesButtonActionPerformed
 
     /**

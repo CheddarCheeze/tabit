@@ -218,10 +218,6 @@ public class Inventory extends javax.swing.JFrame {
         int id, Quant, EmplID, VendorNo;
         float CostUnit, TotalCost, SalePrice;
         String Vendor, ProdName, DateIn;
-        //        try {
-        //            databit.deleteInfoDatabase("Inventory");
-        //        } catch (SQLException e) {
-        //        }
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             Object o;
             boolean correct = true;
