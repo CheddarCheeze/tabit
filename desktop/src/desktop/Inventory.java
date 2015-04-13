@@ -73,18 +73,6 @@ public class Inventory extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setHeaderValue("ID");
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(1).setHeaderValue("Product Name");
-        jTable1.getColumnModel().getColumn(2).setHeaderValue("Quantity");
-        jTable1.getColumnModel().getColumn(3).setHeaderValue("Date In");
-        jTable1.getColumnModel().getColumn(4).setHeaderValue("Cost Unit");
-        jTable1.getColumnModel().getColumn(5).setHeaderValue("Total Cost");
-        jTable1.getColumnModel().getColumn(6).setHeaderValue("Sale Price");
-        jTable1.getColumnModel().getColumn(7).setHeaderValue("Empl ID");
-        jTable1.getColumnModel().getColumn(8).setHeaderValue("Vendor");
-        jTable1.getColumnModel().getColumn(9).setPreferredWidth(70);
-        jTable1.getColumnModel().getColumn(9).setHeaderValue("Vendor No");
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         int rows = 0;
         try {
@@ -178,7 +166,7 @@ public class Inventory extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 id = -1;
                 correct = false;
-                continue;
+                break;
             } else
                 id = Integer.parseInt(o.toString());
             // id = Integer.parseInt(jTable1.getModel().getValueAt(i, 0).toString());
@@ -189,7 +177,7 @@ public class Inventory extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 ProdName = "";
                 correct = false;
-                continue;
+                break;
             } else {
                 ProdName = o.toString();
                 ProdName = ProdName.toUpperCase();
@@ -200,7 +188,7 @@ public class Inventory extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 Quant = -1;
                 correct = false;
-                continue;
+                break;
             } else
                 Quant = Integer.parseInt(o.toString());
 
@@ -210,12 +198,12 @@ public class Inventory extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 DateIn = "";
                 correct = false;
-                continue;
+                break;
             } else if (!isDateValid( o.toString())){
                 JOptionPane.showMessageDialog(null, "Date Format is: YYYY-MM-DD");
                 DateIn = "";
                 correct = false;
-                continue;
+                break;
             }
                 else{
                 DateIn = o.toString();
@@ -228,7 +216,7 @@ public class Inventory extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 CostUnit = -1;
                 correct = false;
-                continue;
+                break;
             } else
                 CostUnit = Float.parseFloat(o.toString());
 
@@ -238,7 +226,7 @@ public class Inventory extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 TotalCost = -1;
                 correct = false;
-                continue;
+                break;
             } else
                 TotalCost = Float.parseFloat(o.toString());
 
@@ -249,7 +237,7 @@ public class Inventory extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 SalePrice = -1;
                 correct = false;
-                continue;
+                break;
             } else
                 SalePrice = Float.parseFloat(o.toString());
 
@@ -259,7 +247,7 @@ public class Inventory extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 EmplID = -1;
                 correct = false;
-                continue;
+                break;
             } else
                 EmplID = Integer.parseInt(o.toString());
 
@@ -269,7 +257,7 @@ public class Inventory extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 Vendor = "";
                 correct = false;
-                continue;
+                break;
             } else {
                 Vendor = o.toString();
                 Vendor = Vendor.toUpperCase();
@@ -281,7 +269,7 @@ public class Inventory extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 VendorNo = -1;
                 correct = false;
-                continue;
+                break;
             } else
                 VendorNo = Integer.parseInt(o.toString());
 
