@@ -2,13 +2,11 @@
 package desktop;
 
 import static java.lang.String.valueOf;
-
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 
 /**
- *
+ * The purpose is to diplay information about a selected Table Object to the user
  * @author Brandon Foster
  */
 public class ViewTable extends javax.swing.JFrame {

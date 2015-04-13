@@ -54,7 +54,7 @@ public class ManagerProfile extends javax.swing.JFrame {
         modifyInventoryButton = new javax.swing.JButton();
         viewProfileButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        tableJList = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,20 +107,20 @@ public class ManagerProfile extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        tableJList.setModel(new javax.swing.AbstractListModel() {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jList1.addListSelectionListener(
+        tableJList.addListSelectionListener(
             new ListSelectionListener(){
                 public void valueChanged(ListSelectionEvent e){
                     System.out.print("Value Changed");
-                    int i = jList1.getSelectedIndex();
+                    int i = tableJList.getSelectedIndex();
                     openTable(i);
                 }
             }
         );
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(tableJList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,6 +205,8 @@ public class ManagerProfile extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        //Store all table numbers into strings to be displayed in the JList
         for(int i = 0; i < TableList.allTables.size(); i++){
             String num = valueOf(TableList.allTables.get(i).getTableNumber());
             System.out.print(num + "\n");
@@ -247,12 +249,12 @@ public class ManagerProfile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearTablesButton;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton magagerLogOutButton;
     private javax.swing.JButton modifyEmployeeButton;
     private javax.swing.JButton modifyInventoryButton;
     private javax.swing.JButton modifyScheduleButton;
+    private javax.swing.JList tableJList;
     private javax.swing.JButton viewFinancesButton;
     private javax.swing.JButton viewProfileButton;
     // End of variables declaration//GEN-END:variables

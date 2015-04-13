@@ -3,17 +3,14 @@ package desktop;
 import javax.swing.JFrame;
 
 /*
- * Purpose is to display all tables in use
+ * Purpose is to contain information about the Table Objects
  * @author: Brandon Foster
 */
 
 import static java.lang.String.valueOf;
-
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -26,7 +23,6 @@ public class TableList extends JFrame {
     public static ArrayList<Table> allTables;
     public static String[] tableNumbers = new String[1000];
     public static JList tableJList;
-    private static Table t = null; // used as return for getTableByNumber
     public String args[] = {};
     public static DefaultListModel listModel;
     
@@ -83,13 +79,14 @@ public class TableList extends JFrame {
         }
         
         /*
-         * getTableByNumber takes in a table number and returns the table
-         * object with the matching number. A null pointer will be returned if 
+         * getTableByNumber passes in a table number and returns the table
+         * object with the matching table number. A null pointer will be returned if 
          * the matching table does not exist
          */
         public static Table getTableByNumber(int tableNumber){
+            Table t = null;
             try {
-                Table t = new Table();
+                t = new Table();
                 for(int i = 0; i < allTables.size(); i++){
                     t = allTables.get(i);
                     if(t.getTableNumber() == tableNumber){
