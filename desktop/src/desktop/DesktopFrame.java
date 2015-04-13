@@ -116,11 +116,8 @@ public class DesktopFrame extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         if(needTableList == true){
-<<<<<<< HEAD
 //            TableList t = new TableList();
-=======
             tables = new TableList();
->>>>>>> c05d96c6a147978211083a085f9d0b1394a21bd5
             needTableList = false;
         }
         /* Set the Nimbus look and feel */
