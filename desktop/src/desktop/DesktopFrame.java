@@ -1,11 +1,11 @@
 
 package desktop;
 import java.awt.Image;
-
 import java.io.File;
 
-import javax.imageio.ImageIO;
+import java.sql.SQLException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
@@ -13,7 +13,9 @@ import javax.swing.ImageIcon;
  * @author Owner, Nicolas Nunez
  */
 public class DesktopFrame extends javax.swing.JFrame {
-    ManagerProfile m = new ManagerProfile();
+    String args[] = {};
+    public static boolean needTableList = true;
+    public static TableList tables;
     @SuppressWarnings("compatibility:-4952383735578523799")
     private static final long serialVersionUID = 1L;
 
@@ -21,7 +23,7 @@ public class DesktopFrame extends javax.swing.JFrame {
     /** Creates new form DesktopFrame */
     public DesktopFrame() {
         initComponents();
-        
+        this.setLocationRelativeTo(getRootPane());
     }
 
     /** This method is called from within the constructor to
@@ -105,9 +107,7 @@ public class DesktopFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
-
-        String[] args = {};
-        m.main(args);
+        desktop.ManagerProfile.main(args);
         super.dispose();
     }//GEN-LAST:event_signInButtonActionPerformed
 
@@ -115,6 +115,11 @@ public class DesktopFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        if(needTableList == true){
+//            TableList t = new TableList();
+            tables = new TableList();
+            needTableList = false;
+        }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

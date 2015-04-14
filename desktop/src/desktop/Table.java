@@ -1,7 +1,7 @@
 package desktop;
 
-/* READ
- * Changes by: Nicolas Nunez
+/** READ
+ * Nicolas Nunez
  * changed some variable names and made the ArrayList of orders to contain items
  * instead of Integers we still have to figure out a way to approach to this issue
  *
@@ -72,6 +72,10 @@ public class Table {
         return ItemsOrdered.size();
     }
     
+    public ArrayList<Item> getItemsOrdered(){
+        return ItemsOrdered;
+    }
+    
     public void clearTable(){
         ItemsOrdered.clear();
     }
@@ -103,7 +107,7 @@ public class Table {
     }
     
 //Main method for testing purposes only
-// In constructor tablenumber goes first
+// In constructor the tablenumber goes first
 
     public static void main(String[] args) throws SQLException {
         

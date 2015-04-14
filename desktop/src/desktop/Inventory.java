@@ -1,18 +1,15 @@
 
 package desktop;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Date;
-
-import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -21,15 +18,16 @@ import java.awt.Image;
 
 /**
  *
- * @authors Martin Bruckner and Nicolas Nunez
+ * @authors Nicolas Nunez, Martin Bruckner
  */
 
 public class Inventory extends javax.swing.JFrame {
 
     @SuppressWarnings("oracle.jdeveloper.java.unconventional-field-modifier-order")
-    final static String FORMAT = "yyyy-MM-dd";
+    final static String FORMAT = "MMM/dd/yyy";
+    SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
+    Font bfont = new Font("Verdana", Font.BOLD, 13);
     /** Creates new form Inventory */
-    List<Image> listex = new ArrayList<>();
     ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
     DataHandler databit;
     
@@ -52,8 +50,13 @@ public class Inventory extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 153, 255));
         setIconImage(img.getImage());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -70,6 +73,11 @@ public class Inventory extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -105,33 +113,77 @@ public class Inventory extends javax.swing.JFrame {
 
         jButton3.setText("Back");
 
+        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(10);
+        jTextArea1.setRows(5);
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setFont(bfont);
+        jTextArea1.setForeground(Color.blue);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addGap(25, 25, 25))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+        );
+
+        jButton4.setText("Remove Row");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(439, 439, 439)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton3)
-                            .addComponent(jButton2)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                            .addComponent(jButton2))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addGap(40, 40, 40))
         );
 
@@ -143,6 +195,8 @@ public class Inventory extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.addRow(new Object[] { null, null, null, null, null, null, null, null });
     }//GEN-LAST:event_jButton1ActionPerformed
+//
+    
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -152,10 +206,6 @@ public class Inventory extends javax.swing.JFrame {
         int id, Quant, EmplID, VendorNo;
         float CostUnit, TotalCost, SalePrice;
         String Vendor, ProdName, DateIn;
-        //        try {
-        //            databit.deleteInfoDatabase("Inventory");
-        //        } catch (SQLException e) {
-        //        }
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             Object o;
             boolean correct = true;
@@ -200,7 +250,7 @@ public class Inventory extends javax.swing.JFrame {
                 correct = false;
                 break;
             } else if (!isDateValid( o.toString())){
-                JOptionPane.showMessageDialog(null, "Date Format is: YYYY-MM-DD");
+                JOptionPane.showMessageDialog(null, "Date Format is: MON/DD/YYYY");
                 DateIn = "";
                 correct = false;
                 break;
@@ -228,8 +278,9 @@ public class Inventory extends javax.swing.JFrame {
                 correct = false;
                 break;
             } else
-                TotalCost = Float.parseFloat(o.toString());
-
+                //TotalCost = Float.parseFloat(o.toString());
+                TotalCost = CostUnit * Quant;
+                System.out.println(TotalCost);
 
             o = jTable1.getModel().getValueAt(i, 6);
             if (o == null) {
@@ -283,17 +334,64 @@ public class Inventory extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:\
+        //This is where the code for removing a row will go.
+        int row = jTable1.getSelectedRow();
+        System.out.print("This is the row that is currently selected: " + row + "\n");
+        Object o = jTable1.getModel().getValueAt(row, 0);
+        if (o == null){
+        ((DefaultTableModel)jTable1.getModel()).removeRow(row);
+        }
+        else{
+            //TextDialog
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this product from the database?","Warning",dialogButton);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                // Delete product from the database.
+                int id = Integer.parseInt(o.toString());
+                System.out.println(id);
+                    try {
+                        databit.deleteById("Inventory", id);
+                    } catch (SQLException e) {
+                }
+                ((DefaultTableModel)jTable1.getModel()).removeRow(row);        
+            }
+            else{
+                System.out.println("Not confirmed");
+            }
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        Object o;
+        int row = jTable1.rowAtPoint(evt.getPoint());
+        int col = 9;
+        System.out.println(row + " " + col);
+        o = jTable1.getModel().getValueAt(row, col);
+        if( o == null) {
+            System.out.println("Doesnt have a value yet");
+        }
+        else{
+        int id = Integer.parseInt(o.toString());
+        System.out.println(id);
+            try {
+                fillTextArea(id);
+            } catch (SQLException e) {
+            }
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
     void loadInventory(JTable jt, int rows) throws SQLException {
         ResultSet inventory = databit.getInventory();
         int i = 0;
-
+            
         while (inventory.next()) {
-
-
             jt.getModel().setValueAt(inventory.getInt(1), i, 0);
             jt.getModel().setValueAt(inventory.getString(2), i, 1);
             jt.getModel().setValueAt(inventory.getInt(3), i, 2);
-            jt.getModel().setValueAt(inventory.getDate(4).toString(), i, 3);
+            jt.getModel().setValueAt(fmt.format(inventory.getDate(4)), i, 3);
             jt.getModel().setValueAt(inventory.getFloat(5), i, 4);
             jt.getModel().setValueAt(inventory.getFloat(6), i, 5);
             jt.getModel().setValueAt(inventory.getFloat(7), i, 6);
@@ -316,6 +414,10 @@ public class Inventory extends javax.swing.JFrame {
             }
     }
     
+    
+    public void fillTextArea(int id) throws SQLException {
+        this.jTextArea1.setText(databit.getVendorInfo(id));
+    }
 
     /**
      * @param args the command line arguments
@@ -359,8 +461,12 @@ public class Inventory extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
 }

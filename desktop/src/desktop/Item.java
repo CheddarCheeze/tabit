@@ -11,6 +11,7 @@ public class Item {
     private int num;
     private int quantity;
     private double price;
+    private String modifier;
     Item(){
         this("", -1, -1, 0);
     }
@@ -19,6 +20,7 @@ public class Item {
         this.num = num;
         this.quantity = quantity;
         this.price = price;
+        this.modifier = null;
     }
     
     public void setName(String name){
@@ -37,6 +39,10 @@ public class Item {
         this.price = price;
     }
     
+    public void setModifier(String mod){
+        this.modifier = mod;
+    }
+    
     public String getName(){
         return name;
     }
@@ -52,9 +58,19 @@ public class Item {
     public double getPrice(){
         return price;
     }
+    
+    public String getModifier(){
+        return modifier;
+    }
+    
+
     @Override
     public String toString(){
-     return "|Item: " + name + " |ItemNum: " + num + " |Quantity: " + quantity + " |PriceItem: " + price + "\n";
+        if(modifier != null){
+            return "|Item: " + name + " |ItemNum: " + num + " |Quantity: " + quantity + " |PriceItem: " + price + "\n Modifier: " + modifier + "\n";
+        }else{
+            return "|Item: " + name + " |ItemNum: " + num + " |Quantity: " + quantity + " |PriceItem: " + price + "\n";
+        }
     }
     
  /*
@@ -62,12 +78,15 @@ public class Item {
   */
     public static void main(String[] args){
         ArrayList<Item> order = new ArrayList<>();
+        Item item = new Item("Taco", 1, 3, 1.35);
+        item.modifier = "No Cheese";
+        order.add(item);
         order.add(new Item("Taco", 1, 3, 1.35));
         order.add(new Item("Quesadilla", 2, 3, 4.35));
         order.add(new Item("Torta", 3, 3, 5.35));
         order.add(new Item("Gordita", 4, 3, 2.35));
 //            System.out.println(order.toString());
-            System.out.println(order.get(1).toString());
+            System.out.println(order.get(0).toString());
             String temp = order.get(1).name;
             System.out.println(temp);
     }

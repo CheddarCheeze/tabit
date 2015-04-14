@@ -1,22 +1,44 @@
 
 package desktop;
 
+import java.sql.SQLException;
+import desktop.TableList;
+import java.util.ArrayList;
+import static java.lang.String.valueOf;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
  * @author Brandon Foster
  */
 public class ManagerProfile extends javax.swing.JFrame {
-    //Schedule s = new Schedule();
-    Finance f = new Finance();
-    Profile p = new Profile();
     String[] args = {};
+    //public static TableList tableList = new TableList();
+    public static String[] strings = new String[1000]; //strings stores the table name in the List
+    public static TableList tableList = new TableList();
     /** Creates new form ManagerProfile */
-    public ManagerProfile() {
+    public ManagerProfile() { 
         initComponents();
+        this.setLocationRelativeTo(getRootPane());
     }
 
+    // Opens ViewTable with the information about the table
+    public void openTable(int index){
+        if(index >= 0){
+            System.out.print("\n" + index + "\n");
+            String num = valueOf(TableList.allTables.get(index).getTableNumber());
+            String[] args = {num};
+            ViewTable.main(args);
+            super.dispose();
+        }
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -29,11 +51,11 @@ public class ManagerProfile extends javax.swing.JFrame {
         viewFinancesButton = new javax.swing.JButton();
         modifyEmployeeButton = new javax.swing.JButton();
         clearTablesButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
         magagerLogOutButton = new javax.swing.JButton();
         modifyInventoryButton = new javax.swing.JButton();
         viewProfileButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableJList = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +73,12 @@ public class ManagerProfile extends javax.swing.JFrame {
             }
         });
 
-        modifyEmployeeButton.setText("Modify Employee");
+        modifyEmployeeButton.setText("View Employees");
+        modifyEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifyEmployeeButtonActionPerformed(evt);
+            }
+        });
 
         clearTablesButton.setText("Clear All Tables");
         clearTablesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -59,13 +86,6 @@ public class ManagerProfile extends javax.swing.JFrame {
                 clearTablesButtonActionPerformed(evt);
             }
         });
-
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
 
         magagerLogOutButton.setText("Log Out");
         magagerLogOutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +108,21 @@ public class ManagerProfile extends javax.swing.JFrame {
             }
         });
 
+        tableJList.setModel(new javax.swing.AbstractListModel() {
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        tableJList.addListSelectionListener(
+            new ListSelectionListener(){
+                public void valueChanged(ListSelectionEvent e){
+                    System.out.print("Value Changed");
+                    int i = tableJList.getSelectedIndex();
+                    openTable(i);
+                }
+            }
+        );
+        jScrollPane1.setViewportView(tableJList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,18 +139,15 @@ public class ManagerProfile extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(modifyInventoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                     .addComponent(viewProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addGap(148, 148, 148)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(124, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(93, 93, 93)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(modifyScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,52 +156,66 @@ public class ManagerProfile extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(viewProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
                             .addComponent(modifyEmployeeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(viewFinancesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(clearTablesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(magagerLogOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))))
+                        .addGap(21, 21, 21)
+                        .addComponent(viewFinancesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearTablesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(magagerLogOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();
     }//GEN-END:initComponents
 
     private void modifyScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyScheduleButtonActionPerformed
-        String[] args = {};
-        //s.main(args);
+        Schedule.main(args);
+        super.dispose();
     }//GEN-LAST:event_modifyScheduleButtonActionPerformed
 
     private void viewFinancesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFinancesButtonActionPerformed
-
-        f.main(args);
+        Finance.main(args);
+        super.dispose();
     }//GEN-LAST:event_viewFinancesButtonActionPerformed
 
     private void clearTablesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearTablesButtonActionPerformed
-        TableList.clearTables();
+       // TableList.clearTables();
     }//GEN-LAST:event_clearTablesButtonActionPerformed
 
     private void magagerLogOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_magagerLogOutButtonActionPerformed
-
-        DesktopFrame d = new DesktopFrame();
-        d.main(args);
+        DesktopFrame.main(args);
         super.dispose();
     }//GEN-LAST:event_magagerLogOutButtonActionPerformed
 
     private void modifyInventoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyInventoryButtonActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_modifyInventoryButtonActionPerformed
 
     private void viewProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProfileButtonActionPerformed
-        p.main(args);
+        Profile.main(args);
         super.dispose();
     }//GEN-LAST:event_viewProfileButtonActionPerformed
+
+    private void viewTablesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTablesButtonActionPerformed
+        TableList.main(args);
+    }//GEN-LAST:event_viewTablesButtonActionPerformed
+    private void modifyEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyEmployeeButtonActionPerformed
+        Employee.main(args);
+        super.dispose();
+    }//GEN-LAST:event_modifyEmployeeButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        //Store all table numbers into strings to be displayed in the JList
+        for(int i = 0; i < TableList.allTables.size(); i++){
+            String num = valueOf(TableList.allTables.get(i).getTableNumber());
+            System.out.print(num + "\n");
+            strings[i] = ("Table " + num);
+        }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -207,12 +253,12 @@ public class ManagerProfile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearTablesButton;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton magagerLogOutButton;
     private javax.swing.JButton modifyEmployeeButton;
     private javax.swing.JButton modifyInventoryButton;
     private javax.swing.JButton modifyScheduleButton;
+    private javax.swing.JList tableJList;
     private javax.swing.JButton viewFinancesButton;
     private javax.swing.JButton viewProfileButton;
     // End of variables declaration//GEN-END:variables
