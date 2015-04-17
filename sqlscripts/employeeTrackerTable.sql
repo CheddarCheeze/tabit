@@ -6,7 +6,7 @@ ClockOut timestamp,
 PRIMARY KEY (Id),
 FOREIGN KEY (Id) REFERENCES Employee(Id)
 )
-
+;
 CREATE TABLE Orders
 (
 Id int NOT NULL,

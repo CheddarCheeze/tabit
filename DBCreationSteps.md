@@ -1,5 +1,15 @@
 Oracle XE 11g Express Edition
 
+First, install VIM before you begin installation. (http://www.vim.org/download.php)
+
+Start up the setup.exe. Wait for it to load. Accept user agreement.
+
+In "Choose Destination Location," you should have it by default destination "C:\oraclexe\" and if this is correct click next.
+
+Enter a password of your choosing in the next screen. This is something of your choosing, but "default" will be used for this tutorial. Click next.
+
+Double-check to make sure the installation is similar to below and click install.
+
 Installation:
 
 	Destination Folder: C:\oraclexe\
@@ -16,7 +26,7 @@ all parameter files for a database must exist in the Oracle HOME (see above), go
 	cd C:\oraclexe\app\oracle\product\11.2.0\server\database
 	vim inittabit.ora
 	
-Inside the file "inittabit.ora" inside the open file in your text editor copy the following , save it and quit:
+Inside the file "inittabit.ora" inside the open file in your text editor copy the following , save it and quit (Command is ":x" in VIM):
 
 	db_name=tabit
 	control_files="C:\database\oradata\tabit\control01.ctl"
@@ -26,7 +36,6 @@ type the following in the cmd:
 
 	set ORACLE_SID=tabit
 	set ORACLE_HOME=C:\oraclexe\app\oracle\product\11.2.0\server\
-
 	
 create a windows service, type the following in the cmd:
 
@@ -35,12 +44,18 @@ create a windows service, type the following in the cmd:
 [this automatically starts service]
 [how to delete -> oradim -delete -sid tabit]
 	
+You should get a message "Instance created."
+
+If you get an error message, this may be because you are not running cmd as admin. Close your current command prompt, and reopen command prompt by right clicking and choosing "Run as administrator."
+
 	
 to start service: net start OracleServicetabit
 to stop service: net stop OracleServicetabit
 	
 	cd ..
 	cd bin
+
+You will now be in "C:\oraclexe\app\oracle\product\11.2.0\server\bin\" for the next steps.
 	
 connect to the sid (tabit) with the highest authority type in the following in the cmd:
 
@@ -78,7 +93,7 @@ Copy the following inside the open file, save it and quit:
 	national character set al16utf16
 	logfile group 1 ('C:\database\oradata\tabit\redo01.log') size 10m,
 	group 2 ('C:\database\oradata\tabit\redo02.log') size 10m,
-	group 3 ('C:\database\oradata\tabit\redo03.log') size 10m
+	group 3 ('C:\database\oradata\tabit\redo03.log') size 10m;
 	
 go back to C:\ in the cmd
 
@@ -138,7 +153,7 @@ how to create a user and grant access (this is all done from the command line)
 
 Type in the following with the same username and password[THIS IS BECAUSE THE JAVA CODE IN GITHUB DATAHANDLER CLASS HAS THIS RECORDED]
 	
-	SQL>create user nanunezr identified by password tabit0427;
+	SQL>create user nanunezr identified by tabit0427;
 	SQL>grant connect to nanunezr;
 	SQL>grant connect, resource, dba to nanunezr;
 	SQL>grant create session to nanunezr;
