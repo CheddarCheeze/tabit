@@ -13,6 +13,17 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -53,6 +64,7 @@ public class Schedule extends javax.swing.JFrame{
         String dateString = new SimpleDateFormat("MMM/dd/yyyy").format(date);
         String dateTempString = new SimpleDateFormat("MMM/dd/yyyy").format(datetemp);
         jLabel1 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tabit - Schedule");
@@ -63,19 +75,28 @@ public class Schedule extends javax.swing.JFrame{
 
             },
             new String [] {
-                "Employee", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+                "Employee ID", "Employee", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(0).setHeaderValue("Employee");
-        jTable1.getColumnModel().getColumn(1).setHeaderValue("Monday");
-        jTable1.getColumnModel().getColumn(2).setHeaderValue("Tuesday");
-        jTable1.getColumnModel().getColumn(3).setHeaderValue("Wednesday");
-        jTable1.getColumnModel().getColumn(4).setHeaderValue("Thursday");
-        jTable1.getColumnModel().getColumn(5).setHeaderValue("Friday");
-        jTable1.getColumnModel().getColumn(6).setHeaderValue("Saturday");
-        jTable1.getColumnModel().getColumn(7).setHeaderValue("Sunday");
+        jTable1.getColumnModel().getColumn(0).setHeaderValue("Employee ID");
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(1).setHeaderValue("Employee");
+        jTable1.getColumnModel().getColumn(2).setHeaderValue("Monday");
+        jTable1.getColumnModel().getColumn(3).setHeaderValue("Tuesday");
+        jTable1.getColumnModel().getColumn(4).setHeaderValue("Wednesday");
+        jTable1.getColumnModel().getColumn(5).setHeaderValue("Thursday");
+        jTable1.getColumnModel().getColumn(6).setHeaderValue("Friday");
+        jTable1.getColumnModel().getColumn(7).setHeaderValue("Saturday");
+        jTable1.getColumnModel().getColumn(8).setHeaderValue("Sunday");
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         int rows = 0;
         try {
@@ -91,6 +112,36 @@ public class Schedule extends javax.swing.JFrame{
         try{
             loadSchedule(jTable1, rows);
         }catch(SQLException e) { }
+
+        TableColumnModelListener tableColumnModelListener =
+        new TableColumnModelListener() {
+            public void columnAdded(TableColumnModelEvent e) {
+                return;
+            }
+            public void columnMarginChanged(ChangeEvent e) {
+                return;
+            }
+            public void columnMoved(TableColumnModelEvent e) {
+                return;
+            }
+            public void columnRemoved(TableColumnModelEvent e) {
+                return;
+            }
+            public void columnSelectionChanged(ListSelectionEvent e) {
+                int selectedRow = jTable1.getSelectedRow();
+                int selectedColumns = jTable1.getSelectedColumn();
+                if ( selectedColumns == 1)
+                try{
+                    String name = databit.getEmployeeName(Integer.parseInt(jTable1.getValueAt(selectedRow,0).toString()));
+                    jTable1.setValueAt(name,selectedRow,1);
+                    if (name == "")
+                    JOptionPane.showMessageDialog(null, "ID does not exist or is invalid");
+                }catch(SQLException ex) { }
+            }
+        };
+
+        TableColumnModel columnModel = jTable1.getColumnModel();
+        columnModel.addColumnModelListener(tableColumnModelListener);
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +172,13 @@ public class Schedule extends javax.swing.JFrame{
             }
         });
 
+        jButton4.setText("Delete Row");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,7 +189,9 @@ public class Schedule extends javax.swing.JFrame{
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3)
@@ -154,7 +214,9 @@ public class Schedule extends javax.swing.JFrame{
                     .addComponent(jButton2)
                     .addComponent(jButton1))
                 .addGap(8, 8, 8)
-                .addComponent(jButton3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addContainerGap())
         );
 
@@ -163,36 +225,104 @@ public class Schedule extends javax.swing.JFrame{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        System.out.println("Save Records");
+        //System.out.println("Save Records");
         //Add records to database
-        try{
-            databit.deleteInfoTable("Schedule");
-        }catch(SQLException e){}
+
+    
+        int id = -1;
         String name, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday;
         for (int i=0; i<jTable1.getRowCount(); i++){
-           name = (String)jTable1.getModel().getValueAt(i, 0);
-           Monday = (String)jTable1.getModel().getValueAt(i, 1);
-            Tuesday = (String)jTable1.getModel().getValueAt(i, 2);
-            Wednesday = (String)jTable1.getModel().getValueAt(i, 3);
-            Thursday = (String)jTable1.getModel().getValueAt(i, 4);
-            Friday = (String)jTable1.getModel().getValueAt(i, 5);
-            Saturday = (String)jTable1.getModel().getValueAt(i, 6);
-            Sunday = (String)jTable1.getModel().getValueAt(i, 7);
+            Object o;
+            boolean correct = true;
+          //  System.out.println("IM there");
+            o = jTable1.getModel().getValueAt(i, 0);
+            if (o == null) {
+                //                JOptionPane.showInputDialog(null, "WRONG");
+                JOptionPane.showMessageDialog(null, "ID does not exist or is invalid");
+                id = -1;
+                correct = false;
+                break;
+            } else 
+                id = Integer.parseInt(o.toString());
+            
+           name = jTable1.getModel().getValueAt(i, 1).toString();
+            o = jTable1.getModel().getValueAt(i, 2);
+            if (o == null) {
+                Monday = "";
+            } else {
+                Monday = o.toString();
+                 Monday =  Monday.toUpperCase();
+            }
+            o = jTable1.getModel().getValueAt(i, 3);
+            if (o == null) {
+                Tuesday = "";
+            } else {
+                Tuesday = o.toString();
+                 Tuesday =  Tuesday.toUpperCase();
+            }
+            o = jTable1.getModel().getValueAt(i, 4);
+            if (o == null) {
+                Wednesday = "";
+            } else {
+              Wednesday= o.toString();
+                 Wednesday =  Wednesday.toUpperCase();
+            }
+            o = jTable1.getModel().getValueAt(i, 5);
+            if (o == null) {
+                Thursday = "";
+            } else {
+               Thursday = o.toString();
+                 Thursday =  Thursday.toUpperCase();
+            }
+            o = jTable1.getModel().getValueAt(i, 6);
+            if (o == null) {
+                Friday = "";
+            } else {
+                Friday = o.toString();
+                 Friday =  Friday.toUpperCase();
+            }
+            o = jTable1.getModel().getValueAt(i, 7);
+            if (o == null) {
+                Saturday = "";
+            } else {
+                Saturday = o.toString();
+                 Saturday =  Saturday.toUpperCase();
+            }
+            o = jTable1.getModel().getValueAt(i, 8);
+            if (o == null) {
+                Sunday = "";
+            } else {
+                Sunday = o.toString();
+                 Sunday =  Monday.toUpperCase();
+            }
+            
 //            System.out.println(name + " " +  Monday + " " + Tuesday + " " + Wednesday + " " + Thursday + " " + Friday + " " + Saturday + " " + Sunday);
-            if(name != null){
-            try {
-                    databit.addSchedule(name, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday);
+            if(correct ==true){
+                try {
+                    if (!databit.findKey("schedule", id))
+                        try {
+                            databit.addSchedule(id, name, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday,
+                                                Sunday);
+                        } catch (SQLException e) {
+                        }
+                    else
+                        try {
+                            databit.updateSchedule(id, name, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday,
+                                                   Sunday);
+                        } catch (SQLException e) {
+                        }
                 } catch (SQLException e) {
                 }
             }
         }
-        
+   
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});
+        dtm.addRow(new Object[]{null,"", "", "", "", "", "", "", ""});
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel1ComponentResized
@@ -205,7 +335,7 @@ public class Schedule extends javax.swing.JFrame{
         ResultSet schedule = databit.getSchedule();
         int i = 0;
         while(schedule.next()){
-            jt.getModel().setValueAt(schedule.getString(1),i ,0);
+            jt.getModel().setValueAt(schedule.getInt(1),i ,0);
             jt.getModel().setValueAt(schedule.getString(2),i ,1);
             jt.getModel().setValueAt(schedule.getString(3),i ,2);
             jt.getModel().setValueAt(schedule.getString(4),i ,3);
@@ -213,6 +343,8 @@ public class Schedule extends javax.swing.JFrame{
             jt.getModel().setValueAt(schedule.getString(6),i ,5);
             jt.getModel().setValueAt(schedule.getString(7),i ,6);
             jt.getModel().setValueAt(schedule.getString(8),i ,7);
+            jt.getModel().setValueAt(schedule.getString(9),i ,8);
+        
             i++;
         }
     }
@@ -222,6 +354,29 @@ public class Schedule extends javax.swing.JFrame{
         ManagerProfile.main(args);
         super.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int[] rows = jTable1.getSelectedRows();
+        TableModel tm= jTable1.getModel();
+        Object o;
+                while(rows.length>0) {
+                    o = jTable1.getModel().getValueAt(jTable1.convertRowIndexToModel(rows[0]), 0);
+                    ((DefaultTableModel)tm).removeRow(jTable1.convertRowIndexToModel(rows[0]));
+                        
+                    if (o!=null) {
+                    try {
+                        databit.deleteSchedule( Integer.parseInt(o.toString()));
+                    } 
+                    catch (SQLException e) {
+                    }
+                }
+                    rows = jTable1.getSelectedRows();
+                }
+               
+              jTable1.clearSelection();
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     /**
@@ -268,6 +423,7 @@ public class Schedule extends javax.swing.JFrame{
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

@@ -100,6 +100,10 @@ public class DataHandler {
         stmt.execute(query);
     }
 
+    
+    
+
+
 //==================================================================================================
 // Name: addSchedule
 // Purpose: to schedule a worker.
@@ -107,10 +111,11 @@ public class DataHandler {
 //             id, last name, first name, date of brith, position, salary, phone no
 // returns nothing
 //==================================================================================================    
-    public void addSchedule(String name, String mond, String tues, String wed, String thurs, String fri, String sat, String sun) throws SQLException {
+
+public void addSchedule(int id,String name, String mond, String tues, String wed, String thurs, String fri, String sat, String sun) throws SQLException {
         Statement stmt = conn.createStatement();
         System.out.println(name + " " + mond + " " + tues + " " + wed + " " + thurs + " " + fri + " " + sat + " " + sun);
-        query = "INSERT INTO Schedule VALUES('"+name+"', '"+mond+"', '"+tues+"', '"+wed+"', '"+thurs+"', '"+fri+"', '"+sat+"', '"+sun+"')";
+        query = "INSERT INTO Schedule VALUES("+ id + ",'" +name+"', '"+mond+"', '"+tues+"', '"+wed+"', '"+thurs+"', '"+fri+"', '"+sat+"', '"+sun+"')";
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
     }
@@ -122,12 +127,51 @@ public class DataHandler {
         stmt.execute(query);
     }
     
+
+    
+    public void updateInventory(int id ,String ProdName, int Quant, String DateIn,float CostUnit, float TotalCost,float SalePrice,  int EmplID,String Vendor,int VendorNo ) throws SQLException {
+        Statement stmt = conn.createStatement();
+        query = "UPDATE Inventory SET productname='" + ProdName + "', quantity='"+Quant+"', date_in='"+DateIn+"', cost_unit='"+CostUnit+"', total_cost='"+ TotalCost +"', sale_price='"+ SalePrice +"', empl_id='"+ EmplID+"',vendor='" + Vendor + "vendorno=', "+ VendorNo +"'where id = " + id;
+        System.out.println("\nExecuting query: " + query);
+        stmt.execute(query);
+    }
+    
+    public void updateSchedule(int id ,String Name, String mon, String tues, String wed, String thur, String frid, String sat, String sun) throws SQLException {
+        Statement stmt = conn.createStatement();
+        System.out.println("GOTHERRE");
+        query = "UPDATE Schedule SET name='" + Name + "', monday='"+mon+"', tuesday='"+tues+"', wednesday='"+wed+"', thursday='"+ thur +"', friday='"+ frid +"', saturday='"+ sat +"',sunday='" + sun + "' where id = " + id;
+        System.out.println("\nExecuting query: " + query);
+        stmt.execute(query);
+    }
+    
+    public boolean findKey(String table, int id) throws SQLException {
+        Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "SELECT count(1) from " + table + " where id = "+ id;
+      // query = "SELECT Firstname, Lastname FROM Employee where id = "+ id;
+        System.out.println("\nExecuting query: " + query);
+        
+         rset = stmt.executeQuery(query);
+        int found =-1;
+        while(rset.next()){
+        found = rset.getInt(1);
+        }
+        System.out.println(found);
+        if (found == 1)
+            return true;
+        else
+            return false;
+    }
+    
+    
+
 // ==========================================================================
 // Name: getEmployeeName
 // Purpose: to get the name of the employee associated with a particular id
 // Parameters: int id of employee
 // Returns: String Name
 // ==========================================================================
+
     public String getEmployeeName(int id) throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
@@ -252,7 +296,7 @@ public class DataHandler {
     public ResultSet getSchedule() throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
-        query = "SELECT * FROM Schedule ORDER BY Name";
+        query = "SELECT * FROM Schedule ORDER BY ID";
         System.out.println("\nExecuting query: " + query);
         rset = stmt.executeQuery(query);        
         return rset;
@@ -346,5 +390,13 @@ public class DataHandler {
         System.out.println(datahandler.getRows("Employee"));
         System.out.println(datahandler.getEmployeePicture(1));
         
+    }
+
+    void deleteSchedule(int i) throws SQLException{
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "DELETE FROM SCHEDULE WHERE id="+ i;
+        System.out.println("\nExecuting query: " + query);
+        stmt.execute(query);
     }
 }

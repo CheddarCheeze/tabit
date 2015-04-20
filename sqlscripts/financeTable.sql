@@ -6,5 +6,5 @@ DateSale date,
 Sale_Total decimal(6,2),
 Empl_Id int,
 PRIMARY KEY (Id),
-FOREIGN KEY (Empl_Id) REFERENCES Employee(Id),
+FOREIGN KEY (Empl_Id) REFERENCES Employee(Id)
 )
