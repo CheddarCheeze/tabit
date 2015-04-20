@@ -31,6 +31,7 @@ public class DataHandler {
     ResultSet rset;
     String query;
     String sqlString;
+    String picFile = "";
     SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
     
 //==============================================================
@@ -91,9 +92,10 @@ public class DataHandler {
 // returns nothing
 //==================================================================================================
     public void addNewEmployee(int id, String lastname, String firstname, String dob,String position, 
-                               double salary, String phoneno, String picfile) throws SQLException {
+                               double salary, String phoneno) throws SQLException {
         Statement stmt = conn.createStatement();
-        query = "INSERT INTO Employee VALUES("+id+", '"+lastname+"', '"+firstname+"', '"+dob+"', '"+position+"', "+salary+", '"+phoneno+"', '" + picfile+"')";
+        picFile = firstname+lastname+".png";
+        query = "INSERT INTO Employee VALUES("+id+", '"+lastname+"', '"+firstname+"', '"+dob+"', '"+position+"', "+salary+", '"+phoneno+"', '" + picFile+"')";
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
     }

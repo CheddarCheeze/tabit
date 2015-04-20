@@ -53,12 +53,14 @@ public class ManagerProfile extends javax.swing.JFrame {
         clearTablesButton = new javax.swing.JButton();
         magagerLogOutButton = new javax.swing.JButton();
         modifyInventoryButton = new javax.swing.JButton();
-        viewProfileButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableJList = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        modifyScheduleButton.setBackground(new java.awt.Color(0, 0, 153));
+        modifyScheduleButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        modifyScheduleButton.setForeground(new java.awt.Color(255, 255, 255));
         modifyScheduleButton.setText("Modify Schedule");
         modifyScheduleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +68,9 @@ public class ManagerProfile extends javax.swing.JFrame {
             }
         });
 
+        viewFinancesButton.setBackground(new java.awt.Color(0, 0, 153));
+        viewFinancesButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        viewFinancesButton.setForeground(new java.awt.Color(255, 255, 255));
         viewFinancesButton.setText("View Finances");
         viewFinancesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +78,9 @@ public class ManagerProfile extends javax.swing.JFrame {
             }
         });
 
+        modifyEmployeeButton.setBackground(new java.awt.Color(0, 0, 153));
+        modifyEmployeeButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        modifyEmployeeButton.setForeground(new java.awt.Color(255, 255, 255));
         modifyEmployeeButton.setText("View Employees");
         modifyEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +88,9 @@ public class ManagerProfile extends javax.swing.JFrame {
             }
         });
 
+        clearTablesButton.setBackground(new java.awt.Color(0, 0, 153));
+        clearTablesButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        clearTablesButton.setForeground(new java.awt.Color(255, 255, 255));
         clearTablesButton.setText("Clear All Tables");
         clearTablesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +98,9 @@ public class ManagerProfile extends javax.swing.JFrame {
             }
         });
 
+        magagerLogOutButton.setBackground(new java.awt.Color(0, 0, 153));
+        magagerLogOutButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        magagerLogOutButton.setForeground(new java.awt.Color(255, 255, 255));
         magagerLogOutButton.setText("Log Out");
         magagerLogOutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +108,9 @@ public class ManagerProfile extends javax.swing.JFrame {
             }
         });
 
+        modifyInventoryButton.setBackground(new java.awt.Color(0, 0, 153));
+        modifyInventoryButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        modifyInventoryButton.setForeground(new java.awt.Color(255, 255, 255));
         modifyInventoryButton.setText("Modify Inventory");
         modifyInventoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,13 +118,9 @@ public class ManagerProfile extends javax.swing.JFrame {
             }
         });
 
-        viewProfileButton.setText("View Profile");
-        viewProfileButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewProfileButtonActionPerformed(evt);
-            }
-        });
-
+        tableJList.setBackground(new java.awt.Color(0, 0, 153));
+        tableJList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 4));
+        tableJList.setForeground(new java.awt.Color(255, 255, 255));
         tableJList.setModel(new javax.swing.AbstractListModel() {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -130,40 +143,36 @@ public class ManagerProfile extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(magagerLogOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(clearTablesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(viewFinancesButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(modifyEmployeeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(modifyScheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(magagerLogOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewFinancesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(modifyEmployeeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(modifyScheduleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(modifyInventoryButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(modifyInventoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                    .addComponent(viewProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(148, 148, 148)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(clearTablesButton, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(modifyScheduleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearTablesButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(modifyScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modifyInventoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(viewProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                            .addComponent(modifyEmployeeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(21, 21, 21)
+                        .addComponent(modifyEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(viewFinancesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(clearTablesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(magagerLogOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                        .addComponent(modifyInventoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(magagerLogOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -191,11 +200,6 @@ public class ManagerProfile extends javax.swing.JFrame {
     private void modifyInventoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyInventoryButtonActionPerformed
 
     }//GEN-LAST:event_modifyInventoryButtonActionPerformed
-
-    private void viewProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProfileButtonActionPerformed
-        Profile.main(args);
-        super.dispose();
-    }//GEN-LAST:event_viewProfileButtonActionPerformed
 
     private void viewTablesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTablesButtonActionPerformed
         TableList.main(args);
@@ -260,7 +264,6 @@ public class ManagerProfile extends javax.swing.JFrame {
     private javax.swing.JButton modifyScheduleButton;
     private javax.swing.JList tableJList;
     private javax.swing.JButton viewFinancesButton;
-    private javax.swing.JButton viewProfileButton;
     // End of variables declaration//GEN-END:variables
 
 }

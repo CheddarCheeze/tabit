@@ -29,7 +29,6 @@ public class Profile extends javax.swing.JFrame {
     private void initComponents() {//GEN-BEGIN:initComponents
 
         logOutButton = new javax.swing.JButton();
-        manageButton = new javax.swing.JButton();
         viewScheduleButton = new javax.swing.JButton();
         clockInButton = new javax.swing.JButton();
         newTableButton = new javax.swing.JButton();
@@ -37,13 +36,6 @@ public class Profile extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         logOutButton.setText("Log Out");
-
-        manageButton.setText("Manage");
-        manageButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageButtonActionPerformed(evt);
-            }
-        });
 
         viewScheduleButton.setText("View Schedule");
         viewScheduleButton.addActionListener(new java.awt.event.ActionListener() {
@@ -66,14 +58,13 @@ public class Profile extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(413, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(manageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(341, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(newTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clockInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(87, 87, 87))
+                    .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clockInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,11 +75,9 @@ public class Profile extends javax.swing.JFrame {
                 .addComponent(clockInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(viewScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(manageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(68, 68, 68)
                 .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                .addGap(87, 87, 87))
         );
 
         pack();
@@ -115,11 +104,6 @@ public class Profile extends javax.swing.JFrame {
        //String[] args = {};
        //s.main(args);
     }//GEN-LAST:event_viewScheduleButtonActionPerformed
-
-    private void manageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageButtonActionPerformed
-        desktop.DesktopFrame.main(args);
-        super.dispose();
-    }//GEN-LAST:event_manageButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,7 +143,6 @@ public class Profile extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clockInButton;
     private javax.swing.JButton logOutButton;
-    private javax.swing.JButton manageButton;
     private javax.swing.JButton newTableButton;
     private javax.swing.JButton viewScheduleButton;
     // End of variables declaration//GEN-END:variables

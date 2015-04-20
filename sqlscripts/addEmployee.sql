@@ -1,19 +1,39 @@
 INSERT INTO Employee
 VALUES
-( 1, 'Nunez', 'Nicolas', 'APR/04/1991', 'Manager', 100000, '347-440-4158');
+( 1, 'NUNEZ', 'NICOLAS', 'APR/27/1991', 'MANAGER', 100000, '347-440-4158', 'NicolasNunez.png');
 
 INSERT INTO Employee
 VALUES
-( 2, 'Bruckner', 'Martin', 'NOV/14/1992', 'Manager', 90000, '479-799-6376');
+( 2, 'BRUCKNER', 'MARTIN', 'NOV/14/1992', 'MANAGER', 90000, '479-799-6376', 'MartinBruckner.png');
 
 INSERT INTO Employee
 VALUES
-( 3, 'Foster', 'Brandon', 'MAY/15/1986', 'Manager', 80000, '470-876-0987');
+( 3, 'FOSTER', 'BRANDON', 'MAY/15/1986', 'MANAGER', 80000, '470-876-0987', 'BrandonFoster.png');
 
 INSERT INTO Employee
 VALUES
-( 4, 'Ordorica', 'Adrian', 'JAN/22/1993', 'Manager', 70000, '501-223-4658');
+( 4, 'ORDORICA', 'ADRIAN', 'JAN/22/1993', 'MANAGER', 70000, '501-223-4658', 'AdrianOrdorica.png');
 
 INSERT INTO Employee
 VALUES
-( 5, 'Patitz', 'Matt', 'JUN/07/1977', 'Manager', 500000, '479-777-7777');
+( 5, 'PATITZ', 'MAT', 'JUN/07/1977', 'MANAGER', 500000, '479-777-7777', 'MattPatitz.png');
+
+INSERT INTO Employee
+VALUES
+( 6, 'FU', 'ZHANG', 'APR/04/1991', 'CASHIER', 20000, '501-440-4158', 'FuZhang.png');
+
+INSERT INTO Employee
+VALUES
+( 7, 'ANDRES', 'DISCUA', 'NOV/14/1992', 'CASHIER', 20000, '501-799-6376', 'AndresDiscua.png');
+
+INSERT INTO Employee
+VALUES
+( 8, 'ARROYO', 'MARVIN', 'MAY/15/1986', 'CASHIER', 20000, '501-876-0987', 'MarvinArroyo.png');
+
+INSERT INTO Employee
+VALUES
+( 9, 'CHANG', 'GALO', 'JUL/22/1988', 'CASHIER', 20000, '501-223-4658', 'GaloChang.png');
+
+INSERT INTO Employee
+VALUES
+( 10, 'BENAVIDES', 'MARIA', 'APR/07/1977', 'CASHIER', 20000, '501-121-7777', 'MariaBenavides.png');

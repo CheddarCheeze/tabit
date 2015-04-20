@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 import java.io.File;
@@ -28,6 +29,10 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.awt.Dimension;
+
+import oracle.net.aso.c;
+
 
 /**
  *
@@ -40,15 +45,22 @@ public class Employee extends javax.swing.JFrame {
     SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
     Font bfont = new Font("Verdana", Font.BOLD, 13);
     ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
-    BufferedImage picture;
+    BufferedImage picture, restLogo;
     File file;
-    ImageIcon iicon;
+    ImageIcon iicon, restIcon;
     String filepath = "C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\EmployeePictures\\";
+    String logopath = "C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\losaltoslogo\\300-187-wide.png";
     String picturepath;
     DataHandler databit;
-    public Employee() throws SQLException {
+    Toolkit tk = Toolkit.getDefaultToolkit();
+    int xSize = ((int)tk.getScreenSize().getWidth());
+    int ySize = ((int)tk.getScreenSize().getHeight())-30;
+    public Employee() throws SQLException, IOException {
+        restLogo = ImageIO.read(new File(logopath));
+        restIcon = new ImageIcon(restLogo);
         databit = new DataHandler();
         initComponents();
+        this.RestaurantLogoLabel.setIcon(restIcon);
     }
 
     /** This method is called from within the constructor to
@@ -74,10 +86,12 @@ public class Employee extends javax.swing.JFrame {
         AddEmployee = new javax.swing.JButton();
         DeleteEmployee = new javax.swing.JButton();
         AddtoDB = new javax.swing.JButton();
+        RestaurantLogoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 153));
         setIconImage(img.getImage());
+        setPreferredSize(new Dimension(xSize, ySize));
 
         PicturePanel.setBackground(new java.awt.Color(255, 255, 255));
         PicturePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 6));
@@ -100,9 +114,8 @@ public class Employee extends javax.swing.JFrame {
         );
 
         PictureLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        PictureLabel.setForeground(new java.awt.Color(0, 0, 204));
 
-        InfoPanel.setBackground(new java.awt.Color(51, 255, 255));
+        InfoPanel.setBackground(new java.awt.Color(0, 0, 0));
         InfoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         InfoTextArea.setEditable(false);
@@ -125,16 +138,15 @@ public class Employee extends javax.swing.JFrame {
         InfoPanelLayout.setVerticalGroup(
             InfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InfoPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(jScrollPane1)
                 .addGap(23, 23, 23))
         );
 
         InformationLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        InformationLabel.setForeground(new java.awt.Color(0, 0, 204));
         InformationLabel.setText("Employee Information");
 
-        ModifyTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 255, 204), 3));
+        ModifyTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         ModifyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -183,7 +195,6 @@ public class Employee extends javax.swing.JFrame {
         }catch(SQLException e) { }
 
         ModifyLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        ModifyLabel.setForeground(new java.awt.Color(0, 0, 204));
         ModifyLabel.setText("Modify Employee Information");
 
         SaveButton.setBackground(new java.awt.Color(204, 255, 255));
@@ -241,8 +252,9 @@ public class Employee extends javax.swing.JFrame {
                             .addComponent(AddtoDB, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PicturePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PicturePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RestaurantLogoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(InformationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,16 +266,16 @@ public class Employee extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(InformationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PictureLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(InformationLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ModifyLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(ModifyLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(InfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(25, 25, 25))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -271,7 +283,7 @@ public class Employee extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(SaveButton))
                             .addComponent(AddtoDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(DeleteEmployee)
@@ -279,6 +291,8 @@ public class Employee extends javax.swing.JFrame {
                             .addComponent(Exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PicturePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(RestaurantLogoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -432,7 +446,7 @@ public class Employee extends javax.swing.JFrame {
         }
             if (correct == true) {
                 try {
-                    databit.addNewEmployee(id, LastN, FirstN, DOB, Position, Salary, PhoneNo , "");
+                    databit.addNewEmployee(id, LastN, FirstN, DOB, Position, Salary, PhoneNo);
                 } catch (SQLException e) {
                 }
             }
@@ -524,7 +538,8 @@ public class Employee extends javax.swing.JFrame {
                 try{
                 new Employee().setVisible(true);
                 }
-                    catch(SQLException e){}
+                    catch(SQLException e){} catch (IOException e) {
+                }
             }
         });
     }
@@ -542,6 +557,7 @@ public class Employee extends javax.swing.JFrame {
     private javax.swing.JTable ModifyTable;
     private javax.swing.JLabel PictureLabel;
     private javax.swing.JPanel PicturePanel;
+    private javax.swing.JLabel RestaurantLogoLabel;
     private javax.swing.JButton SaveButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

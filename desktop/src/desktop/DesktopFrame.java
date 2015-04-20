@@ -15,15 +15,21 @@ import javax.swing.ImageIcon;
 public class DesktopFrame extends javax.swing.JFrame {
     String args[] = {};
     public static boolean needTableList = true;
-    public static TableList tables;
+    public static TableList tables;    
     @SuppressWarnings("compatibility:-4952383735578523799")
     private static final long serialVersionUID = 1L;
+    private String pathtoBackground = "C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\losaltoslogo\\600-375-wide.png";
+    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
+    private ImageIcon loginIcon = new ImageIcon(pathtoBackground);
 
     @SuppressWarnings("oracle.jdeveloper.java.field-not-serializable")
     /** Creates new form DesktopFrame */
     public DesktopFrame() {
         initComponents();
         this.setLocationRelativeTo(getRootPane());
+        setIconImage(img.getImage());
+        this.loginLabel.setIcon(loginIcon);
+//        this.signInUsernameField.setText("");
     }
 
     /** This method is called from within the constructor to
@@ -34,81 +40,116 @@ public class DesktopFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     private void initComponents() {//GEN-BEGIN:initComponents
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jPanel1 = new javax.swing.JPanel();
         signInButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        canvas1 = new java.awt.Canvas();
-        jLabel1 = new javax.swing.JLabel();
+        signInPasswordField = new javax.swing.JPasswordField();
+        signInPasswordLabel = new javax.swing.JLabel();
+        signInUserNameLabel = new javax.swing.JLabel();
+        signInUserField = new javax.swing.JTextField();
+        PicturePanel = new javax.swing.JPanel();
+        loginLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 480));
+        setResizable(false);
 
-        jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
-            }
-        });
-        jPasswordField1.setBounds(190, 180, 160, 30);
-        jDesktopPane1.add(jPasswordField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jSplitPane1.setBackground(new java.awt.Color(204, 255, 51));
+        jSplitPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
+        jSplitPane1.setDividerLocation(40);
+        jSplitPane1.setDividerSize(10);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        signInButton.setText("Sign in");
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+
+        signInButton.setBackground(new java.awt.Color(255, 255, 255));
+        signInButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        signInButton.setText("Sign In!");
         signInButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signInButtonActionPerformed(evt);
             }
         });
-        signInButton.setBounds(180, 240, 100, 40);
-        jDesktopPane1.add(signInButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jTextField1.setText("Username");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jTextField1.setBounds(190, 140, 160, 30);
-        jDesktopPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        canvas1.setBounds(230, 80, 0, 0);
-        jDesktopPane1.add(canvas1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        signInPasswordLabel.setBackground(new java.awt.Color(0, 0, 0));
+        signInPasswordLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        signInPasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
+        signInPasswordLabel.setText("Password:");
 
-        jLabel1.setText(null);
-        Image img = new ImageIcon("logo.png").getImage();
-        jLabel1.setIcon(new ImageIcon(img));
-        jLabel1.setBounds(340, 30, 140, 90);
-        jDesktopPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        signInUserNameLabel.setBackground(new java.awt.Color(0, 0, 0));
+        signInUserNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        signInUserNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        signInUserNameLabel.setText("Username:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(signInUserNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(signInUserField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(signInPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(signInPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(signInButton)
+                .addGap(67, 67, 67))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(signInUserField)
+                        .addComponent(signInUserNameLabel)
+                        .addComponent(signInPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(signInButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(signInPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+
+        jSplitPane1.setTopComponent(jPanel1);
+
+        PicturePanel.setBackground(new java.awt.Color(0, 0, 0));
+
+        loginLabel.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout PicturePanelLayout = new javax.swing.GroupLayout(PicturePanel);
+        PicturePanel.setLayout(PicturePanelLayout);
+        PicturePanelLayout.setHorizontalGroup(
+            PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
+        );
+        PicturePanelLayout.setVerticalGroup(
+            PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PicturePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(loginLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jSplitPane1.setRightComponent(PicturePanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jSplitPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
         );
 
         pack();
     }//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
-        desktop.ManagerProfile.main(args);
-        super.dispose();
+        // TODO add your handling code here:
+        System.out.println("Sign in button pressed!");
     }//GEN-LAST:event_signInButtonActionPerformed
 
     /**
@@ -156,12 +197,15 @@ public class DesktopFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Canvas canvas1;
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel PicturePanel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel loginLabel;
     private javax.swing.JButton signInButton;
+    private javax.swing.JPasswordField signInPasswordField;
+    private javax.swing.JLabel signInPasswordLabel;
+    private javax.swing.JTextField signInUserField;
+    private javax.swing.JLabel signInUserNameLabel;
     // End of variables declaration//GEN-END:variables
 
 }
