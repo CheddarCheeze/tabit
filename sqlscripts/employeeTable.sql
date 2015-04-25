@@ -1,16 +1,12 @@
-CREATE TABLE EmployeeNew
+CREATE TABLE Employee
 (
 Id int NOT NULL,
 LastName varchar(20) NOT NULL,
 FirstName varchar(20),
 DOB date,
-Address varchar(50),
-PhoneNo varchar(20),
 Position varchar(20),
-hasRank number(1),
 Salary number(6),
-isHourly number(1),
-Username varchar(50),
-Password varchar(50),
+PhoneNo varchar(20),
+PictureFile varchar(20),
 PRIMARY KEY (Id)
 )
