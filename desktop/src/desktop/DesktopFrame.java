@@ -16,6 +16,7 @@ public class DesktopFrame extends javax.swing.JFrame {
     String args[] = {};
     public static boolean needTableList = true;
     public static TableList tables;    
+    DataHandler databit;
     @SuppressWarnings("compatibility:-4952383735578523799")
     private static final long serialVersionUID = 1L;
     private String pathtoBackground = "C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\losaltoslogo\\600-375-wide.png";
@@ -24,12 +25,12 @@ public class DesktopFrame extends javax.swing.JFrame {
 
     @SuppressWarnings("oracle.jdeveloper.java.field-not-serializable")
     /** Creates new form DesktopFrame */
-    public DesktopFrame() {
+    public DesktopFrame() throws SQLException{
+        databit = new DataHandler();
         initComponents();
         this.setLocationRelativeTo(getRootPane());
         setIconImage(img.getImage());
         this.loginLabel.setIcon(loginIcon);
-//        this.signInUsernameField.setText("");
     }
 
     /** This method is called from within the constructor to
@@ -43,15 +44,14 @@ public class DesktopFrame extends javax.swing.JFrame {
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         signInButton = new javax.swing.JButton();
-        signInPasswordField = new javax.swing.JPasswordField();
+        password = new javax.swing.JPasswordField();
         signInPasswordLabel = new javax.swing.JLabel();
         signInUserNameLabel = new javax.swing.JLabel();
-        signInUserField = new javax.swing.JTextField();
+        username = new javax.swing.JTextField();
         PicturePanel = new javax.swing.JPanel();
         loginLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 480));
         setResizable(false);
 
         jSplitPane1.setBackground(new java.awt.Color(204, 255, 51));
@@ -79,35 +79,34 @@ public class DesktopFrame extends javax.swing.JFrame {
         signInUserNameLabel.setBackground(new java.awt.Color(0, 0, 0));
         signInUserNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         signInUserNameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        signInUserNameLabel.setText("Username:");
+        signInUserNameLabel.setText("User ID:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(signInUserNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(signInUserField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(signInUserNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(signInPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(signInPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(signInButton)
-                .addGap(67, 67, 67))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(signInUserField)
-                        .addComponent(signInUserNameLabel)
-                        .addComponent(signInPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(signInButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(signInPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(username)
+                    .addComponent(signInUserNameLabel)
+                    .addComponent(signInPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(signInButton))
                 .addContainerGap())
         );
 
@@ -121,13 +120,13 @@ public class DesktopFrame extends javax.swing.JFrame {
         PicturePanel.setLayout(PicturePanelLayout);
         PicturePanelLayout.setHorizontalGroup(
             PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(loginLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
+            .addComponent(loginLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
         );
         PicturePanelLayout.setVerticalGroup(
             PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PicturePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(loginLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addComponent(loginLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -141,7 +140,7 @@ public class DesktopFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+            .addComponent(jSplitPane1)
         );
 
         pack();
@@ -150,8 +149,32 @@ public class DesktopFrame extends javax.swing.JFrame {
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
         // TODO add your handling code here:
         System.out.println("Sign in button pressed!");
+        System.out.println(this.username.getText());
+        System.out.println(this.password.getText());
+        
+        boolean authentification = false;
+        try {
+            authentification = Authenticate(username.getText(), password.getText());
+        } catch (SQLException e) {
+        }
+        if(authentification){
+                System.out.println("Open the manager Profile");
+            }
+            else{
+                System.out.println("Open dialog to indicate that the password or username do not match");   
+            }
     }//GEN-LAST:event_signInButtonActionPerformed
-
+    
+    private boolean Authenticate(String u, String p) throws SQLException{
+            String toMatch = "";
+            toMatch = databit.getLoginData(Integer.parseInt(u));
+            boolean temp = false;
+            if(!toMatch.isEmpty()){
+                if (toMatch.matches(p))
+                    temp = true;
+            }
+            return temp;
+    }
     /**
      * @param args the command line arguments
      */
@@ -191,7 +214,10 @@ public class DesktopFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DesktopFrame().setVisible(true);
+                try {
+                    new DesktopFrame().setVisible(true);
+                } catch (SQLException e) {
+                }
             }
         });
     }
@@ -201,11 +227,11 @@ public class DesktopFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel loginLabel;
+    private javax.swing.JPasswordField password;
     private javax.swing.JButton signInButton;
-    private javax.swing.JPasswordField signInPasswordField;
     private javax.swing.JLabel signInPasswordLabel;
-    private javax.swing.JTextField signInUserField;
     private javax.swing.JLabel signInUserNameLabel;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 
 import java.text.SimpleDateFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import oracle.jdbc.pool.OracleDataSource;
@@ -99,10 +100,6 @@ public class DataHandler {
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
     }
-
-    
-    
-
 
 //==================================================================================================
 // Name: addSchedule
@@ -271,7 +268,22 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
                 }
            return picture;
        }
-    
+
+
+// ============================================================
+// getLogin Data    
+//=============================================================
+    public String getLoginData(int id) throws SQLException {
+           stmt = conn.createStatement();
+           query = "SELECT password FROM  Employee where id = " + id;
+           System.out.println("\nExecuting query: " + query);
+           rset = stmt.executeQuery(query);
+           String p ="";
+           while(rset.next()){
+               p = rset.getString(1);
+           }
+           return p;
+       }
 //======================================================================
 // Name: deleteByID
 // Purpose: to delete information from a given table by the unique id
@@ -378,6 +390,14 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
         stmt.execute(query);
     }
     
+    void deleteSchedule(int i) throws SQLException{
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "DELETE FROM SCHEDULE WHERE id="+ i;
+        System.out.println("\nExecuting query: " + query);
+        stmt.execute(query);
+    }
+    
 // ============================================================================
 // Name: main 
 // Purpose: method is for testing class purposes only
@@ -385,18 +405,11 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
 // ============================================================================
     public static void main(String[] args) throws SQLException {
         DataHandler datahandler = new DataHandler();
-        datahandler.printEmployees();
-        System.out.println(datahandler.getEmployeeName(1));
-        System.out.println(datahandler.getRows("Employee"));
-        System.out.println(datahandler.getEmployeePicture(1));
+//        datahandler.printEmployees();
+//        System.out.println(datahandler.getEmployeeName(1));
+//        System.out.println(datahandler.getRows("Employee"));
+//        System.out.println(datahandler.getEmployeePicture(1));
+//        String temp = datahandler.getLoginData(1);
         
-    }
-
-    void deleteSchedule(int i) throws SQLException{
-        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-               ResultSet.CONCUR_READ_ONLY);
-        query = "DELETE FROM SCHEDULE WHERE id="+ i;
-        System.out.println("\nExecuting query: " + query);
-        stmt.execute(query);
     }
 }
