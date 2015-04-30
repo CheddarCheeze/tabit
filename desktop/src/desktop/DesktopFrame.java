@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Owner, Nicolas Nunez
+ * @author Nicolas Nunez
  */
 public class DesktopFrame extends javax.swing.JFrame {
     String args[] = {};
