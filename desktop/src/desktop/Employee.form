@@ -39,7 +39,6 @@
                   <Component id="ModifyLabel" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="SaveButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="AddEmployee" alignment="0" max="32767" attributes="0"/>
                           <Component id="DeleteEmployee" pref="147" max="32767" attributes="0"/>
                       </Group>
@@ -83,13 +82,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane2" min="-2" pref="350" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="AddEmployee" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="SaveButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="AddtoDB" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="AddEmployee" min="-2" max="-2" attributes="0"/>
+                          <Component id="AddtoDB" min="-2" pref="47" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -245,41 +240,40 @@
                 <Column editable="true" title="PhoneNo" type="java.lang.String"/>
               </Table>
             </Property>
-            <Property name="cellSelectionEnabled" type="boolean" value="true"/>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="DefaultTableModel dtm = (DefaultTableModel) ModifyTable.getModel();&#xa;int rows = 0;&#xa;System.out.println(rows);&#xa;try {&#xa;      System.out.println(rows);&#xa;      rows = databit.getRows(&quot;Employee&quot;);&#xa;      System.out.println(&quot;It executed&quot;);&#xa;    }catch (SQLException e) {}&#xa;    System.out.println(&quot;# of rows &quot; + rows);&#xa;    int rowsInTable = ModifyTable.getRowCount();&#xa;        while(rowsInTable &lt; rows){&#xa;            dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});&#xa;            rowsInTable++;&#xa;        }&#xa;        try{&#xa;            loadInventory(ModifyTable, rows);&#xa;        }catch(SQLException e) { }">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="4" resizable="false">
-                  <Title/>
+                  <Title value="Id"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="Last Name"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="FirstName"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="Date of Birth"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="Position"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
+                  <Title value="Salary"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="PhoneNo"/>
                   <Editor/>
                   <Renderer/>
                 </Column>
@@ -301,17 +295,6 @@
           <Font name="Arial" size="24" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Modify Employee Information"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="SaveButton">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="cc" type="rgb"/>
-        </Property>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="11" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Save Changes"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="Exit">
@@ -361,7 +344,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Add Employee"/>
+        <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddtoDBActionPerformed"/>

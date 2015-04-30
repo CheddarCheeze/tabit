@@ -81,7 +81,6 @@ public class Employee extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         ModifyTable = new javax.swing.JTable();
         ModifyLabel = new javax.swing.JLabel();
-        SaveButton = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
         AddEmployee = new javax.swing.JButton();
         DeleteEmployee = new javax.swing.JButton();
@@ -166,7 +165,6 @@ public class Employee extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        ModifyTable.setCellSelectionEnabled(true);
         ModifyTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ModifyTableMouseClicked(evt);
@@ -175,7 +173,14 @@ public class Employee extends javax.swing.JFrame {
         jScrollPane2.setViewportView(ModifyTable);
         ModifyTable.getColumnModel().getColumn(0).setResizable(false);
         ModifyTable.getColumnModel().getColumn(0).setPreferredWidth(4);
+        ModifyTable.getColumnModel().getColumn(0).setHeaderValue("Id");
+        ModifyTable.getColumnModel().getColumn(1).setHeaderValue("Last Name");
+        ModifyTable.getColumnModel().getColumn(2).setHeaderValue("FirstName");
+        ModifyTable.getColumnModel().getColumn(3).setHeaderValue("Date of Birth");
+        ModifyTable.getColumnModel().getColumn(4).setHeaderValue("Position");
         ModifyTable.getColumnModel().getColumn(5).setResizable(false);
+        ModifyTable.getColumnModel().getColumn(5).setHeaderValue("Salary");
+        ModifyTable.getColumnModel().getColumn(6).setHeaderValue("PhoneNo");
         DefaultTableModel dtm = (DefaultTableModel) ModifyTable.getModel();
         int rows = 0;
         System.out.println(rows);
@@ -196,10 +201,6 @@ public class Employee extends javax.swing.JFrame {
 
         ModifyLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         ModifyLabel.setText("Modify Employee Information");
-
-        SaveButton.setBackground(new java.awt.Color(204, 255, 255));
-        SaveButton.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        SaveButton.setText("Save Changes");
 
         Exit.setBackground(new java.awt.Color(204, 255, 255));
         Exit.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
@@ -225,7 +226,7 @@ public class Employee extends javax.swing.JFrame {
 
         AddtoDB.setBackground(new java.awt.Color(204, 255, 255));
         AddtoDB.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        AddtoDB.setText("Add Employee");
+        AddtoDB.setText("Save");
         AddtoDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddtoDBActionPerformed(evt);
@@ -243,7 +244,6 @@ public class Employee extends javax.swing.JFrame {
                     .addComponent(ModifyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(SaveButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(AddEmployee, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(DeleteEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -277,12 +277,9 @@ public class Employee extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(AddEmployee)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(SaveButton))
-                            .addComponent(AddtoDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AddEmployee)
+                            .addComponent(AddtoDB, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -366,10 +363,10 @@ public class Employee extends javax.swing.JFrame {
         String FirstN="", LastN="", Position="", PhoneNo="", DOB="";
         boolean correct = true;
         int row = ModifyTable.getSelectedRow();
-        for (int i = 0; i < ModifyTable.getColumnCount(); i++) {
+        for (int i = 0; i < ModifyTable.getRowCount(); i++) {
             Object o;
             System.out.println("IM there");
-            o = ModifyTable.getModel().getValueAt(row, 0);
+            o = ModifyTable.getModel().getValueAt(i, 0);
             if (o == null) {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 id = -1;
@@ -377,7 +374,7 @@ public class Employee extends javax.swing.JFrame {
                 continue;
             } else
                 id = Integer.parseInt(o.toString());
-                o = ModifyTable.getModel().getValueAt(row, 1);
+                o = ModifyTable.getModel().getValueAt(i, 1);
             if (o == null) {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 LastN = "";
@@ -387,7 +384,7 @@ public class Employee extends javax.swing.JFrame {
                 LastN = o.toString();
                 LastN = LastN.toUpperCase();
             }
-            o = ModifyTable.getModel().getValueAt(row, 2);
+            o = ModifyTable.getModel().getValueAt(i, 2);
             if (o == null) {
                 //                JOptionPane.showInputDialog(null, "WRONG");
                 JOptionPane.showMessageDialog(null, "Fill all fields");
@@ -398,7 +395,7 @@ public class Employee extends javax.swing.JFrame {
                 FirstN = o.toString();
                 FirstN = FirstN.toUpperCase();
             
-            o = ModifyTable.getModel().getValueAt(row, 3);
+            o = ModifyTable.getModel().getValueAt(i, 3);
             if (o == null) {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 DOB = "";
@@ -415,7 +412,7 @@ public class Employee extends javax.swing.JFrame {
             }
 
 
-            o = ModifyTable.getModel().getValueAt(row, 4);
+            o = ModifyTable.getModel().getValueAt(i, 4);
             if (o == null) {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 Position = "";
@@ -425,7 +422,7 @@ public class Employee extends javax.swing.JFrame {
                 Position = o.toString();
                 Position = Position.toUpperCase();
             
-            o = ModifyTable.getModel().getValueAt(row, 5);
+            o = ModifyTable.getModel().getValueAt(i, 5);
             if (o == null) {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 Salary = -1;
@@ -435,7 +432,7 @@ public class Employee extends javax.swing.JFrame {
                 //TotalCost = Float.parseFloat(o.toString());
                 Salary = Double.parseDouble(o.toString());
 
-            o = ModifyTable.getModel().getValueAt(row, 6);
+            o = ModifyTable.getModel().getValueAt(i, 6);
             if (o == null) {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 PhoneNo = "";
@@ -443,16 +440,27 @@ public class Employee extends javax.swing.JFrame {
                 continue;
             } else
                 PhoneNo = o.toString();
-        }
-            if (correct == true) {
+            
+            if(correct ==true){
                 try {
-                    databit.addNewEmployee(id, LastN, FirstN, DOB, Position, Salary, PhoneNo);
+                    if (!databit.findKey("employee", id))
+                        try {
+                            databit.addNewEmployee(id, LastN, FirstN, DOB, Position, Salary, PhoneNo);
+                        } catch (SQLException e) {
+                        }
+                    else
+                        try {
+                            databit.updateEmployee(id, LastN, FirstN, DOB, Position, Salary, PhoneNo);
+                        } catch (SQLException e) {
+                        }
                 } catch (SQLException e) {
                 }
             }
+        }
+       
         
     }//GEN-LAST:event_AddtoDBActionPerformed
-    
+   
     public static boolean isDateValid(String date) 
     {
             try {
@@ -558,7 +566,6 @@ public class Employee extends javax.swing.JFrame {
     private javax.swing.JLabel PictureLabel;
     private javax.swing.JPanel PicturePanel;
     private javax.swing.JLabel RestaurantLogoLabel;
-    private javax.swing.JButton SaveButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
