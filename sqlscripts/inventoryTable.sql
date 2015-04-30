@@ -1,7 +1,7 @@
 CREATE TABLE Inventory
 (
 Id int NOT NULL,
-ProductName varchar(30) NOT NULL,
+ProductName varchar(60) NOT NULL,
 Quantity int,
 Date_In date,
 Cost_Unit decimal(5,2),

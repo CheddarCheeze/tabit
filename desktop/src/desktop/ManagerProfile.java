@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import static java.lang.String.valueOf;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -22,9 +23,11 @@ public class ManagerProfile extends javax.swing.JFrame {
     //public static TableList tableList = new TableList();
     public static String[] strings = new String[1000]; //strings stores the table name in the List
     public static TableList tableList = new TableList();
+    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
     /** Creates new form ManagerProfile */
     public ManagerProfile() { 
         initComponents();
+        setIconImage(img.getImage());
         this.setLocationRelativeTo(getRootPane());
     }
 
@@ -59,6 +62,7 @@ public class ManagerProfile extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tabit");
+        setResizable(false);
 
         modifyScheduleButton.setBackground(new java.awt.Color(0, 0, 153));
         modifyScheduleButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
