@@ -1,24 +1,25 @@
 INSERT
-INTO Inventory
+INTO Sales
 VALUES
-( 1, 'CLEAR PLASTIC PLATES', 2, 'APR/23/2015', 3, 6, 9, 1, 'WALMART', 1);
+( 1, sysdate, '2 Tacos Asada, 3 Tortas Pollo, 1 1L Jarrito Mandarina', 15.25, 1);
 
 INSERT
-INTO Inventory
+INTO Sales
 VALUES
-( 2, 'JARRITOS SODA PACK', 2, 'APR/23/2015', 3, 6, 9, 1, 'JUAN DEL SUR', 5);
+( 2, sysdate, '1 Burrito Asada, 2 Horchata Andina, 1 Taco Loco', 13.25, 2);
 
 INSERT
-INTO Inventory
+INTO Sales
 VALUES
-( 3, 'PALETA PAYASO', 2, 'APR/23/2015', 3, 6, 9, 1, 'BELLAGGIO', 6);
+( 3, sysdate, '5 Tacos Pastor, 2 .5L Pepsi', 10.75, 2);
 
 INSERT
-INTO Inventory
+INTO Sales
 VALUES
-( 4, 'DUVALIN', 2, 'APR/23/2015', 3, 6, 9, 1, 'BELLAGGIO', 1);
+( 4, sysdate, '2 Tacos Asada, 3 Tortas Pollo, 1 Jarrito Mandarina', 15.25, 1);
 
 INSERT
-INTO Inventory
+INTO Sales
 VALUES
-( 5, 'SALSA VALENTINA PRIMAVERA', 2, 'APR/23/2015', 3, 6, 9, 1, 'LA VECINITA', 4);
+( 5, sysdate, '2 Tacos Asada, 3 Tortas Pollo, 1 Jarrito Mandarina', 15.25, 1);
+
