@@ -1,16 +1,9 @@
 
 package desktop;
 
-import java.sql.SQLException;
-import desktop.TableList;
-import java.util.ArrayList;
 import static java.lang.String.valueOf;
 
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 

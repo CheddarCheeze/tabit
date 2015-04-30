@@ -1,11 +1,8 @@
 
 package desktop;
-import java.awt.Image;
-import java.io.File;
 
 import java.sql.SQLException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 

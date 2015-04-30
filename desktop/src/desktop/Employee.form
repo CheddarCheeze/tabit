@@ -30,46 +30,58 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" pref="483" max="32767" attributes="0"/>
-                  <Component id="ModifyLabel" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="AddEmployee" max="32767" attributes="0"/>
-                          <Component id="DeleteEmployee" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="Exit" pref="140" max="32767" attributes="0"/>
-                          <Component id="AddtoDB" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="InformationLabel" min="-2" pref="291" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="PicturePanel" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="PictureLabel" min="-2" pref="291" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="50" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="ModifyLabel" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="PictureLabel" min="-2" pref="291" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane1" min="-2" pref="279" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jScrollPane2" min="-2" pref="667" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="AddEmployee" max="32767" attributes="0"/>
+                                          <Component id="DeleteEmployee" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="AddtoDB" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="Exit" min="-2" pref="140" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="PicturePanel" min="-2" pref="284" max="-2" attributes="0"/>
+                                  <Component id="RestaurantLogoLabel" min="-2" pref="304" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jScrollPane1" min="-2" pref="318" max="-2" attributes="0"/>
-                          <Component id="InformationLabel" min="-2" pref="291" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                      <Component id="RestaurantLogoLabel" min="-2" pref="317" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -81,31 +93,41 @@
                   <Component id="PictureLabel" alignment="1" max="32767" attributes="0"/>
                   <Component id="ModifyLabel" alignment="1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" pref="368" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="PicturePanel" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       <Component id="InformationLabel" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="299" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Component id="RestaurantLogoLabel" min="-2" pref="153" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="PicturePanel" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="AddtoDB" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="AddEmployee" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Exit" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="DeleteEmployee" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="RestaurantLogoLabel" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="2" attributes="0">
-                      <Component id="AddEmployee" min="-2" pref="39" max="-2" attributes="0"/>
-                      <EmptySpace min="5" pref="5" max="5" attributes="0"/>
-                      <Component id="DeleteEmployee" min="-2" pref="40" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="2" attributes="0">
-                      <Component id="AddtoDB" min="-2" pref="39" max="-2" attributes="0"/>
-                      <EmptySpace min="5" pref="5" max="5" attributes="0"/>
-                      <Component id="Exit" min="-2" pref="40" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -127,9 +149,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabelContainingPicture" min="-2" pref="277" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -137,7 +159,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="LabelContainingPicture" min="-2" pref="308" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -148,28 +175,18 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="LabelContainingPicture" min="-2" pref="254" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="0" pref="324" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="LabelContainingPicture" min="-2" pref="308" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="0" pref="332" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="LabelContainingPicture">
-            </Component>
-          </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="LabelContainingPicture">
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="PictureLabel">
@@ -214,7 +231,7 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="DefaultTableModel dtm = (DefaultTableModel) ModifyTable.getModel();&#xa;int rows = 0;&#xa;System.out.println(rows);&#xa;try {&#xa;      System.out.println(rows);&#xa;      rows = databit.getRows(&quot;Employee&quot;);&#xa;      System.out.println(&quot;It executed&quot;);&#xa;    }catch (SQLException e) {}&#xa;    System.out.println(&quot;# of rows &quot; + rows);&#xa;    int rowsInTable = ModifyTable.getRowCount();&#xa;        while(rowsInTable &lt; rows){&#xa;            dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});&#xa;            rowsInTable++;&#xa;        }&#xa;        try{&#xa;            loadInventory(ModifyTable, rows);&#xa;        }catch(SQLException e) { }">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="4" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="4" resizable="true">
                   <Title value="Id"/>
                   <Editor/>
                   <Renderer/>

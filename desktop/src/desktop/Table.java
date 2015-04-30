@@ -7,8 +7,6 @@ package desktop;
  *
 */
 
-import java.awt.ItemSelectable;
-
 import java.sql.SQLException;
 
 import java.text.DecimalFormat;

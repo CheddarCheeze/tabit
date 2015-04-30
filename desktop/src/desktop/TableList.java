@@ -1,23 +1,20 @@
 package desktop;
 
-import javax.swing.JFrame;
+import static java.lang.String.valueOf;
 
+import java.sql.SQLException;
+
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 /*
  * Purpose is to contain information about the Table Objects
  * @author: Brandon Foster
 */
-
-import static java.lang.String.valueOf;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.*;
-import javax.swing.event.*;
 
 public class TableList extends JFrame {
     public static ArrayList<Table> allTables;

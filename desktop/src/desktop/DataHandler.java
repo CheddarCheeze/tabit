@@ -1,19 +1,11 @@
 package desktop;
 
-import java.io.UnsupportedEncodingException;
-
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.DriverManager;
 
 import java.text.SimpleDateFormat;
-
-import java.util.ArrayList;
-import java.util.Date;
-
-import javax.swing.text.Position;
 
 import oracle.jdbc.pool.OracleDataSource;
 

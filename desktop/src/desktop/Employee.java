@@ -1,37 +1,29 @@
 
 package desktop;
 
-import java.awt.Font;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import java.text.SimpleDateFormat;
-
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
-
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 import java.io.File;
-
 import java.io.IOException;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
 import javax.imageio.ImageIO;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import java.awt.Dimension;
-
-import oracle.net.aso.c;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -53,9 +45,10 @@ public class Employee extends javax.swing.JFrame {
     String picturepath;
     DataHandler databit;
     Toolkit tk = Toolkit.getDefaultToolkit();
-    int xSize = ((int)tk.getScreenSize().getWidth());
-    int ySize = ((int)tk.getScreenSize().getHeight())-30;
-    String args[] = {};
+    int xSize = ((int) tk.getScreenSize().getWidth());
+    int ySize = ((int) tk.getScreenSize().getHeight()) - 30;
+    String args[] = { };
+
     public Employee() throws SQLException, IOException {
         restLogo = ImageIO.read(new File(logopath));
         restIcon = new ImageIcon(restLogo);
@@ -100,17 +93,11 @@ public class Employee extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LabelContainingPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 324, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LabelContainingPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 332, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout PicturePanelLayout = new javax.swing.GroupLayout(PicturePanel);
@@ -118,15 +105,19 @@ public class Employee extends javax.swing.JFrame {
         PicturePanelLayout.setHorizontalGroup(
             PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PicturePanelLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(LabelContainingPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PicturePanelLayout.setVerticalGroup(
             PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PicturePanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 5, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PicturePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LabelContainingPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         PictureLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -160,7 +151,6 @@ public class Employee extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(ModifyTable);
-        ModifyTable.getColumnModel().getColumn(0).setResizable(false);
         ModifyTable.getColumnModel().getColumn(0).setPreferredWidth(4);
         ModifyTable.getColumnModel().getColumn(0).setHeaderValue("Id");
         ModifyTable.getColumnModel().getColumn(1).setHeaderValue("Last Name");
@@ -244,36 +234,43 @@ public class Employee extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
-                    .addComponent(ModifyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(AddEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DeleteEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Exit, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                            .addComponent(AddtoDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(InformationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PicturePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(PictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 50, Short.MAX_VALUE)))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(InformationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(85, 85, 85))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(RestaurantLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(ModifyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(PictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(27, 27, 27))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(AddEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(DeleteEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(AddtoDB, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Exit, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(44, 44, 44)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PicturePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(RestaurantLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(320, 320, 320)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,26 +279,32 @@ public class Employee extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PictureLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ModifyLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PicturePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
                         .addComponent(InformationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
-                    .addComponent(PicturePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(RestaurantLogoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(RestaurantLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(AddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(DeleteEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(AddtoDB, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(Exit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AddtoDB, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Exit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DeleteEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40))))
         );
 
         pack();
@@ -313,52 +316,51 @@ public class Employee extends javax.swing.JFrame {
         int row = ModifyTable.rowAtPoint(evt.getPoint());
         int col = 0;
         o = ModifyTable.getModel().getValueAt(row, col);
-        if( o == null) {
+        if (o == null) {
             System.out.println("Doesnt have a value yet");
-        }
-        else{
-        int id = Integer.parseInt(o.toString());
-        System.out.println(id);
+        } else {
+            int id = Integer.parseInt(o.toString());
+            System.out.println(id);
             try {
                 fillPictureLabel(id);
                 fillInfoTextArea(id);
                 loadPicturePanel(id);
-            } catch (SQLException e) {} catch (IOException e) {
+            } catch (SQLException e) {
+            } catch (IOException e) {
             }
         }
     }//GEN-LAST:event_ModifyTableMouseClicked
 
     private void AddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel dtm = (DefaultTableModel) ModifyTable.getModel();
-        dtm.addRow(new Object[] { null, null, null, null, null, null, null, null });
-        int row = ModifyTable.getSelectedRow();
-        System.out.println(row);
+    
+    
+     
     }//GEN-LAST:event_AddEmployeeActionPerformed
 
+    
     private void DeleteEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteEmployeeActionPerformed
         // TODO add your handling code here:
         int row = ModifyTable.getSelectedRow();
         System.out.print("This is the row that is currently selected: " + row + "\n");
         Object o = ModifyTable.getModel().getValueAt(row, 0);
-        if (o == null){
-        ((DefaultTableModel)ModifyTable.getModel()).removeRow(row);
-        }
-        else{
+        if (o == null) {
+            ((DefaultTableModel) ModifyTable.getModel()).removeRow(row);
+        } else {
             //TextDialog
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this employee from the database?","Warning",dialogButton);
-            if(dialogResult == JOptionPane.YES_OPTION){
+            int dialogResult =
+                JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this employee from the database?",
+                                              "Warning", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) {
                 // Delete product from the database.
                 int id = Integer.parseInt(o.toString());
                 System.out.println(id);
-                    try {
-                        databit.deleteById("Employee", id);
-                    } catch (SQLException e) {
+                try {
+                    databit.deleteById("Employee", id);
+                } catch (SQLException e) {
                 }
-                ((DefaultTableModel)ModifyTable.getModel()).removeRow(row);        
-            }
-            else{
+                ((DefaultTableModel) ModifyTable.getModel()).removeRow(row);
+            } else {
                 System.out.println("Not confirmed");
             }
         }
@@ -370,8 +372,8 @@ public class Employee extends javax.swing.JFrame {
         System.out.println("Adding to the Database");
         //Add records to database
         int id = -1;
-        double Salary =-1;
-        String FirstN="", LastN="", Position="", PhoneNo="", DOB="";
+        double Salary = -1;
+        String FirstN = "", LastN = "", Position = "", PhoneNo = "", DOB = "";
         boolean correct = true;
         int row = ModifyTable.getSelectedRow();
         for (int i = 0; i < ModifyTable.getRowCount(); i++) {
@@ -385,7 +387,7 @@ public class Employee extends javax.swing.JFrame {
                 continue;
             } else
                 id = Integer.parseInt(o.toString());
-                o = ModifyTable.getModel().getValueAt(i, 1);
+            o = ModifyTable.getModel().getValueAt(i, 1);
             if (o == null) {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 LastN = "";
@@ -404,21 +406,20 @@ public class Employee extends javax.swing.JFrame {
                 continue;
             } else
                 FirstN = o.toString();
-                FirstN = FirstN.toUpperCase();
-            
+            FirstN = FirstN.toUpperCase();
+
             o = ModifyTable.getModel().getValueAt(i, 3);
             if (o == null) {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
                 DOB = "";
                 correct = false;
                 continue;
-            } else if (!isDateValid( o.toString())){
+            } else if (!isDateValid(o.toString())) {
                 JOptionPane.showMessageDialog(null, "Date Format is: MON/DD/YYYY");
                 DOB = "";
                 correct = false;
                 continue;
-            }
-                else{
+            } else {
                 DOB = o.toString();
             }
 
@@ -431,8 +432,8 @@ public class Employee extends javax.swing.JFrame {
                 continue;
             } else
                 Position = o.toString();
-                Position = Position.toUpperCase();
-            
+            Position = Position.toUpperCase();
+
             o = ModifyTable.getModel().getValueAt(i, 5);
             if (o == null) {
                 JOptionPane.showMessageDialog(null, "Fill all fields");
@@ -451,8 +452,8 @@ public class Employee extends javax.swing.JFrame {
                 continue;
             } else
                 PhoneNo = o.toString();
-            
-            if(correct ==true){
+
+            if (correct == true) {
                 try {
                     if (!databit.findKey("employee", id))
                         try {
@@ -478,47 +479,58 @@ public class Employee extends javax.swing.JFrame {
         super.dispose();
     }//GEN-LAST:event_ExitActionPerformed
    
-    public static boolean isDateValid(String date) 
-    {
-            try {
-                DateFormat df = new SimpleDateFormat(Inventory.FORMAT);
-                df.setLenient(false);
-               Date d= df.parse(date);
-                System.out.println(d);
-                return true;
-            } catch (ParseException e) {
-                return false;
-            }
+    public static boolean isDateValid(String date) {
+        try {
+            DateFormat df = new SimpleDateFormat(Inventory.FORMAT);
+            df.setLenient(false);
+            Date d = df.parse(date);
+            System.out.println(d);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
     }
-    
+
     public void fillInfoTextArea(int id) throws SQLException {
         System.out.println("Executing!!!");
         this.InfoTextArea.setText(databit.getEmployeeInfo(id));
     }
-    
+
     public void loadPicturePanel(int id) throws SQLException, IOException {
-        if(databit.getEmployeePicture(id) == null){
-            System.out.println("Picture path is not in DB");
-            this.LabelContainingPicture.setIcon(null);
-        }
-        else{
-            picturepath = this.filepath + databit.getEmployeePicture(id);
-            System.out.println(picturepath);
-            picture = ImageIO.read(new File(picturepath));
+
+        picturepath = this.filepath + databit.getEmployeePicture(id);
+        File f = new File(picturepath);
+        System.out.println(f);
+        if (f.exists() && f.canRead()) {
+            picture = ImageIO.read(f);
+            iicon = new ImageIcon(picture);
+            this.LabelContainingPicture.setIcon(iicon);
+        } else {
+            picture = ImageIO.read(new File(this.filepath + "Nophoto.png"));
             iicon = new ImageIcon(picture);
             this.LabelContainingPicture.setIcon(iicon);
         }
-        throw new IOException("There is something wrong");
+
     }
-    
-    public void fillPictureLabel(int id) throws SQLException{
-        this.PictureLabel.setText(databit.getEmployeeName(id));
+    /*else {
+
+                picture = ImageIO.read(new File(this.filepath + "NicoNunez.png"));
+                iicon = new ImageIcon(picture);
+                this.LabelContainingPicture.setIcon(iicon);
+            }
+
+        }
+    throw new IOException("There is something wrong");*/
+    // }
+
+    public void fillPictureLabel(int id) throws SQLException {
+        // this.PictureLabel.setText(databit.getEmployeeName(id));
     }
-    
+
     void loadInventory(JTable jt, int rows) throws SQLException {
         ResultSet inventory = databit.getAllEmployees();
         int i = 0;
-            
+
         while (inventory.next()) {
             jt.getModel().setValueAt(inventory.getInt(1), i, 0);
             jt.getModel().setValueAt(inventory.getString(2), i, 1);
@@ -530,6 +542,7 @@ public class Employee extends javax.swing.JFrame {
             i++;
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -560,10 +573,10 @@ public class Employee extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try{
-                new Employee().setVisible(true);
-                }
-                    catch(SQLException e){} catch (IOException e) {
+                try {
+                    new Employee().setVisible(true);
+                } catch (SQLException e) {
+                } catch (IOException e) {
                 }
             }
         });

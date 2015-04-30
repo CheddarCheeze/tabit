@@ -4,26 +4,27 @@ package desktop;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 import java.io.File;
-
 import java.io.IOException;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+
 import javax.imageio.ImageIO;
+
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
