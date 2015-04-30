@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -59,6 +60,7 @@ public class DesktopFrame extends javax.swing.JFrame {
         jSplitPane1.setDividerLocation(40);
         jSplitPane1.setDividerSize(10);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(600, 411));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -71,6 +73,12 @@ public class DesktopFrame extends javax.swing.JFrame {
             }
         });
 
+        password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordActionPerformed(evt);
+            }
+        });
+
         signInPasswordLabel.setBackground(new java.awt.Color(0, 0, 0));
         signInPasswordLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         signInPasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -79,19 +87,19 @@ public class DesktopFrame extends javax.swing.JFrame {
         signInUserNameLabel.setBackground(new java.awt.Color(0, 0, 0));
         signInUserNameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         signInUserNameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        signInUserNameLabel.setText("User ID:");
+        signInUserNameLabel.setText("Username:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(signInUserNameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(signInPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(signInUserNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(signInPasswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -120,13 +128,14 @@ public class DesktopFrame extends javax.swing.JFrame {
         PicturePanel.setLayout(PicturePanelLayout);
         PicturePanelLayout.setHorizontalGroup(
             PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(loginLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+            .addGroup(PicturePanelLayout.createSequentialGroup()
+                .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         PicturePanelLayout.setVerticalGroup(
             PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PicturePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(loginLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addComponent(loginLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -136,11 +145,11 @@ public class DesktopFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -153,21 +162,41 @@ public class DesktopFrame extends javax.swing.JFrame {
         System.out.println(this.password.getText());
         
         boolean authentification = false;
+        boolean isManager = false;
         try {
+            isManager = CheckRank(username.getText());
             authentification = Authenticate(username.getText(), password.getText());
+            System.out.println(isManager + " " + authentification);
         } catch (SQLException e) {
         }
-        if(authentification){
+        if(authentification && isManager){
                 System.out.println("Open the manager Profile");
+                ManagerProfile.main(args);
+                super.dispose();
             }
             else{
+                JOptionPane.showMessageDialog(this, "Password or Username do not match. Please try again.");
                 System.out.println("Open dialog to indicate that the password or username do not match");   
             }
     }//GEN-LAST:event_signInButtonActionPerformed
+
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordActionPerformed
     
+    private boolean CheckRank(String u)throws SQLException{
+        boolean temp = false;
+            int Rank = 0;
+            Rank = databit.getRank(u);
+//            System.out.print("Rank in function" + Rank + "\n");
+            if(Rank == 1){
+                temp = true;
+            }
+        return temp;
+    }
     private boolean Authenticate(String u, String p) throws SQLException{
             String toMatch = "";
-            toMatch = databit.getLoginData(Integer.parseInt(u));
+            toMatch = databit.getLoginData(u);
             boolean temp = false;
             if(!toMatch.isEmpty()){
                 if (toMatch.matches(p))

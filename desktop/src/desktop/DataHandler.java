@@ -285,9 +285,9 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
 // ============================================================
 // getLogin Data    
 //=============================================================
-    public String getLoginData(int id) throws SQLException {
+    public String getLoginData(String username) throws SQLException {
            stmt = conn.createStatement();
-           query = "SELECT password FROM  Employee where id = " + id;
+           query = "SELECT password FROM  Employee where username = '" + username + "'";
            System.out.println("\nExecuting query: " + query);
            rset = stmt.executeQuery(query);
            String p ="";
@@ -296,6 +296,23 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
            }
            return p;
        }
+    
+//====================================================================
+// getRank
+// ===================================================================
+    public int getRank(String username)throws SQLException{
+        stmt = conn.createStatement();
+        query = "SELECT hasrank FROM  Employee where username = '" + username + "'";
+        System.out.println("\nExecuting query: " + query);
+        int rank = -1;
+        rset = stmt.executeQuery(query);
+        while(rset.next()){
+            rank = rset.getInt(1);
+        }
+//        System.out.print("Rank in handler: " + rank + "\n");
+        return rank;
+    }
+    
 //======================================================================
 // Name: deleteByID
 // Purpose: to delete information from a given table by the unique id
