@@ -38,7 +38,7 @@ public class Inventory extends javax.swing.JFrame {
     SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
     Font bfont = new Font("Verdana", Font.BOLD, 13);
     /** Creates new form Inventory */
-    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
+    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\tabitIcon.png");
     ImageIcon iicon;
     String LosAltosPath = "C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\losaltoslogo\\350-218-wide.png";
     BufferedImage picture;

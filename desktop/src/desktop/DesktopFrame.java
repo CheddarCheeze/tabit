@@ -18,7 +18,7 @@ public class DesktopFrame extends javax.swing.JFrame {
     @SuppressWarnings("compatibility:-4952383735578523799")
     private static final long serialVersionUID = 1L;
     private String pathtoBackground = "C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\losaltoslogo\\600-375-wide.png";
-    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
+    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\tabitIcon.png");
     private ImageIcon loginIcon = new ImageIcon(pathtoBackground);
 
     @SuppressWarnings("oracle.jdeveloper.java.field-not-serializable")

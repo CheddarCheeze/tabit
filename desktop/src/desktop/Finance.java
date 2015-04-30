@@ -1,19 +1,35 @@
 
 package desktop;
 
+import java.awt.Font;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.text.SimpleDateFormat;
+
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JTable;
 
 /**
  *
- * @author Nicolas Nunez
+ * @author Nicolas Nunez, Martin Bruckner AKA Le Mangonevic
  */
 public class Finance extends javax.swing.JFrame {
-    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
-    String args[] = {};
+    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\tabitIcon.png");
+    Font bfont = new Font("Verdana", Font.BOLD, 26);
+    SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
+    DataHandler databit;
+    String args[] = { };
+
     /** Creates new form Finance */
-    public Finance() {
-        
+    public Finance() throws SQLException {
+        databit = new DataHandler();
         initComponents();
+        this.jLabel1.setFont(bfont);
+        this.jLabel1.setText("Tabit - Finances");
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(getRootPane());
     }
 
@@ -35,6 +51,8 @@ public class Finance extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        AllSalesTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tabit");
@@ -73,14 +91,14 @@ public class Finance extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Daily Sales");
-        jButton4.setBounds(20, 20, 140, 40);
+        jButton4.setBounds(20, 10, 140, 40);
         jDesktopPane1.add(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton5.setBackground(new java.awt.Color(0, 0, 153));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Weekly Sales");
-        jButton5.setBounds(20, 90, 140, 40);
+        jButton5.setBounds(20, 50, 140, 40);
         jDesktopPane1.add(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton6.setBackground(new java.awt.Color(0, 0, 153));
@@ -92,7 +110,7 @@ public class Finance extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jButton6.setBounds(20, 160, 140, 40);
+        jButton6.setBounds(20, 90, 140, 40);
         jDesktopPane1.add(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -105,7 +123,7 @@ public class Finance extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -122,6 +140,44 @@ public class Finance extends javax.swing.JFrame {
 
         jLabel1.setText("Tabit - Finances");
 
+        AllSalesTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        AllSalesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Sale ID", "Date", "Description", "Sale Price"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        AllSalesTable.setRowSelectionAllowed(false);
+        AllSalesTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        AllSalesTable.getTableHeader().setResizingAllowed(false);
+        AllSalesTable.getTableHeader().setReorderingAllowed(false);
+        AllSalesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AllSalesTableMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AllSalesTableMouseEntered(evt);
+            }
+        });
+        jScrollPane2.setViewportView(AllSalesTable);
+        AllSalesTable.getColumnModel().getColumn(0).setResizable(false);
+        AllSalesTable.getColumnModel().getColumn(1).setResizable(false);
+        AllSalesTable.getColumnModel().getColumn(2).setResizable(false);
+        AllSalesTable.getColumnModel().getColumn(3).setResizable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,10 +185,11 @@ public class Finance extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(713, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -144,9 +201,11 @@ public class Finance extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addGap(53, 53, 53)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                .addGap(33, 33, 33)
+                .addGap(28, 28, 28)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -163,6 +222,28 @@ public class Finance extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void AllSalesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AllSalesTableMouseClicked
+        // TODO add your handling code here:
+        System.out.println(this.AllSalesTable.getSelectedRow() + " " + this.AllSalesTable.getSelectedColumn());
+    }//GEN-LAST:event_AllSalesTableMouseClicked
+
+    private void AllSalesTableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AllSalesTableMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AllSalesTableMouseEntered
+
+    void loadDailyTable(JTable jt, int rows) throws SQLException {
+        ResultSet dailySales = databit.getDailySales();
+        int i = 0;
+
+        while (dailySales.next()) {
+            jt.getModel().setValueAt(dailySales.getInt(1), i, 0);
+            jt.getModel().setValueAt(fmt.format(dailySales.getDate(2)), i, 1);
+            jt.getModel().setValueAt(dailySales.getString(3), i, 2);
+            jt.getModel().setValueAt(dailySales.getDouble(4), i, 3);
+            i++;
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -194,12 +275,16 @@ public class Finance extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Finance().setVisible(true);
+                try {
+                    new Finance().setVisible(true);
+                } catch (SQLException e) {
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable AllSalesTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -208,6 +293,7 @@ public class Finance extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
