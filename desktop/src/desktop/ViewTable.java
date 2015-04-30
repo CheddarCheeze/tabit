@@ -140,8 +140,6 @@ public class ViewTable extends javax.swing.JFrame {
         }
 
 
-        /* TESTING 
-         * Create a table object with items ordered, insert into JList
         Table table1;
         serverName = "This Guy";
         try {
@@ -164,7 +162,7 @@ public class ViewTable extends javax.swing.JFrame {
             totalCost = (table1.totalCostOrder()).toString();
         } catch (SQLException e) {
         }
-        */
+        
 
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

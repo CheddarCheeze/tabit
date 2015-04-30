@@ -7,6 +7,8 @@ import java.sql.Statement;
 
 import java.text.SimpleDateFormat;
 
+import java.util.Date;
+
 import oracle.jdbc.pool.OracleDataSource;
 
 /**
@@ -27,6 +29,7 @@ public class DataHandler {
     String query;
     String sqlString;
     String picFile = "";
+    Date date = new Date();
     SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
     
 //==============================================================
@@ -194,6 +197,18 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
         rset = stmt.executeQuery(query);
         return rset;
     }
+//=================================================================
+//Method that returns all DailySales
+//=================================================================
+    public ResultSet getDailySales() throws SQLException{
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+               ResultSet.CONCUR_READ_ONLY);
+        query = "SELECT * FROM Sales WHERE sale_date = '"+fmt.format(date)+"'";
+        System.out.println("\nExecuting query: " + query);
+        rset = stmt.executeQuery(query);
+        return rset;
+    }
+    
     
     public ResultSet getAllProducts() throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
@@ -363,6 +378,18 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
                 temp.getInt(6) + " " + temp.getString(7));
         }
     }
+    //=================================================================================
+    // Name: printDailySales
+    // Purpose: to print all the information of all employess
+    // Parameters: none
+    //=================================================================================
+        public void printDailySales() throws SQLException {
+            ResultSet temp = getDailySales();
+            while(temp.next()){
+                System.out.println(temp.getInt(1)+ "\n " + fmt.format(temp.getDate(2)) + "\n " +
+                    temp.getString(3) + "\n " + temp.getDouble(4));
+            }
+        }
 
 //=================================================================================
 // Name: printInventory
@@ -431,6 +458,8 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
 //        System.out.println(datahandler.getRows("Employee"));
 //        System.out.println(datahandler.getEmployeePicture(1));
 //        String temp = datahandler.getLoginData(1);
+        System.out.println(datahandler.fmt.format(datahandler.date));
+        datahandler.printDailySales();
         
     }
 }

@@ -36,7 +36,7 @@ public class Employee extends javax.swing.JFrame {
     /** Creates new form Employee */
     SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
     Font bfont = new Font("Verdana", Font.BOLD, 13);
-    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
+    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\tabitIcon.png");
     BufferedImage picture, restLogo;
     File file;
     ImageIcon iicon, restIcon;

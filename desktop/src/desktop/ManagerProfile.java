@@ -9,14 +9,14 @@ import javax.swing.event.ListSelectionListener;
 
 /**
  *
- * @author Brandon Foster
+ * @author Brandon Foster, Nicolas Nunez, Martin Bruckner
  */
 public class ManagerProfile extends javax.swing.JFrame {
     String[] args = {};
     //public static TableList tableList = new TableList();
     public static String[] strings = new String[1000]; //strings stores the table name in the List
     public static TableList tableList = new TableList();
-    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
+    ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\tabitIcon.png");
     /** Creates new form ManagerProfile */
     public ManagerProfile() { 
         initComponents();
