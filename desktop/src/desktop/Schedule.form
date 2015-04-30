@@ -7,6 +7,7 @@
     <Property name="iconImage" type="java.awt.Image" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
       <Connection code="img.getImage()" type="code"/>
     </Property>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -94,54 +95,8 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;Employee ID&quot;, &quot;Employee&quot;, &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;&#xa;    }&#xa;) {&#xa;    Class[] types = new Class [] {&#xa;        java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class&#xa;    };&#xa;&#xa;    public Class getColumnClass(int columnIndex) {&#xa;        return types [columnIndex];&#xa;    }&#xa;}" type="code"/>
             </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel(); &#xa;int rows = 0;&#xa;try {&#xa;    rows = databit.getRows(&quot;Schedule&quot;);&#xa;     &#xa; }catch (SQLException e) {}&#xa;//System.out.println(&quot;# of rows &quot; + rows);&#xa;int rowsInTable = jTable1.getRowCount();&#xa;while(rowsInTable &lt; rows){&#xa;dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});&#xa;rowsInTable++;&#xa;}&#xa;try{&#xa;    loadSchedule(jTable1, rows);&#xa;}catch(SQLException e) { }&#xa;&#xa;    &#xa;    TableColumnModelListener tableColumnModelListener =&#xa;    new TableColumnModelListener() {&#xa;    public void columnAdded(TableColumnModelEvent e) {&#xa;     return;&#xa;  }&#xa;  public void columnMarginChanged(ChangeEvent e) {&#xa;   return;&#xa;  }&#xa;  public void columnMoved(TableColumnModelEvent e) {&#xa;   return;&#xa;  }&#xa;  public void columnRemoved(TableColumnModelEvent e) {&#xa;  return;&#xa;  }&#xa;  public void columnSelectionChanged(ListSelectionEvent e) {&#xa;   int selectedRow = jTable1.getSelectedRow();&#xa;   int selectedColumns = jTable1.getSelectedColumn();&#xa;   if ( selectedColumns == 1)&#xa;   try{&#xa;    String name = databit.getEmployeeName(Integer.parseInt(jTable1.getValueAt(selectedRow,0).toString()));&#xa;    jTable1.setValueAt(name,selectedRow,1);&#xa;    if (name == &quot;&quot;)&#xa;           JOptionPane.showMessageDialog(null, &quot;ID does not exist or is invalid&quot;);&#xa;}catch(SQLException ex) { }&#xa;  }&#xa;};&#xa;&#xa;TableColumnModel columnModel = jTable1.getColumnModel();&#xa;    columnModel.addColumnModelListener(tableColumnModelListener);">
-              <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title value="Employee ID"/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="true">
-                  <Title value="Employee"/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title value="Monday"/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title value="Tuesday"/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title value="Wednesday"/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title value="Thursday"/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title value="Friday"/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title value="Saturday"/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title value="Sunday"/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-              </TableColumnModel>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="TableColumn column = null;&#xa;    for (int i = 0; i &lt; 8; i++) {&#xa;        column = jTable1.getColumnModel().getColumn(i);&#xa;        if (i == 1) {&#xa;            column.setPreferredWidth(150); //sport column is bigger&#xa;        } else {&#xa;            column.setPreferredWidth(80);&#xa;        }&#xa;    }    &#xa;&#xa;&#xa;DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel(); &#xa;int rows = 0;&#xa;try {&#xa;    rows = databit.getRows(&quot;Schedule&quot;);&#xa;     &#xa; }catch (SQLException e) {}&#xa;//System.out.println(&quot;# of rows &quot; + rows);&#xa;int rowsInTable = jTable1.getRowCount();&#xa;while(rowsInTable &lt; rows){&#xa;dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});&#xa;rowsInTable++;&#xa;}&#xa;try{&#xa;    loadSchedule(jTable1, rows);&#xa;}catch(SQLException e) { }&#xa;&#xa;    &#xa;    TableColumnModelListener tableColumnModelListener =&#xa;    new TableColumnModelListener() {&#xa;    public void columnAdded(TableColumnModelEvent e) {&#xa;     return;&#xa;  }&#xa;  public void columnMarginChanged(ChangeEvent e) {&#xa;   return;&#xa;  }&#xa;  public void columnMoved(TableColumnModelEvent e) {&#xa;   return;&#xa;  }&#xa;  public void columnRemoved(TableColumnModelEvent e) {&#xa;  return;&#xa;  }&#xa;  public void columnSelectionChanged(ListSelectionEvent e) {&#xa;   int selectedRow = jTable1.getSelectedRow();&#xa;   int selectedColumns = jTable1.getSelectedColumn();&#xa;   if ( selectedColumns == 1)&#xa;   try{&#xa;    String name = databit.getEmployeeName(Integer.parseInt(jTable1.getValueAt(selectedRow,0).toString()));&#xa;    jTable1.setValueAt(name,selectedRow,1);&#xa;    if (name == &quot;&quot;)&#xa;           JOptionPane.showMessageDialog(null, &quot;ID does not exist or is invalid&quot;);&#xa;}catch(SQLException ex) { }&#xa;  }&#xa;};&#xa;&#xa;TableColumnModel columnModel = jTable1.getColumnModel();&#xa;    columnModel.addColumnModelListener(tableColumnModelListener);">
+              <TableColumnModel selectionModel="0"/>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>

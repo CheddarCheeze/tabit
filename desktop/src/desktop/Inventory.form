@@ -10,9 +10,7 @@
     <Property name="iconImage" type="java.awt.Image" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
       <Connection code="img.getImage()" type="code"/>
     </Property>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-      <Connection code="new Dimension(xSize, ySize)" type="code"/>
-    </Property>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -36,23 +34,27 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="824" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jButton4" linkSize="1" max="32767" attributes="0"/>
                           <Component id="jButton1" linkSize="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="595" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jButton3" linkSize="1" max="32767" attributes="0"/>
                           <Component id="jButton2" linkSize="1" pref="92" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" pref="850" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jPanel1" max="32767" attributes="0"/>
-                  <Component id="RestaurantLogoLabel" min="-2" pref="360" max="-2" attributes="0"/>
+                  <Component id="RestaurantLogoLabel" min="-2" pref="332" max="-2" attributes="0"/>
+                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -116,7 +118,7 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;        {null, null, null, &quot;YYYY/MM/DD&quot;, null, null, null, null, null, null}&#xa;    },&#xa;    new String [] {&#xa;        &quot;ID&quot;, &quot;Product Name&quot;, &quot;Quantity&quot;, &quot;Date In&quot;, &quot;Cost Unit&quot;, &quot;Total Cost&quot;, &quot;Sale Price&quot;, &quot;Empl ID&quot;, &quot;Vendor&quot;, &quot;Vendor No&quot;&#xa;    }&#xa;) {&#xa;    Class[] types = new Class [] {&#xa;        java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class&#xa;    };&#xa;&#xa;    public Class getColumnClass(int columnIndex) {&#xa;        return types [columnIndex];&#xa;    }&#xa;}" type="code"/>
             </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel(); &#xa;int rows = 0;&#xa;try {&#xa;    rows = databit.getRows(&quot;Inventory&quot;);&#xa;     &#xa; }catch (SQLException e) {}&#xa;//System.out.println(&quot;# of rows &quot; + rows);&#xa;int rowsInTable = jTable1.getRowCount();&#xa;while(rowsInTable &lt; rows){&#xa;dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});&#xa;rowsInTable++;&#xa;}&#xa;try{&#xa;    loadInventory(jTable1, rows);&#xa;}catch(SQLException e) { }">
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="TableColumn column = null;&#xa;    for (int i = 0; i &lt; 9; i++) {&#xa;        column = jTable1.getColumnModel().getColumn(i);&#xa;        if (i == 1) {&#xa;            column.setPreferredWidth(200); //sport column is bigger&#xa;        }&#xa;        else if (i == 0) {&#xa;            column.setPreferredWidth(25); //sport column is bigger&#xa;        }&#xa;         else if (i == 3) {&#xa;            column.setPreferredWidth(100); //sport column is bigger&#xa;        }&#xa;        else if (i == 8) {&#xa;            column.setPreferredWidth(150);&#xa;            }&#xa;        else {&#xa;            column.setPreferredWidth(80);&#xa;        }&#xa;     }&#xa;&#xa;DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel(); &#xa;int rows = 0;&#xa;try {&#xa;    rows = databit.getRows(&quot;Inventory&quot;);&#xa;     &#xa; }catch (SQLException e) {}&#xa;//System.out.println(&quot;# of rows &quot; + rows);&#xa;int rowsInTable = jTable1.getRowCount();&#xa;while(rowsInTable &lt; rows){&#xa;dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});&#xa;rowsInTable++;&#xa;}&#xa;try{&#xa;    loadInventory(jTable1, rows);&#xa;}catch(SQLException e) { }">
               <TableColumnModel selectionModel="0"/>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -190,7 +192,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane2" alignment="1" pref="366" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="330" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

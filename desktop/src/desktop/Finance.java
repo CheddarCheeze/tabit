@@ -39,6 +39,7 @@ public class Finance extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tabit");
         setIconImage(img.getImage());
+        setResizable(false);
 
         jSplitPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jSplitPane1.setDividerSize(0);

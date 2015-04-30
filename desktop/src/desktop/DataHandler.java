@@ -86,11 +86,11 @@ public class DataHandler {
 //             id, last name, first name, date of brith, position, salary, phone no
 // returns nothing
 //==================================================================================================
-    public void addNewEmployee(int id, String lastname, String firstname, String dob,String position, 
-                               double salary, String phoneno) throws SQLException {
+      public void addNewEmployee(int id, String lastname, String firstname, String dob,String position, 
+                               double salary, String phoneno, String address, int rank, int hourly, String username, String password) throws SQLException {
         Statement stmt = conn.createStatement();
-        picFile = firstname+lastname+".png";
-        query = "INSERT INTO Employee VALUES("+id+", '"+lastname+"', '"+firstname+"', '"+dob+"', '"+position+"', "+salary+", '"+phoneno+"'"+ picFile+"')";
+        String picFile = firstname+lastname+".png";
+        query = "INSERT INTO Employee VALUES("+id+", '"+lastname.toUpperCase()+"', '"+firstname.toUpperCase()+"', '"+dob.toUpperCase()+"', '"+position.toUpperCase()+"', "+salary+", '"+phoneno+"', '"+ picFile+"' , ' "+address+" ', " + rank+ ", " + hourly +", '"+username+"', '"+ password+"')";
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
     }

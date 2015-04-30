@@ -55,6 +55,7 @@ public class Employee extends javax.swing.JFrame {
         databit = new DataHandler();
         initComponents();
         this.RestaurantLogoLabel.setIcon(restIcon);
+        this.setLocationRelativeTo(getRootPane());
     }
 
     /** This method is called from within the constructor to
@@ -74,7 +75,7 @@ public class Employee extends javax.swing.JFrame {
         ModifyTable = new javax.swing.JTable();
         ModifyLabel = new javax.swing.JLabel();
         Exit = new javax.swing.JButton();
-        AddEmployee = new javax.swing.JButton();
+        AddEmployeeb = new javax.swing.JButton();
         DeleteEmployee = new javax.swing.JButton();
         AddtoDB = new javax.swing.JButton();
         RestaurantLogoLabel = new javax.swing.JLabel();
@@ -85,6 +86,14 @@ public class Employee extends javax.swing.JFrame {
         setTitle("Tabit");
         setBackground(new java.awt.Color(0, 153, 153));
         setIconImage(img.getImage());
+        setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         PicturePanel.setBackground(new java.awt.Color(255, 255, 255));
         PicturePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
@@ -191,13 +200,13 @@ public class Employee extends javax.swing.JFrame {
             }
         });
 
-        AddEmployee.setBackground(new java.awt.Color(0, 0, 153));
-        AddEmployee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        AddEmployee.setForeground(new java.awt.Color(255, 255, 255));
-        AddEmployee.setText("New Employee");
-        AddEmployee.addActionListener(new java.awt.event.ActionListener() {
+        AddEmployeeb.setBackground(new java.awt.Color(0, 0, 153));
+        AddEmployeeb.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        AddEmployeeb.setForeground(new java.awt.Color(255, 255, 255));
+        AddEmployeeb.setText("New Employee");
+        AddEmployeeb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddEmployeeActionPerformed(evt);
+                AddEmployeebActionPerformed(evt);
             }
         });
 
@@ -259,7 +268,7 @@ public class Employee extends javax.swing.JFrame {
                                         .addGap(18, 18, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(AddEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(AddEmployeeb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(DeleteEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,7 +308,7 @@ public class Employee extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(AddtoDB, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(AddEmployeeb, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Exit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,11 +340,13 @@ public class Employee extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ModifyTableMouseClicked
 
-    private void AddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeActionPerformed
-    
+    private void AddEmployeebActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeebActionPerformed
     
      
-    }//GEN-LAST:event_AddEmployeeActionPerformed
+            AddEmployee.main(args);
+      
+      
+    }//GEN-LAST:event_AddEmployeebActionPerformed
 
     
     private void DeleteEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteEmployeeActionPerformed
@@ -455,11 +466,8 @@ public class Employee extends javax.swing.JFrame {
 
             if (correct == true) {
                 try {
-                    if (!databit.findKey("employee", id))
-                        try {
-                            databit.addNewEmployee(id, LastN, FirstN, DOB, Position, Salary, PhoneNo);
-                        } catch (SQLException e) {
-                        }
+                    if (!databit.findKey("employee", id)){
+                    }   
                     else
                         try {
                             databit.updateEmployee(id, LastN, FirstN, DOB, Position, Salary, PhoneNo);
@@ -478,6 +486,14 @@ public class Employee extends javax.swing.JFrame {
         ManagerProfile.main(args);
         super.dispose();
     }//GEN-LAST:event_ExitActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+    
+    try {
+   loadInventory(ModifyTable, ModifyTable.getRowCount());
+    } catch (SQLException e) {
+    }        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowGainedFocus
    
     public static boolean isDateValid(String date) {
         try {
@@ -527,10 +543,16 @@ public class Employee extends javax.swing.JFrame {
         // this.PictureLabel.setText(databit.getEmployeeName(id));
     }
 
-    void loadInventory(JTable jt, int rows) throws SQLException {
+   public void loadInventory(JTable jt, int rows) throws SQLException {
         ResultSet inventory = databit.getAllEmployees();
         int i = 0;
-
+        DefaultTableModel dtm = (DefaultTableModel) ModifyTable.getModel();
+        int tablerows= databit.getRows("employee");
+        int rowsInTable = ModifyTable.getRowCount();
+        while(rowsInTable < tablerows){
+            dtm.addRow(new Object[]{null, null, null, null, null, null, null, null});
+            rowsInTable++;
+        }
         while (inventory.next()) {
             jt.getModel().setValueAt(inventory.getInt(1), i, 0);
             jt.getModel().setValueAt(inventory.getString(2), i, 1);
@@ -583,7 +605,7 @@ public class Employee extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddEmployee;
+    private javax.swing.JButton AddEmployeeb;
     private javax.swing.JButton AddtoDB;
     private javax.swing.JButton DeleteEmployee;
     private javax.swing.JButton Exit;

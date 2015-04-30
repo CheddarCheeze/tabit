@@ -18,6 +18,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.TableColumnModelEvent;
 import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
@@ -66,6 +67,7 @@ public class Schedule extends javax.swing.JFrame{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tabit ");
         setIconImage(img.getImage());
+        setResizable(false);
 
         jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -85,16 +87,16 @@ public class Schedule extends javax.swing.JFrame{
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setHeaderValue("Employee ID");
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(1).setHeaderValue("Employee");
-        jTable1.getColumnModel().getColumn(2).setHeaderValue("Monday");
-        jTable1.getColumnModel().getColumn(3).setHeaderValue("Tuesday");
-        jTable1.getColumnModel().getColumn(4).setHeaderValue("Wednesday");
-        jTable1.getColumnModel().getColumn(5).setHeaderValue("Thursday");
-        jTable1.getColumnModel().getColumn(6).setHeaderValue("Friday");
-        jTable1.getColumnModel().getColumn(7).setHeaderValue("Saturday");
-        jTable1.getColumnModel().getColumn(8).setHeaderValue("Sunday");
+        TableColumn column = null;
+        for (int i = 0; i < 8; i++) {
+            column = jTable1.getColumnModel().getColumn(i);
+            if (i == 1) {
+                column.setPreferredWidth(150); //sport column is bigger
+            } else {
+                column.setPreferredWidth(80);
+            }
+        }
+
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         int rows = 0;
         try {
