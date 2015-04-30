@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.text.Position;
+
 import oracle.jdbc.pool.OracleDataSource;
 
 /**
@@ -96,7 +98,7 @@ public class DataHandler {
                                double salary, String phoneno) throws SQLException {
         Statement stmt = conn.createStatement();
         picFile = firstname+lastname+".png";
-        query = "INSERT INTO Employee VALUES("+id+", '"+lastname+"', '"+firstname+"', '"+dob+"', '"+position+"', "+salary+", '"+phoneno+"', '" + picFile+"')";
+        query = "INSERT INTO Employee VALUES("+id+", '"+lastname+"', '"+firstname+"', '"+dob+"', '"+position+"', "+salary+", '"+phoneno+"'"+ picFile+"')";
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
     }
@@ -140,6 +142,16 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
         System.out.println("\nExecuting query: " + query);
         stmt.execute(query);
     }
+    
+    
+    public void updateEmployee(int id, String lastname, String firstname, String dob,String position, 
+                               double salary, String phoneno) throws SQLException {
+        Statement stmt = conn.createStatement();
+        query = "UPDATE Employee SET lastname='" + lastname + "', firstname='"+firstname+"', dob='"+dob+"', position='"+position+"', salary="+ salary +", phoneno='"+ phoneno +"' where id = " + id;
+        System.out.println("\nExecuting query: " + query);
+        stmt.execute(query);
+    }
+    
     
     public boolean findKey(String table, int id) throws SQLException {
         Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
