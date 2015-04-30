@@ -9,9 +9,12 @@ import javax.swing.ImageIcon;
  */
 public class Finance extends javax.swing.JFrame {
     ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\logo.png");
+    String args[] = {};
     /** Creates new form Finance */
     public Finance() {
+        
         initComponents();
+        this.setLocationRelativeTo(getRootPane());
     }
 
     /** This method is called from within the constructor to
@@ -34,8 +37,13 @@ public class Finance extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tabit");
         setIconImage(img.getImage());
 
+        jSplitPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jSplitPane1.setDividerSize(0);
+
+        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Gross Sales", null},
@@ -56,19 +64,35 @@ public class Finance extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getColumn(0).setHeaderValue("Field");
+        jTable1.getColumnModel().getColumn(1).setHeaderValue("Amount");
 
         jSplitPane1.setRightComponent(jScrollPane1);
 
+        jButton4.setBackground(new java.awt.Color(0, 0, 153));
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Daily Sales");
-        jButton4.setBounds(10, 20, 130, 21);
+        jButton4.setBounds(20, 20, 140, 40);
         jDesktopPane1.add(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jButton5.setBackground(new java.awt.Color(0, 0, 153));
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Weekly Sales");
-        jButton5.setBounds(10, 50, 130, 21);
+        jButton5.setBounds(20, 90, 140, 40);
         jDesktopPane1.add(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jButton6.setBackground(new java.awt.Color(0, 0, 153));
+        jButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Monthly Sales");
-        jButton6.setBounds(10, 80, 130, 21);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jButton6.setBounds(20, 160, 140, 40);
         jDesktopPane1.add(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -81,12 +105,20 @@ public class Finance extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
 
+        jButton1.setBackground(new java.awt.Color(0, 0, 153));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Tabit - Finances");
 
@@ -94,18 +126,17 @@ public class Finance extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(713, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1)))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
@@ -116,12 +147,22 @@ public class Finance extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                 .addGap(33, 33, 33)
-                .addComponent(jButton1)
-                .addGap(44, 44, 44))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
 
         pack();
     }//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ManagerProfile.main(args);
+        super.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments

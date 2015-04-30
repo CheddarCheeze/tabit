@@ -55,6 +55,7 @@ public class Employee extends javax.swing.JFrame {
     Toolkit tk = Toolkit.getDefaultToolkit();
     int xSize = ((int)tk.getScreenSize().getWidth());
     int ySize = ((int)tk.getScreenSize().getHeight())-30;
+    String args[] = {};
     public Employee() throws SQLException, IOException {
         restLogo = ImageIO.read(new File(logopath));
         restIcon = new ImageIcon(restLogo);
@@ -72,11 +73,7 @@ public class Employee extends javax.swing.JFrame {
     private void initComponents() {//GEN-BEGIN:initComponents
 
         PicturePanel = new javax.swing.JPanel();
-        LabelContainingPicture = new javax.swing.JLabel();
         PictureLabel = new javax.swing.JLabel();
-        InfoPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        InfoTextArea = new javax.swing.JTextArea();
         InformationLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ModifyTable = new javax.swing.JTable();
@@ -86,66 +83,36 @@ public class Employee extends javax.swing.JFrame {
         DeleteEmployee = new javax.swing.JButton();
         AddtoDB = new javax.swing.JButton();
         RestaurantLogoLabel = new javax.swing.JLabel();
+        LabelContainingPicture = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        InfoTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tabit");
         setBackground(new java.awt.Color(0, 153, 153));
         setIconImage(img.getImage());
         setPreferredSize(new Dimension(xSize, ySize));
 
         PicturePanel.setBackground(new java.awt.Color(255, 255, 255));
-        PicturePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 6));
+        PicturePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         javax.swing.GroupLayout PicturePanelLayout = new javax.swing.GroupLayout(PicturePanel);
         PicturePanel.setLayout(PicturePanelLayout);
         PicturePanelLayout.setHorizontalGroup(
             PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PicturePanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(LabelContainingPicture, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         PicturePanelLayout.setVerticalGroup(
             PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PicturePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LabelContainingPicture, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         PictureLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
 
-        InfoPanel.setBackground(new java.awt.Color(0, 0, 0));
-        InfoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-
-        InfoTextArea.setEditable(false);
-        InfoTextArea.setColumns(20);
-        InfoTextArea.setRows(5);
-        InfoTextArea.setFont(bfont);
-        InfoTextArea.setForeground(Color.blue);
-        InfoTextArea.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jScrollPane1.setViewportView(InfoTextArea);
-
-        javax.swing.GroupLayout InfoPanelLayout = new javax.swing.GroupLayout(InfoPanel);
-        InfoPanel.setLayout(InfoPanelLayout);
-        InfoPanelLayout.setHorizontalGroup(
-            InfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(InfoPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
-        );
-        InfoPanelLayout.setVerticalGroup(
-            InfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InfoPanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jScrollPane1)
-                .addGap(23, 23, 23))
-        );
-
         InformationLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         InformationLabel.setText("Employee Information");
 
-        ModifyTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        ModifyTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         ModifyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -202,12 +169,19 @@ public class Employee extends javax.swing.JFrame {
         ModifyLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         ModifyLabel.setText("Modify Employee Information");
 
-        Exit.setBackground(new java.awt.Color(204, 255, 255));
-        Exit.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        Exit.setText("Exit");
+        Exit.setBackground(new java.awt.Color(0, 0, 153));
+        Exit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Exit.setForeground(new java.awt.Color(255, 255, 255));
+        Exit.setText("Back");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
 
-        AddEmployee.setBackground(new java.awt.Color(204, 255, 255));
-        AddEmployee.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        AddEmployee.setBackground(new java.awt.Color(0, 0, 153));
+        AddEmployee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        AddEmployee.setForeground(new java.awt.Color(255, 255, 255));
         AddEmployee.setText("New Employee");
         AddEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,8 +189,9 @@ public class Employee extends javax.swing.JFrame {
             }
         });
 
-        DeleteEmployee.setBackground(new java.awt.Color(204, 255, 255));
-        DeleteEmployee.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        DeleteEmployee.setBackground(new java.awt.Color(0, 0, 153));
+        DeleteEmployee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        DeleteEmployee.setForeground(new java.awt.Color(255, 255, 255));
         DeleteEmployee.setText("Delete Employee");
         DeleteEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,14 +199,24 @@ public class Employee extends javax.swing.JFrame {
             }
         });
 
-        AddtoDB.setBackground(new java.awt.Color(204, 255, 255));
-        AddtoDB.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        AddtoDB.setBackground(new java.awt.Color(0, 0, 153));
+        AddtoDB.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        AddtoDB.setForeground(new java.awt.Color(255, 255, 255));
         AddtoDB.setText("Save");
         AddtoDB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddtoDBActionPerformed(evt);
             }
         });
+
+        InfoTextArea.setEditable(false);
+        InfoTextArea.setColumns(20);
+        InfoTextArea.setLineWrap(true);
+        InfoTextArea.setRows(5);
+        InfoTextArea.setFont(bfont);
+        InfoTextArea.setForeground(Color.blue);
+        InfoTextArea.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jScrollPane1.setViewportView(InfoTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -240,57 +225,64 @@ public class Employee extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                     .addComponent(ModifyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(AddEmployee, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DeleteEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(AddEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(DeleteEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(AddtoDB, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))))
+                            .addComponent(Exit, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(AddtoDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PicturePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RestaurantLogoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(InformationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(InfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LabelContainingPicture, javax.swing.GroupLayout.DEFAULT_SIZE, 6, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PicturePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(PictureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 32, Short.MAX_VALUE)))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(InformationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(85, 85, 85))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(RestaurantLogoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(InformationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PictureLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ModifyLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                    .addComponent(ModifyLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LabelContainingPicture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(InfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(25, 25, 25))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(InformationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AddEmployee)
-                            .addComponent(AddtoDB, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(DeleteEmployee)
-                                .addContainerGap())
-                            .addComponent(Exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1))
+                    .addComponent(PicturePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(RestaurantLogoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(PicturePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(RestaurantLogoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(AddEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(DeleteEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(AddtoDB, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(Exit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -460,6 +452,12 @@ public class Employee extends javax.swing.JFrame {
        
         
     }//GEN-LAST:event_AddtoDBActionPerformed
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        // TODO add your handling code here:
+        ManagerProfile.main(args);
+        super.dispose();
+    }//GEN-LAST:event_ExitActionPerformed
    
     public static boolean isDateValid(String date) 
     {
@@ -557,7 +555,6 @@ public class Employee extends javax.swing.JFrame {
     private javax.swing.JButton AddtoDB;
     private javax.swing.JButton DeleteEmployee;
     private javax.swing.JButton Exit;
-    private javax.swing.JPanel InfoPanel;
     private javax.swing.JTextArea InfoTextArea;
     private javax.swing.JLabel InformationLabel;
     private javax.swing.JLabel LabelContainingPicture;

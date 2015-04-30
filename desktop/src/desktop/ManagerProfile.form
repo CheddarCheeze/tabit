@@ -3,6 +3,7 @@
 <Form version="1.3" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Tabit"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -25,17 +26,22 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="magagerLogOutButton" max="32767" attributes="0"/>
-                  <Component id="viewFinancesButton" max="32767" attributes="0"/>
-                  <Component id="modifyEmployeeButton" max="32767" attributes="0"/>
-                  <Component id="modifyScheduleButton" max="32767" attributes="0"/>
-                  <Component id="modifyInventoryButton" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
-                  <Component id="clearTablesButton" pref="232" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" min="-2" pref="126" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="magagerLogOutButton" max="32767" attributes="0"/>
+                          <Component id="viewFinancesButton" max="32767" attributes="0"/>
+                          <Component id="modifyEmployeeButton" max="32767" attributes="0"/>
+                          <Component id="modifyScheduleButton" max="32767" attributes="0"/>
+                          <Component id="modifyInventoryButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                          <Component id="clearTablesButton" pref="232" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace pref="52" max="32767" attributes="0"/>
           </Group>
@@ -43,8 +49,10 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace pref="48" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" pref="18" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="modifyScheduleButton" alignment="1" min="-2" pref="57" max="-2" attributes="0"/>
                   <Component id="clearTablesButton" alignment="1" min="-2" pref="61" max="-2" attributes="0"/>
@@ -202,5 +210,10 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tabit - Manager Profile"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
