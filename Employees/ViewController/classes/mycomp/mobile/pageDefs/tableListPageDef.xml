@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="tableListPageDef"
+                Package="mycomp.mobile.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="root" RangeSize="25" DataControl="TableList" id="TableListIterator"/>
+    <accessorIterator MasterBinding="TableListIterator" Binds="tables" RangeSize="25" DataControl="TableList"
+                      BeanClass="mycomp.mobile.Table" id="tablesIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="tablesIterator" id="tables">
+      <nodeDefinition DefName="mycomp.mobile.Table" Name="tables0">
+        <AttrNames>
+          <Item Value="tableNumber"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="tablesIterator" id="tableNumber">
+      <AttrNames>
+        <Item Value="tableNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="tablesIterator" id="employeeNumber">
+      <AttrNames>
+        <Item Value="employeeNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="tablesIterator" id="numItems">
+      <AttrNames>
+        <Item Value="numItems"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="tablesIterator" id="setCurrentRowWithKey" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKey" NDValue="#{pageFlowScope.tableNumber}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

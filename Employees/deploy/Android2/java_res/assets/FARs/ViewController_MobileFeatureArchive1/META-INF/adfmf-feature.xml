@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <adfmf:features xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adfmf="http://xmlns.oracle.com/adf/mf">
-  <adfmf:feature id="mycomp.Employees" name="Employees">
-    <adfmf:content id="mycomp.Employees.1">
-      <adfmf:amx file="mycomp.Employees/EmpsTaskFlow.xml#EmpsTaskFlow"/>
+  <adfmf:feature id="mycomp.Employees" name="Employees"/>
+  <adfmf:feature id="mycomp.Help" icon="resources/32-32-icon.png" credentials="none">
+    <adfmf:content id="mycomp.Help.1">
+      <adfmf:remoteURL connection="Check"/>
     </adfmf:content>
   </adfmf:feature>
-  <adfmf:feature id="mycomp.Help" name="Help">
-    <adfmf:content id="mycomp.Help.1">
-      <adfmf:localHTML url="mycomp.Help/help.html"/>
+  <adfmf:feature id="mycomp.home" name="home" credentials="remote">
+    <adfmf:content id="mycomp.home.1">
+      <adfmf:amx/>
+    </adfmf:content>
+  </adfmf:feature>
+  <adfmf:feature id="mycomp.Tables" name="Tables">
+    <adfmf:content id="mycomp.Tables.1">
+      <adfmf:amx>
+        <adfmf:includes/>
+      </adfmf:amx>
     </adfmf:content>
   </adfmf:feature>
 </adfmf:features>

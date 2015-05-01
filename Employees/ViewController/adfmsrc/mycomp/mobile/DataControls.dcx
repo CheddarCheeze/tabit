@@ -14,4 +14,55 @@
       <bean-definition BeanClass="mycomp.mobile.Emps" xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
     </Source>
   </AdapterDataControl>
+  <AdapterDataControl id="TableList" FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDCDefinition" SupportsTransactions="false"
+                      SupportsSortCollection="true" SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true" Definition="mycomp.mobile.TableList"
+                      BeanClass="mycomp.mobile.TableList" xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="mycomp.mobile.Table"/>
+      <TypeInfo FullName="mycomp.mobile.TableList"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="mycomp.mobile.TableList" xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="Items" FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDCDefinition" SupportsTransactions="false"
+                      SupportsSortCollection="true" SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true" Definition="mycomp.mobile.Items"
+                      BeanClass="mycomp.mobile.Items" xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="mycomp.mobile.Items"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="mycomp.mobile.Items" xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="Orders" FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDCDefinition" SupportsTransactions="false"
+                      SupportsSortCollection="true" SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true" Definition="mycomp.mobile.Orders"
+                      BeanClass="mycomp.mobile.Orders" xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="mycomp.mobile.Order"/>
+      <TypeInfo FullName="mycomp.mobile.Orders"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="mycomp.mobile.Orders" xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+  <AdapterDataControl id="Menus" FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDCDefinition" SupportsTransactions="false"
+                      SupportsSortCollection="true" SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true" Definition="mycomp.mobile.Menus"
+                      BeanClass="mycomp.mobile.Menus" xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="mycomp.mobile.Menu"/>
+      <TypeInfo FullName="mycomp.mobile.Menus"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="mycomp.mobile.Menus" xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
 </DataControlConfigs>

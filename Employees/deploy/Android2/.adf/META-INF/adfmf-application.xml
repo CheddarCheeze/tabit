@@ -4,4 +4,6 @@
                    appControllerFolder="ApplicationController">
   <adfmf:featureReference id="mycomp.Employees"/>
   <adfmf:featureReference id="mycomp.Help"/>
+  <adfmf:featureReference id="mycomp.home"/>
+  <adfmf:featureReference id="mycomp.Tables"/>
 </adfmf:application>

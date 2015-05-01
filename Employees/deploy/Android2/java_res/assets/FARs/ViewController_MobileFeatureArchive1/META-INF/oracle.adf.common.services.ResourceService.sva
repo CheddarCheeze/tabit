@@ -1,6 +1,13 @@
-#:__PROLOG__:!;ADF_DataControl:!-;ADF_BindingApp
+#:__PROLOG__:ADF_LibraryDependencies:ADF_Connections:!;ADF_DataControl:!-;ADF_BindingApp:ADF_BusComps
 #:ADF_DataControl:oracle.adf.library.rc.dcxdatacontrols.DataControlURLDescriptor:0,Emps,mycomp.mobile.Emps,mycomp/mobile/DataControls.dcx,.class
+#:ADF_DataControl:oracle.adf.library.rc.dcxdatacontrols.DataControlURLDescriptor:0,TableList,mycomp.mobile.TableList,mycomp/mobile/DataControls.dcx,.class
+#:ADF_DataControl:oracle.adf.library.rc.dcxdatacontrols.DataControlURLDescriptor:0,Items,mycomp.mobile.Items,mycomp/mobile/DataControls.dcx,.class
+#:ADF_DataControl:oracle.adf.library.rc.dcxdatacontrols.DataControlURLDescriptor:0,Orders,mycomp.mobile.Orders,mycomp/mobile/DataControls.dcx,.class
+#:ADF_DataControl:oracle.adf.library.rc.dcxdatacontrols.DataControlURLDescriptor:0,Menus,mycomp.mobile.Menus,mycomp/mobile/DataControls.dcx,.class
 #:ADF_BindingApp:oracle.adf.library.rc.bindingapp.BindingAppURLDescriptor:0,mycomp/mobile/DataBindings.cpx
 #:__EPILOG__:
+oracle.adf.library.rc.dependencies.LibDepsServiceStrategy ADF_LibraryDependencies
+oracle.adf.library.rc.connections.CAServiceStrategy ADF_Connections
 oracle.adf.library.rc.dcxdatacontrols.DataControlServiceStrategy ADF_DataControl
 oracle.adf.library.rc.bindingapp.BindingAppServiceStrategy ADF_BindingApp
+oracle.adf.library.rc.buscomp.BusCompServiceStrategy ADF_BusComps
