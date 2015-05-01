@@ -117,7 +117,6 @@
          <hash n="Default">
             <value n="custom" v="false"/>
             <value n="name" v="Default"/>
-            <value n="targetURL"/>
          </hash>
       </hash>
    </hash>

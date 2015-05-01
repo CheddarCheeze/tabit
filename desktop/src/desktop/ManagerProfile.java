@@ -3,6 +3,8 @@ package desktop;
 
 import desktop.TableList;
 
+import java.awt.Font;
+
 import static java.lang.String.valueOf;
 
 import javax.swing.ImageIcon;
@@ -18,11 +20,14 @@ public class ManagerProfile extends javax.swing.JFrame {
     //public static TableList tableList = new TableList();
     public static String[] strings = new String[1000]; //strings stores the table name in the List
     public static TableList tableList = new TableList();
+    Font bfont = new Font("Verdana", Font.BOLD, 20);
     ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\tabitIcon.png");
     /** Creates new form ManagerProfile */
     public ManagerProfile() { 
         initComponents();
         setIconImage(img.getImage());
+        this.jLabel1.setFont(bfont);
+        this.jLabel1.setText("Tabit - Manager Profile");
         this.setLocationRelativeTo(getRootPane());
     }
 
@@ -137,16 +142,14 @@ public class ManagerProfile extends javax.swing.JFrame {
         );
         jScrollPane1.setViewportView(tableJList);
 
-        jLabel1.setText("Tabit - Manager Profile");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(magagerLogOutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

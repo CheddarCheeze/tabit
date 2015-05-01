@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import javax.swing.ImageIcon;
@@ -22,6 +23,8 @@ public class Finance extends javax.swing.JFrame {
     Font bfont = new Font("Verdana", Font.BOLD, 20);
     SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
     DataHandler databit;
+    ResultSet dailySales, weeklySales, monthlySales;
+    DecimalFormat decf = new DecimalFormat("#.00"); 
     String args[] = { };
 
     /** Creates new form Finance */
@@ -209,7 +212,7 @@ public class Finance extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
@@ -220,11 +223,19 @@ public class Finance extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        //Daily
         DefaultTableModel dtm = (DefaultTableModel) this.AllSalesTable.getModel();
+        // delete all previous rows that were in table
+        System.out.println(this.AllSalesTable.getRowCount());
+        if(this.AllSalesTable.getRowCount() > 0){
+            for(int i=0; i<this.AllSalesTable.getRowCount(); i++){
+                dtm.removeRow(i);
+                System.out.print("Removing row: "+ i + "\n");
+            }
+        }
         int rows = 0;
         try {
-            
-            rows = databit.getRows("Sales");
+            rows = databit.getDailyRows();
             System.out.println(rows);
             int rowsInTable = this.AllSalesTable.getRowCount();
             System.out.println(rowsInTable);
@@ -233,18 +244,39 @@ public class Finance extends javax.swing.JFrame {
                 rowsInTable++;
            }
             loadDailyTable(AllSalesTable, rows);
+            double sales=0;
+            double notax=0;
+             for (int i=0 ;i < AllSalesTable.getRowCount();i++)
+               sales = sales +Double.parseDouble( dtm.getValueAt(i, 3).toString());
+             jTable1.setValueAt(sales, 0, 1);
+            notax = sales - sales *0.11;
+             jTable1.getModel().setValueAt(sales, 0, 1);
+            jTable1.getModel().setValueAt(notax, 1, 1);
+            double t = databit.getAllHSalary();
+            t = t/365;
+            jTable1.getModel().setValueAt(t, 2, 1);
+            double lp = t/sales *100;
+            jTable1.getModel().setValueAt(lp, 3, 1);
         }catch (SQLException e) {}
-
+    float sales;
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //WEEKLY
         DefaultTableModel dtm = (DefaultTableModel) this.AllSalesTable.getModel();
+        System.out.println(this.AllSalesTable.getRowCount());
+        if(this.AllSalesTable.getRowCount() > 0){
+            for(int i=0; i<this.AllSalesTable.getRowCount(); i++){
+                System.out.println("In here!");
+                dtm.removeRow(i);
+                System.out.print("Removing row: "+ i + "\n");
+            }
+        }
         int rows = 0;
         try {
             
-            rows = databit.getRows("Sales");
+            rows = databit.getWeeklyRows();
             System.out.println(rows);
             int rowsInTable = this.AllSalesTable.getRowCount();
             System.out.println(rowsInTable);
@@ -253,6 +285,20 @@ public class Finance extends javax.swing.JFrame {
                 rowsInTable++;
            }
             loadWeeklyTable(AllSalesTable, rows);
+            double sales=0;
+            double notax=0;
+            for (int i=0 ;i < AllSalesTable.getRowCount();i++){
+                    System.out.println(sales);   
+               sales = sales +Double.parseDouble( dtm.getValueAt(i, 3).toString());
+            }
+            notax = sales - sales *0.11;
+             jTable1.getModel().setValueAt(sales, 0, 1);
+            jTable1.getModel().setValueAt(notax, 1, 1);
+            double t = databit.getAllHSalary();
+            t = t/52;
+            jTable1.getModel().setValueAt(t, 2, 1);
+            double lp = t/sales *100;
+            jTable1.getModel().setValueAt(lp, 3, 1);
         }catch (SQLException e) {}
   
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -261,10 +307,17 @@ public class Finance extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Monthly
         DefaultTableModel dtm = (DefaultTableModel) this.AllSalesTable.getModel();
+        if(this.AllSalesTable.getRowCount() > 0){
+            for(int i=0; i<this.AllSalesTable.getRowCount(); i++){
+                System.out.println("In here!");
+                dtm.removeRow(i);
+                System.out.print("Removing row: "+ i + "\n");
+            }
+        }
         int rows = 0;
         try {
             
-            rows = databit.getRows("Sales");
+            rows = databit.getMonthlyRows();
             System.out.println(rows);
             int rowsInTable = this.AllSalesTable.getRowCount();
             System.out.println(rowsInTable);
@@ -272,7 +325,20 @@ public class Finance extends javax.swing.JFrame {
                 dtm.addRow(new Object[]{null, null, null, null});
                 rowsInTable++;
            }
+           double sales=0;
+            double notax=0;
             loadMonthlyTable(AllSalesTable, rows);
+            for (int i=0 ;i < AllSalesTable.getRowCount();i++)
+                    sales = sales +Double.parseDouble( dtm.getValueAt(i, 3).toString());
+            
+            notax = sales - sales *0.11;
+             jTable1.getModel().setValueAt(sales, 0, 1);
+            jTable1.getModel().setValueAt(notax, 1, 1);
+            double t = databit.getAllHSalary();
+            t = t/12;
+            jTable1.getModel().setValueAt(t, 2, 1);
+            double lp = t/sales *100;
+            jTable1.getModel().setValueAt(lp, 3, 1);
         }catch (SQLException e) {}
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -281,10 +347,10 @@ public class Finance extends javax.swing.JFrame {
     super.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    void loadDailyTable(JTable jt, int rows) throws SQLException {
-        ResultSet dailySales = databit.getDailySales();
+   void loadDailyTable(JTable jt, int rows) throws SQLException {
+        dailySales = databit.getDailySales();
         int i = 0;
-
+        double temp=0;
         while (dailySales.next()) {
             jt.getModel().setValueAt(dailySales.getInt(1), i, 0);
             jt.getModel().setValueAt(fmt.format(dailySales.getDate(2)), i, 1);
@@ -292,32 +358,37 @@ public class Finance extends javax.swing.JFrame {
             jt.getModel().setValueAt(dailySales.getDouble(4), i, 3);
             i++;
         }
+    
     }
     
-    void loadWeeklyTable(JTable jt, int rows) throws SQLException {
-        ResultSet dailySales = databit.getDailySales();
+     void loadWeeklyTable(JTable jt, int rows) throws SQLException {
+        weeklySales = databit.getWeeklySales();
         int i = 0;
+        double temp=0;
+        while (weeklySales.next()) {
+            jt.getModel().setValueAt(weeklySales.getInt(1), i, 0);
+            jt.getModel().setValueAt(fmt.format(weeklySales.getDate(2)), i, 1);
+            jt.getModel().setValueAt(weeklySales.getString(3), i, 2);
+            jt.getModel().setValueAt(weeklySales.getDouble(4), i, 3);
 
-        while (dailySales.next()) {
-            jt.getModel().setValueAt(dailySales.getInt(1), i, 0);
-            jt.getModel().setValueAt(fmt.format(dailySales.getDate(2)), i, 1);
-            jt.getModel().setValueAt(dailySales.getString(3), i, 2);
-            jt.getModel().setValueAt(dailySales.getDouble(4), i, 3);
-            i++;
+            i++;     
         }
+
     }
     
     void loadMonthlyTable(JTable jt, int rows) throws SQLException {
-        ResultSet dailySales = databit.getDailySales();
+        monthlySales = databit.getMonthlySales();
         int i = 0;
-
-        while (dailySales.next()) {
-            jt.getModel().setValueAt(dailySales.getInt(1), i, 0);
-            jt.getModel().setValueAt(fmt.format(dailySales.getDate(2)), i, 1);
-            jt.getModel().setValueAt(dailySales.getString(3), i, 2);
-            jt.getModel().setValueAt(dailySales.getDouble(4), i, 3);
+        double temp=0;
+        while (monthlySales.next()) {
+            jt.getModel().setValueAt(monthlySales.getInt(1), i, 0);
+            jt.getModel().setValueAt(fmt.format(monthlySales.getDate(2)), i, 1);
+            jt.getModel().setValueAt(monthlySales.getString(3), i, 2);
+            jt.getModel().setValueAt(monthlySales.getDouble(4), i, 3);
+           
             i++;
         }
+       
     }
 
     /**

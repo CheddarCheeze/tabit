@@ -353,25 +353,25 @@ public class Employee extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = ModifyTable.getSelectedRow();
         System.out.print("This is the row that is currently selected: " + row + "\n");
-        Object o = ModifyTable.getModel().getValueAt(row, 0);
-        if (o == null) {
-            ((DefaultTableModel) ModifyTable.getModel()).removeRow(row);
-        } else {
+        Object o =  ModifyTable.getModel().getValueAt(row, 0);
+        if (o == null){
+        ((DefaultTableModel) ModifyTable.getModel()).removeRow(row);
+        }
+        else{
             //TextDialog
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult =
-                JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this employee from the database?",
-                                              "Warning", dialogButton);
-            if (dialogResult == JOptionPane.YES_OPTION) {
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this product from the database?","Warning",dialogButton);
+            if(dialogResult == JOptionPane.YES_OPTION){
                 // Delete product from the database.
                 int id = Integer.parseInt(o.toString());
                 System.out.println(id);
-                try {
-                    databit.deleteById("Employee", id);
-                } catch (SQLException e) {
+                    try {
+                        databit.deleteById("Employee", id);
+                    } catch (SQLException e) {
                 }
-                ((DefaultTableModel) ModifyTable.getModel()).removeRow(row);
-            } else {
+                ((DefaultTableModel) ModifyTable.getModel()).removeRow(row);        
+            }
+            else{
                 System.out.println("Not confirmed");
             }
         }

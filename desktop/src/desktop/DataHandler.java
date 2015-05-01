@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
-
+import java.util.Calendar;
 import oracle.jdbc.pool.OracleDataSource;
 
 /**
@@ -29,7 +29,6 @@ public class DataHandler {
     String query;
     String sqlString;
     String picFile = "";
-    Date date = new Date();
     SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
     
 //==============================================================
@@ -201,6 +200,8 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
 //Method that returns all DailySales
 //=================================================================
     public ResultSet getDailySales() throws SQLException{
+        Date date = new Date();
+        Date dtemp = new Date(); // to change query with other ranges
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
         String tempdate = fmt.format(date).toString();
@@ -212,24 +213,37 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
     }
     
     //=================================================================
-    //Method that returns all DailySales
+    //Method that returns all WeeklySales
     //=================================================================
         public ResultSet getWeeklySales() throws SQLException{
+            Date date = new Date();
+            Date dtemp = new Date(); // to change query with other ranges
+            int currentday = date.getDay();
+            int days = date.getDate() - currentday ;
+            date.setDate(days + 1 );
+            dtemp.setDate(days+ 7);
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                    ResultSet.CONCUR_READ_ONLY);
-            query = "SELECT * FROM Sales WHERE sale_date = '"+fmt.format(date)+"'";
+            String tempdate = fmt.format(date).toString();
+            tempdate = tempdate.toUpperCase();
+            String helpertempdate = fmt.format(dtemp).toString();
+            helpertempdate = helpertempdate.toUpperCase();
+            query = "SELECT * FROM Sales WHERE sale_date >= to_date('"+tempdate+"') and sale_date <= to_date('"+helpertempdate+"')";
             System.out.println("\nExecuting query: " + query);
             rset = stmt.executeQuery(query);
             return rset;
         }
         
     //=================================================================
-    //Method that returns all DailySales
+    //Method that returns all monthly sales
     //=================================================================
         public ResultSet getMonthlySales() throws SQLException{
+            Date date = new Date();
+            int month = date.getMonth()+1;
+            int year = date.getYear()+1900;
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                    ResultSet.CONCUR_READ_ONLY);
-            query = "SELECT * FROM Sales WHERE sale_date = '"+fmt.format(date)+"'";
+            query = "SELECT * FROM sales where extract(month from sale_date) =" +month+" and extract(year from sale_date) = "+ year+"";
             System.out.println("\nExecuting query: " + query);
             rset = stmt.executeQuery(query);
             return rset;
@@ -393,6 +407,27 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
         return rset;
     }
     
+    //=================================================================================
+    // Name: getManagerSalary
+    // Purpose: getSalaries of managers
+    // Parameters: none
+    // Returns: ResultSet
+    //=================================================================================    
+        public double getAllHSalary() throws SQLException{
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                   ResultSet.CONCUR_READ_ONLY);
+            query = "select salary from employee where ishourly = 0";
+            System.out.println("\nExecuting query: " + query);
+            rset = stmt.executeQuery(query);        
+            double temp = 0;
+            while(rset.next()){
+                System.out.println(rset.getDouble(1));
+                temp = temp + rset.getDouble(1);
+            }
+            System.out.println(temp);
+            return temp;
+        }
+    
 //=================================================================================
 // Name: printEmployees
 // Purpose: to print all the information of all employess
@@ -419,6 +454,18 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
             }
         }
 
+    //=================================================================================
+    // Name: printWeeklySales
+    // Purpose: to print all the information of all employess
+    // Parameters: none
+    //=================================================================================
+        public void printWeeklySales() throws SQLException {
+            ResultSet temp = getWeeklySales();
+            while(temp.next()){
+                System.out.println(temp.getInt(1)+ "\n " + fmt.format(temp.getDate(2)) + "\n " +
+                    temp.getString(3) + "\n " + temp.getDouble(4));
+            }
+        }
 //=================================================================================
 // Name: printInventory
 // Purpose: to print all items in the inventory table
@@ -452,6 +499,81 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
         System.out.println(rows);
         return rows;
     }
+    
+    
+    
+    //=================================================================================
+    // Name: getDailyRows
+    // Purpose: get the number of rows in a specific table of the database
+    // Parameters: String tableName
+    //=================================================================================
+        public int getDailyRows() throws SQLException{
+            Date date = new Date();
+            int rows = 0;
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                   ResultSet.CONCUR_READ_ONLY);
+            String tempdate = fmt.format(date).toString();
+            tempdate = tempdate.toUpperCase();
+            query = "SELECT COUNT(*) FROM Sales WHERE to_char(sale_date, 'MON/DD/YYYY') = '"+tempdate+"'";
+            System.out.println("\nExecuting query: " + query);
+            rset = stmt.executeQuery(query);
+            while(rset.next()){
+                rows = rset.getInt(1);
+            }
+            System.out.println(rows);
+            return rows;
+        }
+
+    //=================================================================================
+    // Name: getWeeklyRows
+    // Purpose: get the number of rows in a specific table of the database
+    // Parameters: String tableName
+    //=================================================================================
+        public int getWeeklyRows() throws SQLException{
+            Date date = new Date();
+            Date dtemp = new Date(); // to change query with other ranges
+            int rows = 0;
+            int currentday = date.getDay();
+            int days = date.getDate() - currentday ;
+            date.setDate(days + 1 );
+            dtemp.setDate(days+ 7);
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                   ResultSet.CONCUR_READ_ONLY);
+            String tempdate = fmt.format(date).toString();
+            tempdate = tempdate.toUpperCase();
+            String helpertempdate = fmt.format(dtemp).toString();
+            helpertempdate = helpertempdate.toUpperCase();
+            query = "SELECT COUNT(*) FROM Sales WHERE sale_date >= to_date('"+tempdate+"') and sale_date <= to_date('"+helpertempdate+"')";
+            System.out.println("\nExecuting query: " + query);
+            rset = stmt.executeQuery(query);
+            while(rset.next()){
+                rows = rset.getInt(1);
+            }
+            System.out.println(rows);
+            return rows;
+        }
+
+    //=================================================================================
+    // Name: getMonthlyRows
+    // Purpose: get the number of rows in a specific table of the database
+    // Parameters: String tableName
+    //=================================================================================
+        public int getMonthlyRows() throws SQLException{
+            Date date = new Date();
+            int rows = 0;
+            int month = date.getMonth()+1;
+            int year = date.getYear()+1900;
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                   ResultSet.CONCUR_READ_ONLY);
+            query = "SELECT COUNT(*) FROM sales where extract(month from sale_date) =" +month+" and extract(year from sale_date) = "+ year+"";
+            System.out.println("\nExecuting query: " + query);
+            rset = stmt.executeQuery(query);
+            while(rset.next()){
+                rows = rset.getInt(1);
+            }
+            System.out.println(rows);
+            return rows;
+        }
     
 // ===================================================================
 // Method: deleteInfoTable
@@ -488,6 +610,7 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
 //        String temp = datahandler.getLoginData(1);
         //System.out.println(datahandler.fmt.format(datahandler.date));
 //        datahandler.printDailySales();
+//        datahandler.printWeeklySales();
         
     }
 }
