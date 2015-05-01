@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amx:view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amx="http://xmlns.oracle.com/adf/mf/amx"
+          xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
+  <amx:panelPage id="pp1">
+    <amx:facet name="header">
+      <amx:outputText value="Table" id="ot1"/>
+    </amx:facet>
+    <amx:facet name="primary">
+      <amx:commandButton id="cb1" action="__back"/>
+    </amx:facet>
+    <amx:facet name="secondary">
+      <amx:commandButton id="cb2" text="Clear Table"/>
+    </amx:facet>
+    <amx:panelSplitter id="ps1">
+      <amx:facet name="navigator">
+        <amx:listView var="row" value="#{bindings.tables.collectionModel}" fetchSize="#{bindings.tables.rangeSize}"
+                      id="lv1">
+          <amx:listItem actionListener="#{bindings.setCurrentRowWithKey.execute}" id="li1">
+            <amx:outputText value="Table #{row.tableNumber}" id="ot2"/>
+            <amx:setPropertyListener id="spl1" from="#{row.rowKey}" to="#{pageFlowScope.tableNumber}" type="action"/>
+            
+          </amx:listItem>
+        </amx:listView>
+      </amx:facet>
+      <amx:panelItem id="pi1" inlineStyle="text-align:right; padding:0px 0px 0px;">
+        <amx:panelFormLayout id="pfl1">
+          <amx:panelLabelAndMessage label="Table" id="plam2">
+            <amx:outputText value="#{bindings.tableNumber.inputValue}" id="ot4"/>
+          </amx:panelLabelAndMessage>
+          <amx:panelLabelAndMessage label="Employee" id="plam1">
+            <amx:outputText value="#{bindings.employeeNumber.inputValue}" id="ot3"/>
+          </amx:panelLabelAndMessage>
+          <amx:panelLabelAndMessage label="# of items" id="plam3">
+            <amx:outputText value="#{bindings.numItems.inputValue}" id="ot5"/>
+          </amx:panelLabelAndMessage>
+        </amx:panelFormLayout>
+        
+        <amx:panelFormLayout id="pfl2">
+          <amx:panelLabelAndMessage label="Food" id="plam4">
+            <amx:commandLink text="Order" id="cl1" action="showEmp"/>
+          </amx:panelLabelAndMessage>
+        </amx:panelFormLayout>
+        <amx:outputText value="x20 TACOS" id="ot6" inlineStyle="text-align:left; padding:0% 50% 0% 0%;"/>
+        <amx:outputText value="$0.25" id="ot8" inlineStyle="text-align:right;"/>
+        <amx:spacer id="s1"/>
+        <amx:outputText value="TOTAL: $5.00" id="ot7"/>
+        <amx:inputText label="Notes" value="Spicy pork" id="it1"/>
+        
+      </amx:panelItem>
+    </amx:panelSplitter>
+  </amx:panelPage>
+</amx:view>

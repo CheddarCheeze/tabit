@@ -1,0 +1,37 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+   <Reference name="tabit" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="tabit" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="sid">
+            <Contents>tabit</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>localhost</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>Losaltos</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="Check" className="oracle.adf.model.connection.url.HttpURLConnection" xmlns="">
+      <Factory className="oracle.adf.model.connection.url.URLConnectionFactory"/>
+      <RefAddresses>
+         <XmlRefAddr addrType="Check">
+            <Contents>
+               <urlconnection name="Check" url="http://10.30.73.106:80"/>
+            </Contents>
+         </XmlRefAddr>
+      </RefAddresses>
+   </Reference>
+</References>

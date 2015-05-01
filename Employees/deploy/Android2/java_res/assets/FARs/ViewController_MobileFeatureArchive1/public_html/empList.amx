@@ -3,22 +3,56 @@
           xmlns:dvtm="http://xmlns.oracle.com/adf/mf/amx/dvt">
   <amx:panelPage id="pp1">
     <amx:facet name="header">
-      <amx:outputText value="Welcome" id="ot1"/>
+      <amx:outputText value="Order" id="ot1"/>
     </amx:facet>
     <amx:facet name="primary">
-      <amx:commandButton id="cb1" text="Graph" action="showGraph"/>
+      <amx:commandButton id="cb1" action="__back"/>
     </amx:facet>
     <amx:facet name="secondary">
-      <amx:commandButton id="cb2"/>
+      <amx:commandButton id="cb2" text="Send" action="showGraph"/>
     </amx:facet>
-    <amx:facet name="footer">
-      <amx:outputText value="Footer" id="ot2"/>
-    </amx:facet>
-    <amx:listView var="row" value="#{bindings.emps.collectionModel}" fetchSize="#{bindings.emps.rangeSize}"
-                  dividerAttribute="name" dividerMode="firstLetter" id="lv1">
-      <amx:listItem id="li1">
-        <amx:outputText value="#{row.name}" id="ot3"/>
-      </amx:listItem>
-    </amx:listView>
+    <amx:spacer id="s1"/>
+    <amx:panelSplitter id="ps1">
+      <amx:facet name="navigator">
+        <amx:listView var="row" value="#{bindings.emps.collectionModel}" fetchSize="#{bindings.emps.rangeSize}" id="lv1">
+          <amx:listItem actionListener="#{bindings.setCurrentRowWithKey.execute}" id="li1">
+            <amx:outputText value="#{row.name}" id="ot3"/>
+            <amx:setPropertyListener id="spl1" from="#{row.rowKey}" to="#{pageFlowScope.empId}" type="action"/>
+            
+          </amx:listItem>
+        </amx:listView>
+      </amx:facet>
+      <amx:panelItem id="pi1">
+        <amx:panelFormLayout id="pfl1" labelPosition="center" labelWidth="50">
+        
+          <amx:selectOneRadio value="#{bindings.menus.inputValue}" label="Menu" id="sor2">
+            <amx:selectItems value="#{bindings.menus.items}" id="si2"/>
+          </amx:selectOneRadio>
+        </amx:panelFormLayout>
+        
+        
+        <amx:outputText id="ottest" value="#{bindings.menus.label}"/>
+        
+        
+        <amx:panelFormLayout id="pfl2">
+          <amx:inputNumberSlider label="Quantity:" id="ins1" minimum="1" maximum="10" stepSize="1" value="#{applicationScope.Quantity}" />
+          
+        </amx:panelFormLayout>
+          <amx:outputText id="ot9" value="#{applicationScope.Quantity}"/>
+          <amx:spacer id="s5"/>
+          
+        <amx:commandButton text="Add" id="cb3" icon="/resources/enter.png"/>
+          <amx:spacer id="s2"/>
+          <amx:commandButton text="Remove" id="cb4" icon="/resources/clear.png"/>
+          <amx:spacer id="s3"/>
+          <amx:outputText value="x20 TACOS" id="ot10" inlineStyle="text-align:left; padding:0% 50% 0% 0%;"/>
+          <amx:outputText value="$0.25" id="ot11" inlineStyle="text-align:right;"/>
+          <amx:spacer id="s4"/>
+          <amx:outputText value="TOTAL: $5.00" id="ot12"/>
+          <amx:inputText label="Notes" value="Spicy pork" id="it1"/>
+        
+      </amx:panelItem>
+      
+    </amx:panelSplitter>
   </amx:panelPage>
 </amx:view>

@@ -8,12 +8,17 @@
   <pageMap>
     <page path="/empList.amx" usageId="mycomp_mobile_empListPageDef"/>
     <page path="/graph.amx" usageId="mycomp_mobile_graphPageDef"/>
+    <page path="/tableList.amx" usageId="mycomp_mobile_tableListPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="mycomp_mobile_empListPageDef" path="mycomp.mobile.pageDefs.empListPageDef"/>
     <page id="mycomp_mobile_graphPageDef" path="mycomp.mobile.pageDefs.graphPageDef"/>
+    <page id="mycomp_mobile_tableListPageDef" path="mycomp.mobile.pageDefs.tableListPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
+    <dc id="Menus" path="mycomp.mobile.Menus"/>
+    <dc id="Items" path="mycomp.mobile.Items"/>
+    <dc id="TableList" path="mycomp.mobile.TableList"/>
     <dc id="Emps" path="mycomp.mobile.Emps"/>
   </dataControlUsages>
 </Application>

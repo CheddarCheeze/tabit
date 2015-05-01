@@ -11,6 +11,9 @@
     <view id="login">
       <page>/login.amx</page>
     </view>
+    <view id="tableList">
+      <page>/tableList.amx</page>
+    </view>
     <control-flow-rule id="__1">
       <from-activity-id>empList</from-activity-id>
       <control-flow-case id="__2">
@@ -20,10 +23,19 @@
       </control-flow-case>
     </control-flow-rule>
     <control-flow-rule id="__3">
-      <from-activity-id>login</from-activity-id>
+      <from-activity-id>tableList</from-activity-id>
       <control-flow-case id="__4">
         <from-outcome>showEmp</from-outcome>
         <to-activity-id>empList</to-activity-id>
+        <transition>flipRight</transition>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>login</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>showTables</from-outcome>
+        <to-activity-id>tableList</to-activity-id>
+        <transition>flipRight</transition>
       </control-flow-case>
     </control-flow-rule>
   </task-flow-definition>

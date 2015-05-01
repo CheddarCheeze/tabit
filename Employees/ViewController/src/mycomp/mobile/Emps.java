@@ -16,11 +16,11 @@ public class Emps {
       //This Method gets a list of the employees and their emails 
       Emp[] emps = null; 
       s_emps = new ArrayList(); 
-      s_emps.add(new Emp("Bill", "bill@oracle.com",4000, getADate(2011,3,24,9,0) )) ; 
-      s_emps.add(new Emp("Gary", "gary@oracle.com", 5000, getADate(2007,2,24,9,0) )) ; 
-      s_emps.add(new Emp("Jeff", "jeff@oracle.com", 5500, getADate(2003,2,19,9,0) )) ; 
-      s_emps.add(new Emp("Joe", "joe@oracle.com", 4000, getADate(2012,2,13,9,0) )) ; 
-      s_emps.add(new Emp("Shay", "shay@oracle.com",6000, getADate(2002,2,21,9,0) )) ; 
+      s_emps.add(new Emp("Table 1", "bill@oracle.com",40, getADate(2011,3,24,9,0) )) ; 
+      s_emps.add(new Emp("Table 2", "gary@oracle.com", 50, getADate(2007,2,24,9,0) )) ; 
+      s_emps.add(new Emp("Table 3", "jeff@oracle.com", 55, getADate(2003,2,19,9,0) )) ; 
+      s_emps.add(new Emp("Table 4", "joe@oracle.com", 40, getADate(2012,2,13,9,0) )) ; 
+      s_emps.add(new Emp("Table 5", "shay@oracle.com",60, getADate(2002,2,21,9,0) )) ; 
       emps = (Emp[]) s_emps.toArray(new Emp[s_emps.size()]); 
       return emps; 
     } 
