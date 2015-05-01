@@ -203,11 +203,39 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
     public ResultSet getDailySales() throws SQLException{
         stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                ResultSet.CONCUR_READ_ONLY);
-        query = "SELECT * FROM Sales WHERE sale_date = '"+fmt.format(date)+"'";
+        String tempdate = fmt.format(date).toString();
+        tempdate = tempdate.toUpperCase();
+        query = "SELECT * FROM Sales WHERE to_char(sale_date, 'MON/DD/YYYY') = '"+tempdate+"'";
         System.out.println("\nExecuting query: " + query);
         rset = stmt.executeQuery(query);
         return rset;
     }
+    
+    //=================================================================
+    //Method that returns all DailySales
+    //=================================================================
+        public ResultSet getWeeklySales() throws SQLException{
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                   ResultSet.CONCUR_READ_ONLY);
+            query = "SELECT * FROM Sales WHERE sale_date = '"+fmt.format(date)+"'";
+            System.out.println("\nExecuting query: " + query);
+            rset = stmt.executeQuery(query);
+            return rset;
+        }
+        
+    //=================================================================
+    //Method that returns all DailySales
+    //=================================================================
+        public ResultSet getMonthlySales() throws SQLException{
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                   ResultSet.CONCUR_READ_ONLY);
+            query = "SELECT * FROM Sales WHERE sale_date = '"+fmt.format(date)+"'";
+            System.out.println("\nExecuting query: " + query);
+            rset = stmt.executeQuery(query);
+            return rset;
+        }
+    
+    
     
     
     public ResultSet getAllProducts() throws SQLException{
@@ -458,8 +486,8 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
 //        System.out.println(datahandler.getRows("Employee"));
 //        System.out.println(datahandler.getEmployeePicture(1));
 //        String temp = datahandler.getLoginData(1);
-        System.out.println(datahandler.fmt.format(datahandler.date));
-        datahandler.printDailySales();
+        //System.out.println(datahandler.fmt.format(datahandler.date));
+//        datahandler.printDailySales();
         
     }
 }

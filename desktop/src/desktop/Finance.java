@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,7 +19,7 @@ import javax.swing.JTable;
  */
 public class Finance extends javax.swing.JFrame {
     ImageIcon img = new ImageIcon("C:\\Users\\Nicolas Nunez\\Desktop\\tabit\\desktop\\src\\desktop\\tabitIcon.png");
-    Font bfont = new Font("Verdana", Font.BOLD, 26);
+    Font bfont = new Font("Verdana", Font.BOLD, 20);
     SimpleDateFormat fmt = new SimpleDateFormat("MMM/dd/yyyy");
     DataHandler databit;
     String args[] = { };
@@ -29,7 +30,7 @@ public class Finance extends javax.swing.JFrame {
         initComponents();
         this.jLabel1.setFont(bfont);
         this.jLabel1.setText("Tabit - Finances");
-        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        //setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(getRootPane());
     }
 
@@ -92,14 +93,24 @@ public class Finance extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Daily Sales");
-        jButton4.setBounds(20, 10, 140, 40);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jButton4.setBounds(20, 10, 140, 30);
         jDesktopPane1.add(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton5.setBackground(new java.awt.Color(0, 0, 153));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Weekly Sales");
-        jButton5.setBounds(20, 50, 140, 40);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jButton5.setBounds(20, 50, 140, 30);
         jDesktopPane1.add(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton6.setBackground(new java.awt.Color(0, 0, 153));
@@ -111,7 +122,7 @@ public class Finance extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jButton6.setBounds(20, 90, 140, 40);
+        jButton6.setBounds(20, 90, 140, 30);
         jDesktopPane1.add(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -165,18 +176,11 @@ public class Finance extends javax.swing.JFrame {
         AllSalesTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         AllSalesTable.getTableHeader().setResizingAllowed(false);
         AllSalesTable.getTableHeader().setReorderingAllowed(false);
-        AllSalesTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AllSalesTableMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                AllSalesTableMouseEntered(evt);
-            }
-        });
         jScrollPane2.setViewportView(AllSalesTable);
         AllSalesTable.getColumnModel().getColumn(0).setResizable(false);
         AllSalesTable.getColumnModel().getColumn(1).setResizable(false);
         AllSalesTable.getColumnModel().getColumn(2).setResizable(false);
+        AllSalesTable.getColumnModel().getColumn(2).setPreferredWidth(600);
         AllSalesTable.getColumnModel().getColumn(3).setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,7 +198,7 @@ public class Finance extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 996, Short.MAX_VALUE))
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 867, Short.MAX_VALUE))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
@@ -205,7 +209,7 @@ public class Finance extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
@@ -214,26 +218,96 @@ public class Finance extends javax.swing.JFrame {
         pack();
     }//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        ManagerProfile.main(args);
-        super.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) this.AllSalesTable.getModel();
+        int rows = 0;
+        try {
+            
+            rows = databit.getRows("Sales");
+            System.out.println(rows);
+            int rowsInTable = this.AllSalesTable.getRowCount();
+            System.out.println(rowsInTable);
+            while(rowsInTable < rows){
+                dtm.addRow(new Object[]{null, null, null, null});
+                rowsInTable++;
+           }
+            loadDailyTable(AllSalesTable, rows);
+        }catch (SQLException e) {}
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        //WEEKLY
+        DefaultTableModel dtm = (DefaultTableModel) this.AllSalesTable.getModel();
+        int rows = 0;
+        try {
+            
+            rows = databit.getRows("Sales");
+            System.out.println(rows);
+            int rowsInTable = this.AllSalesTable.getRowCount();
+            System.out.println(rowsInTable);
+            while(rowsInTable < rows){
+                dtm.addRow(new Object[]{null, null, null, null});
+                rowsInTable++;
+           }
+            loadWeeklyTable(AllSalesTable, rows);
+        }catch (SQLException e) {}
+  
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        //Monthly
+        DefaultTableModel dtm = (DefaultTableModel) this.AllSalesTable.getModel();
+        int rows = 0;
+        try {
+            
+            rows = databit.getRows("Sales");
+            System.out.println(rows);
+            int rowsInTable = this.AllSalesTable.getRowCount();
+            System.out.println(rowsInTable);
+            while(rowsInTable < rows){
+                dtm.addRow(new Object[]{null, null, null, null});
+                rowsInTable++;
+           }
+            loadMonthlyTable(AllSalesTable, rows);
+        }catch (SQLException e) {}
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void AllSalesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AllSalesTableMouseClicked
-        // TODO add your handling code here:
-        System.out.println(this.AllSalesTable.getSelectedRow() + " " + this.AllSalesTable.getSelectedColumn());
-    }//GEN-LAST:event_AllSalesTableMouseClicked
-
-    private void AllSalesTableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AllSalesTableMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AllSalesTableMouseEntered
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    ManagerProfile.main(args);
+    super.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     void loadDailyTable(JTable jt, int rows) throws SQLException {
+        ResultSet dailySales = databit.getDailySales();
+        int i = 0;
+
+        while (dailySales.next()) {
+            jt.getModel().setValueAt(dailySales.getInt(1), i, 0);
+            jt.getModel().setValueAt(fmt.format(dailySales.getDate(2)), i, 1);
+            jt.getModel().setValueAt(dailySales.getString(3), i, 2);
+            jt.getModel().setValueAt(dailySales.getDouble(4), i, 3);
+            i++;
+        }
+    }
+    
+    void loadWeeklyTable(JTable jt, int rows) throws SQLException {
+        ResultSet dailySales = databit.getDailySales();
+        int i = 0;
+
+        while (dailySales.next()) {
+            jt.getModel().setValueAt(dailySales.getInt(1), i, 0);
+            jt.getModel().setValueAt(fmt.format(dailySales.getDate(2)), i, 1);
+            jt.getModel().setValueAt(dailySales.getString(3), i, 2);
+            jt.getModel().setValueAt(dailySales.getDouble(4), i, 3);
+            i++;
+        }
+    }
+    
+    void loadMonthlyTable(JTable jt, int rows) throws SQLException {
         ResultSet dailySales = databit.getDailySales();
         int i = 0;
 

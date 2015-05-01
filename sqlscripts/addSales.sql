@@ -16,10 +16,10 @@ VALUES
 INSERT
 INTO Sales
 VALUES
-( 4, sysdate, '2 Tacos Asada, 3 Tortas Pollo, 1 Jarrito Mandarina', 15.25, 1);
+( 4, sysdate, '2 Tacos Asada, 5 Duvalin, 1 Jarrito Fresa', 8.33, 1);
 
 INSERT
 INTO Sales
 VALUES
-( 5, sysdate, '2 Tacos Asada, 3 Tortas Pollo, 1 Jarrito Mandarina', 15.25, 1);
+( 5, sysdate, '1 Tacos Chorizo, 3 Tortas Lengua, 1 Jarrito Toronja', 9.99, 2);
 

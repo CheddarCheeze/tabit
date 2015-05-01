@@ -41,7 +41,7 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jButton1" min="-2" pref="122" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jSplitPane1" pref="996" max="32767" attributes="0"/>
+                  <Component id="jSplitPane1" pref="867" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
@@ -55,7 +55,7 @@
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="jSplitPane1" min="-2" pref="143" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="288" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" pref="46" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -170,9 +170,12 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Daily Sales"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                      <JLayeredPaneConstraints x="20" y="10" width="140" height="40" layer="0" position="-1"/>
+                      <JLayeredPaneConstraints x="20" y="10" width="140" height="30" layer="0" position="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -189,9 +192,12 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Weekly Sales"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                      <JLayeredPaneConstraints x="20" y="50" width="140" height="40" layer="0" position="-1"/>
+                      <JLayeredPaneConstraints x="20" y="50" width="140" height="30" layer="0" position="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -213,7 +219,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-                      <JLayeredPaneConstraints x="20" y="90" width="140" height="40" layer="0" position="-1"/>
+                      <JLayeredPaneConstraints x="20" y="90" width="140" height="30" layer="0" position="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -279,7 +285,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="600" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -299,10 +305,6 @@
               <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AllSalesTableMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AllSalesTableMouseEntered"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
