@@ -306,7 +306,8 @@ public void addSchedule(int id,String name, String mond, String tues, String wed
                       "\nDate of Birth: \n" + rset.getDate(4) +
                       "\nPosition:\n" + rset.getString(5)+
                       "\nSalary:\n$" + rset.getDouble(6)+
-                      "\nPosition:\n" + rset.getString(7)+ "\n";
+                      "\nPhone No:\n" + rset.getString(7) +
+                      "\nAddress:\n" + rset.getString(9)+ "\n";
         }
         return allInfo;
     }
